@@ -1,9 +1,11 @@
+/* ALL */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
-header {
+/* HEADER */
+header.header{
     display: flex;
     justify-content: space-between;
     background-color: #F7146B;
@@ -18,7 +20,36 @@ header {
     width: 4rem;
     height: 2rem;
 }
-footer {
+/* ARTICLE */
+.header_article {
+    display: flex;
+    margin: 1rem;
+}
+.jeanthomas {
+    display: flex;
+    flex-direction: column;
+    margin-left: 1rem;
+    justify-content: center;
+}
+.jeanthomas p, .jeanthomas h2 {
+    font-size: 1rem;
+}
+.main_article {
+}
+.footer_article {
+    display: flex;
+    justify-content: space-around;
+}
+.like, .bulle, .share {
+    display: flex;
+    align-items: center;
+}
+.footer_article p {
+    font-size: 0.8rem;
+    margin-left: 0.3rem;
+}
+/*FOOTER*/
+footer.footer{
     display: flex;
     justify-content: space-around;
     align-items: center;
