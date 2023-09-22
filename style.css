@@ -12,8 +12,13 @@ body {
 
 }
 
+.main {
+    display: flex;
+    flex-direction: column;
+}
 .header {
-
+    z-index: 3;
+    position: sticky;
     top: 0;
     height: 8vh;
     display: flex;
@@ -69,11 +74,13 @@ body {
 }
 
 .list-msg {
+    margin-top: 8vh;
     display: flex;
     flex-direction: column;
     height: 84vh;
     width: 45vw;
-    position: absolute;
+    position: fixed;
+    top: 3rem;
     right: -45vw;
     top: 0;
     list-style: none;
@@ -116,7 +123,7 @@ body {
     transform: translateX(100%);
 }
 
-.header.shadowMode, .footer.shadowMode {
+.header.shadowMode, .footer.shadowMode, .article-area.shadowMode {
     filter: brightness(50%);
 }
 
@@ -130,7 +137,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    position: absolute;
+    position: sticky;
     bottom: 0;
     width: 100%;
     padding: 1.5rem;
