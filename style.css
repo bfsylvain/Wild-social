@@ -2,7 +2,6 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    overflow: hidden;
 }
 
 body {
@@ -14,6 +13,8 @@ body {
 }
 
 .header {
+
+    top: 0;
     height: 8vh;
     display: flex;
     flex-wrap: nowrap;
@@ -21,12 +22,15 @@ body {
     align-items: center;
     width: 100%;
     padding: 1.5rem;
-    background-color: #fff ;
+    background-color: var(--wildColor) ;
 }
+
+
 
 .icon {
     width: 2rem;
     height: 2rem;
+    fill: black;
 }
 
 .icon:hover {
@@ -40,9 +44,28 @@ body {
     background-color: #fff;
 }
 
-.mainPage {
+.article-area {
     flex-grow: 1;
     background-color: #FFF;
+}
+
+.profile {
+    display: flex;
+}
+
+.profile-img {
+    width: 3rem;
+    height: auto;
+}
+
+.post-img {
+    width: 100%;
+
+}
+
+.like-area {
+    display: flex;
+    justify-content: space-around;
 }
 
 .list-msg {
