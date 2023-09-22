@@ -17,13 +17,13 @@ messageBtn.addEventListener('click', () => {
     footerClasslist.toggle('shadowMode')
 })
 
-let profilImg = document.querySelector('.profile-img')
+let profilImg = document.querySelector('.user-img')
 let sidebarList = document.querySelector('.sidebar-list')
 let sidebarListClasslist = sidebarList.classList
 
 profilImg.addEventListener('click', () => {
     sidebarListClasslist.toggle('activeLeft')
     headerClasslist.toggle('shadowMode')
-    article-areaClasslist.toggle('shadowMode')
+    articleAreaClasslist.toggle('shadowMode')
     footerClasslist.toggle('shadowMode')
 })

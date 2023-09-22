@@ -74,7 +74,6 @@ body {
 }
 
 .list-msg {
-    margin-top: 8vh;
     display: flex;
     flex-direction: column;
     height: 84vh;
@@ -88,13 +87,14 @@ body {
 }
 
 .sidebar {
+    /*margin-top: 8vh;*/
     display: flex;
     flex-direction: column;
     height: 84vh;
     width: 45vw;
-    position: absolute;
+    position: fixed;
     left: -45vw;
-    top: 0;
+    top: 3rem;
     list-style: none;
     transition: transform 300ms ease-in-out;
 }
@@ -112,7 +112,7 @@ body {
     border: 3px solid black;
     border-radius: 5px;
     background-color: #fff;
-    flex-grow: 1;
+    flex-grow: 0.6;
 }
 
 .active {
@@ -143,4 +143,8 @@ body {
     padding: 1.5rem;
     height: 8vh;
     background-color: lightgrey;
+}
+
+.website-img {
+    color: black;
 }
