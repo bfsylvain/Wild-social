@@ -4,6 +4,10 @@
     padding: 0;
     box-sizing: border-box;
 }
+/*body {
+    min-height: 100vh; /* 100% de la hauteur de la vue */
+    /* Autres styles */
+    /*overflow-y: auto; /* Ou "scroll" pour toujours montrer la barre de défilement} */
 /* HEADER */
 header.header{
     display: flex;
@@ -24,6 +28,12 @@ header.header{
 .header_article {
     display: flex;
     margin: 1rem;
+}
+div .post {
+    margin: 1rem;
+}
+.webdev {
+    width: 100%;
 }
 .jeanthomas {
     display: flex;
@@ -53,10 +63,14 @@ footer.footer{
     display: flex;
     justify-content: space-around;
     align-items: center;
-    position: absolute;
+    position: fixed;
+    background-color: white;
     bottom: 0;
     width: 100%;
     height: 3rem;
+}
+.footer_footer {
+    display: block;
 }
 .maison, .loupe, .cloche {
     height: 1.5rem;
