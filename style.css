@@ -29,6 +29,9 @@ header.header{
     display: flex;
     margin: 1rem;
 }
+div.article{
+    border-bottom: rgb(195, 195, 195) 3px solid;
+}
 div .post {
     margin: 1rem;
 }
@@ -49,6 +52,7 @@ div .post {
 .footer_article {
     display: flex;
     justify-content: space-around;
+    margin: 0.3rem 0 0.8rem 0;
 }
 .like, .bulle, .share {
     display: flex;
@@ -68,9 +72,6 @@ footer.footer{
     bottom: 0;
     width: 100%;
     height: 3rem;
-}
-.footer_footer {
-    display: block;
 }
 .maison, .loupe, .cloche {
     height: 1.5rem;
