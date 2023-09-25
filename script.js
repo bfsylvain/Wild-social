@@ -1,36 +1,39 @@
 let header = document.querySelector('.header')
-let headerClasslist = header.classList
 let articleArea = document.querySelector('.article-area')
-let articleAreaClasslist = articleArea.classList
 let footer = document.querySelector('.footer')
-let footerClasslist = footer.classList
 
 let messageBtn = document.querySelector('.message-img')
 let sidebarRight = document.querySelector('.sidebar-right')
-let sidebarRightClassList = sidebarRight.classList
-
-messageBtn.addEventListener('click', () => {
-    sidebarRightClassList.toggle('active-right')
-    headerClasslist.toggle('shadowMode')
-    articleAreaClasslist.toggle('shadowMode')
-    footerClasslist.toggle('shadowMode')
-})
 
 let profilImg = document.querySelector('.user-img')
 let sidebarLeft = document.querySelector('.sidebar-left')
-let sidebarLeftClassList = sidebarLeft.classList
 
+
+messageBtn.addEventListener('click', () => {
+    sidebarRight.classList.toggle('active-right')
+    header.classList.toggle('shadowMode')
+    articleArea.classList.toggle('shadowMode')
+    footer.classList.toggle('shadowMode')
+})
 
 profilImg.addEventListener('click', () => {
-    sidebarLeftClassList.toggle('active-left')
-    headerClasslist.toggle('shadowMode')
-    articleAreaClassList.toggle('shadowMode')
-    footerClasslist.toggle('shadowMode')
+    sidebarLeft.classList.toggle('active-left')
+    header.classList.toggle('shadowMode')
+    articleArea.classList.toggle('shadowMode')
+    footer.classList.toggle('shadowMode')
+})
+
+document.addEventListener('click', e => {
+    if(!sidebarRight.contains(e.target) && e.target !== messageBtn && e.target !== profilImg) {
+        sidebarLeft.classList.remove('active-left')
+        sidebarRight.classList.remove('active-right')
+        header.classList.remove('shadowMode')
+        articleArea.classList.remove('shadowMode')
+        footer.classList.remove('shadowMode')
+    }
 })
 
 const likeIcons = document.querySelectorAll(".like-img")
-
-
 
  for (let likeIcon of likeIcons) {
      likeIcon.addEventListener("click", (event) => {
