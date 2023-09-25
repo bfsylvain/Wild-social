@@ -1,0 +1,137 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    --wildColor: #F7146B;
+    min-height: 100vh;
+}
+
+.main {
+    display: flex;
+    flex-direction: column;
+}
+.header {
+    z-index: 3;
+    position: sticky;
+    top: 0;
+    height: 8vh;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 1.5rem;
+    background-color: var(--wildColor) ;
+}
+
+.icon {
+    width: 2rem;
+    height: 2rem;
+    fill: black;
+}
+
+.icon:hover {
+    cursor: pointer;
+}
+
+.main {
+    flex-grow: 1;
+    display: flex;
+    position: relative;
+    background-color: #fff;
+}
+
+.article-area {
+    flex-grow: 1;
+    background-color: #FFF;
+}
+
+.profile {
+    display: flex;
+}
+
+.profile-img {
+    width: 3rem;
+    height: auto;
+}
+
+.post-img {
+    width: 100%;
+
+}
+
+.article-interaction-area {
+    display: flex;
+    justify-content: space-around;
+}
+
+.comment-img:hover {
+    cursor: pointer;
+}
+
+.sidebar-right {
+    display: flex;
+    flex-direction: column;
+    height: 84vh;
+    width: 45vw;
+    position: fixed;
+    top: 3rem;
+    right: -45vw;
+    top: 8vh;
+    list-style: none;
+    transition: transform 300ms ease-in-out;
+}
+
+.sidebar-left {
+    display: flex;
+    flex-direction: column;
+    height: 84vh;
+    width: 45vw;
+    position: fixed;
+    left: -45vw;
+    top: 8vh;
+    list-style: none;
+    transition: transform 300ms ease-in-out;
+}
+
+.sidebar ul {
+    list-style: none;
+    border: 3px solid black;
+    border-radius: 5px;
+    background-color: #fff;
+    flex-grow: 0.6;
+}
+
+
+.active-right {
+    transform: translateX(-100%);
+}
+
+.active-left {
+    transform: translateX(100%);
+}
+
+.header.shadowMode, .footer.shadowMode, .article-area.shadowMode {
+    filter: brightness(50%);
+}
+
+.footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    bottom: 0;
+    width: 100%;
+    padding: 1.5rem;
+    height: 8vh;
+    background-color: lightgrey;
+}
+
+.website-img {
+    color: black;
+}
