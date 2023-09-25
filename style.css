@@ -9,7 +9,6 @@ body {
     flex-direction: column;
     --wildColor: #F7146B;
     min-height: 100vh;
-
 }
 
 .main {
@@ -29,8 +28,6 @@ body {
     padding: 1.5rem;
     background-color: var(--wildColor) ;
 }
-
-
 
 .icon {
     width: 2rem;
@@ -68,12 +65,16 @@ body {
 
 }
 
-.like-area {
+.article-interaction-area {
     display: flex;
     justify-content: space-around;
 }
 
-.list-msg {
+.comment-img:hover {
+    cursor: pointer;
+}
+
+.sidebar-right {
     display: flex;
     flex-direction: column;
     height: 84vh;
@@ -81,30 +82,21 @@ body {
     position: fixed;
     top: 3rem;
     right: -45vw;
-    top: 0;
+    top: 8vh;
     list-style: none;
     transition: transform 300ms ease-in-out;
 }
 
-.sidebar {
-    /*margin-top: 8vh;*/
+.sidebar-left {
     display: flex;
     flex-direction: column;
     height: 84vh;
     width: 45vw;
     position: fixed;
     left: -45vw;
-    top: 3rem;
+    top: 8vh;
     list-style: none;
     transition: transform 300ms ease-in-out;
-}
-
-.list-msg ul {
-    list-style: none;
-    border: 3px solid black;
-    border-radius: 5px;
-    background-color: #fff;
-    flex-grow: 0.6;
 }
 
 .sidebar ul {
@@ -115,23 +107,18 @@ body {
     flex-grow: 0.6;
 }
 
-.active {
+
+.active-right {
     transform: translateX(-100%);
 }
 
-.activeLeft {
+.active-left {
     transform: translateX(100%);
 }
 
 .header.shadowMode, .footer.shadowMode, .article-area.shadowMode {
     filter: brightness(50%);
 }
-
-.mainPage.shadowMode {
-    filter: brightness(50%);
-}
-
-
 
 .footer {
     display: flex;
