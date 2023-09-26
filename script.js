@@ -1,3 +1,6 @@
+
+import { createElement } from "./functions.js"
+
 let header = document.querySelector('.header')
 let articleArea = document.querySelector('.article-area')
 let footer = document.querySelector('.footer')
@@ -32,35 +35,8 @@ const messageSenders = [
 ]
 
 for (let messageSender of messageSenders) {
-    const message = document.createElement('div')
-    message.classList.add('message')
-    const profile = document.createElement('div')
-    profile.classList.add('profile')
-    const senderImg = document.createElement('img')
-    senderImg.classList.add('sender-img')
-    senderImg.setAttribute('src', 'assets/img/WF Image Placeholder.png')
-    const sender = document.createElement('div')
-    sender.classList.add('sender')
-    const senderName = document.createElement('p')
-    senderName.classList.add('sender-name')
-    senderName.innerText = `${messageSender.firstname} ${messageSender.lastname}`
-    const senderTime = document.createElement('p')
-    senderTime.innerText = messageSender.date
-    const msgTxt = document.createElement('div')
-    msgTxt.classList.add('message-text')
-    const text = document.createElement('p')
-    text.classList.add('text')
-    text.innerText = messageSender.message
-    messageArea.appendChild(message)
-    message.appendChild(profile)
-    profile.appendChild(senderImg)
-    profile.appendChild(sender)
-    sender.appendChild(senderName)
-    sender.appendChild(senderTime)
-    message.appendChild(msgTxt)
-    msgTxt.appendChild(text)
+    createElement(messageSender, messageArea)
 }
-
 
 messageBtn.addEventListener('click', () => {
     sidebarRight.classList.toggle('active-right')
