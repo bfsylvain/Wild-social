@@ -1,5 +1,5 @@
 
-import { createElement } from "./functions.js"
+import { createArticle, createProfile} from "./functions.js"
 
 let header = document.querySelector('.header')
 let articleArea = document.querySelector('.article-area')
@@ -13,12 +13,14 @@ let sidebarLeft = document.querySelector('.sidebar-left')
 
 let messageArea = document.querySelector('.message-area')
 
+let profile = document.querySelector('.user-profile')
+
 const messageSenders = [
     {
         date: "hier",
-        firstname: "John", 
-        lastname: "bob",
-        message: "Je suis un prince namibien et j’ai besoin de votre aide..."
+        firstname: "Cédric", 
+        lastname: "D",
+        message: "Apéro ?"
     },
     {
         date: "hier",
@@ -26,17 +28,26 @@ const messageSenders = [
         lastname: "John",
         message: "Banana Banana Banana Banana Banana"
     },
-    /*{
+    {
         date: "hier",
         firstname: "John", 
-        lastname: "Bon",
+        lastname: "Bob",
         message: "Banana Banana Banana Banana Banana"
-    }*/
+    }
 ]
 
-for (let messageSender of messageSenders) {
-    createElement(messageSender, messageArea)
+const user = {
+    firstname: "Mr",
+    lastname: "Fantastic",
+    abonnes: 1961,
+    abonnements: 3
 }
+
+for (let messageSender of messageSenders) {
+    createArticle(messageSender, messageArea)
+}
+
+createProfile(user, profile)
 
 messageBtn.addEventListener('click', () => {
     sidebarRight.classList.toggle('active-right')
