@@ -4,7 +4,6 @@
     padding: 0;
     box-sizing: border-box;
 }
-
 /* En-tête */
 header.header {
     display: flex;
@@ -14,7 +13,7 @@ header.header {
     align-items: center;
     position: fixed;
     width: 100%;
-    top: -80px;
+    top: 0px;
     transition: 0.6s;
 }
 /* nav {
@@ -46,6 +45,10 @@ header.header {
 /* Ligne de séparation entre les articles */
 div.article {
     border-bottom: rgb(195, 195, 195) 2px solid;
+}
+/* Marge pour éviter que le header cache le premier article en position initiale */
+div.first {
+    margin-top: 4.3rem;
 }
 
 /* Contenu d'un article */
