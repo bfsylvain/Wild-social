@@ -77,12 +77,15 @@ body {
 .sidebar-right {
     display: flex;
     flex-direction: column;
-    height: 84vh;
+    height: 42vh;
     width: 45vw;
     position: fixed;
-    top: 3rem;
     right: -45vw;
     top: 8vh;
+    border: 3px solid black;
+    border-radius: 5px;
+    background-color: #fff;
+    flex-grow: 0.6;
     list-style: none;
     transition: transform 300ms ease-in-out;
 }
@@ -90,23 +93,57 @@ body {
 .sidebar-left {
     display: flex;
     flex-direction: column;
-    height: 84vh;
+    height: 42vh;
     width: 45vw;
     position: fixed;
     left: -45vw;
     top: 8vh;
     list-style: none;
-    transition: transform 300ms ease-in-out;
-}
-
-.sidebar ul {
-    list-style: none;
     border: 3px solid black;
     border-radius: 5px;
     background-color: #fff;
     flex-grow: 0.6;
+    transition: transform 300ms ease-in-out;
 }
 
+.sidebar footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 2rem;
+}
+
+.sidebar ul {
+    flex-grow: 1;
+    list-style: none;
+}
+
+.sidebar {
+    padding: 0 0.75rem 0 0.75rem;
+}
+
+.message {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem 0 1rem 0;
+}
+
+.sender {
+    padding-left: 1rem;
+}
+
+.sender-name {
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+
+.sender-time {
+    font-size: 0.75rem;
+}
+.sender-img {
+    width: 2.5rem;
+    height: 2.5rem;
+}
 
 .active-right {
     transform: translateX(-100%);
