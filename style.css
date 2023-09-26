@@ -122,10 +122,19 @@ body {
     padding: 0 0.75rem 0 0.75rem;
 }
 
+.sidebar-right-title {
+    padding: 0.75rem 0 0.75rem 0;
+}
+
+.message-area {
+    flex: 1 0;
+    overflow: hidden;
+}
+
 .message {
     display: flex;
     flex-direction: column;
-    padding: 1rem 0 1rem 0;
+    padding: 0.75rem 0 0.75rem 0;
 }
 
 .sender {
@@ -143,6 +152,10 @@ body {
 .sender-img {
     width: 2.5rem;
     height: 2.5rem;
+}
+
+.messages-footer {
+    background-color: #fff;
 }
 
 .active-right {

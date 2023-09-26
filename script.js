@@ -85,20 +85,24 @@ document.addEventListener('click', e => {
         footer.classList.remove('shadowMode')
     }
 })
-
+const library = new Set();
 const likeIcons = document.querySelectorAll(".like-img")
 
- for (let likeIcon of likeIcons) {
-     likeIcon.addEventListener("click", (event) => {
-        //console.log(event.target)
+likeIcons.forEach((likeIcon, key) => {
+    console.log(likeIcon, key)
+    likeIcon.addEventListener("click", (event) => {
+        const likeZone = event.target.parentNode
+        const likeCounter = likeZone.querySelector("span")
+        if (library.has(key)) {
+            likeCounter.innerHTML--
+            library.delete(key)
+        } else {
         event.target.strokeStyle= "red"
-         const likeZone = event.target.parentNode
-         const likeCounter = likeZone.querySelector("span")
-         likeCounter.innerHTML++
-         likeIcon.removeEventListener('click', event)
+        likeCounter.innerHTML++
+        library.add(key);
+        }
         
      })
- }
-
+})
 
 
