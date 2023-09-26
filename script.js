@@ -26,12 +26,12 @@ const messageSenders = [
         lastname: "John",
         message: "Banana Banana Banana Banana Banana"
     },
-    {
+    /*{
         date: "hier",
         firstname: "John", 
         lastname: "Bon",
         message: "Banana Banana Banana Banana Banana"
-    }
+    }*/
 ]
 
 for (let messageSender of messageSenders) {
