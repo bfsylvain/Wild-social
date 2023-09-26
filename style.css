@@ -1,69 +1,101 @@
-/* ALL */
+/* Réinitialisation des styles par défaut */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
-/*body {
-    min-height: 100vh; /* 100% de la hauteur de la vue */
-    /* Autres styles */
-    /*overflow-y: auto; /* Ou "scroll" pour toujours montrer la barre de défilement} */
-/* HEADER */
-header.header{
+
+/* En-tête */
+header.header {
     display: flex;
     justify-content: space-between;
     background-color: #F7146B;
     height: 4rem;
     align-items: center;
+    position: fixed;
+    width: 100%;
+    top: -80px;
+    transition: 0.6s;
 }
+/* nav {
+    position: fixed;
+    width: 100%;
+    height: 50px;
+    top: -50px;
+    transition: 0.4s;
+} */
+
+/* Icônes de messagerie et d'utilisateur */
 .mail, .user {
     height: 1.7rem;
     margin: 0 1rem;
 }
+
+/* Logo */
 .logo {
     width: 4rem;
     height: 2rem;
 }
-/* ARTICLE */
+
+/* Section des articles */
 .header_article {
     display: flex;
     margin: 1rem;
 }
-div.article{
+
+/* Ligne de séparation entre les articles */
+div.article {
     border-bottom: rgb(195, 195, 195) 2px solid;
 }
+
+/* Contenu d'un article */
 div .post {
     margin: 1rem;
 }
+
+/* Image de développement web */
 .webdev {
     width: 100%;
 }
+
+/* Conteneur pour le nom de l'auteur et le temps */
 .jeanthomas {
     display: flex;
     flex-direction: column;
     margin-left: 1rem;
     justify-content: center;
 }
+
+/* Styles pour les paragraphes et les titres dans la section de l'auteur */
 .jeanthomas p, .jeanthomas h2 {
     font-size: 1rem;
 }
+
+/* Conteneur principal de l'article */
 .main_article {
 }
+
+/* Pied de page de l'article */
 .footer_article {
     display: flex;
     justify-content: space-around;
     margin: 0.3rem 0 0.8rem 0;
 }
+
+/* Styles pour les icônes "like", "commentaire" et "partage" */
 .like, .bulle, .share {
     display: flex;
     align-items: center;
 }
+
+/* Style du texte dans le pied de page de l'article */
 .footer_article p {
     font-size: 0.8rem;
     margin-left: 0.3rem;
 }
-/*FOOTER*/
-footer.footer{
+
+/* Pied de page */
+footer.footer {
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -72,20 +104,26 @@ footer.footer{
     bottom: 0;
     width: 100%;
     height: 3rem;
-    border-top: rgb(152, 152, 152) 0.05rem solid;;
+    border-top: rgb(152, 152, 152) 0.05rem solid;
 }
+
+/* Icônes "Accueil", "Recherche" et "Notifications" */
 .maison, .loupe, .cloche {
     height: 1.5rem;
     margin: 0 1rem;
     padding-bottom: 0.3rem;
 }
-.accueil, .recherche, .notification{
+
+/* Styles pour les éléments "Accueil", "Recherche" et "Notifications" */
+.accueil, .recherche, .notification {
     display: flex;
     flex-direction: column;
     align-items: center;
     font-size: 0.7rem;
     color: rgb(73, 72, 72);
 }
+
+/* Bouton "Carrerose" */
 .carrerose {
     padding: 0.6rem 0.8rem;
     background-color: #F7146B;
@@ -93,5 +131,6 @@ footer.footer{
     bottom: 3.5rem;
     right: 1rem;
     border-radius: 0.5rem;
-
 }
+
+
