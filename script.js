@@ -1,5 +1,6 @@
 
-import { createArticle, createProfile} from "./functions.js"
+import { createArticle, createProfile, removeShadowMode1, removeShadowMode, addShadowMode, shadowModeToggle} from "./functions.js"
+
 
 let header = document.querySelector('.header')
 let articleArea = document.querySelector('.article-area')
@@ -56,14 +57,6 @@ for (let messageSender of messageSenders) {
 
 createProfile(user, profile)
 
-// window.addEventListener('scroll', () =>{
-//     if (window.scrollY > 120) {
-//         header.style.top = ("-8vh")
-//     } else {
-//         header.style.top = 0
-//     }
-// })
-
 let lastScroll = 0;
 
 window.addEventListener("scroll", () => {
@@ -79,6 +72,7 @@ window.addEventListener("scroll", () => {
 
 messageBtn.addEventListener('click', () => {
     sidebarRight.classList.toggle('active-right')
+    
     header.classList.toggle('shadowMode')
     articleArea.classList.toggle('shadowMode')
     footer.classList.toggle('shadowMode')
@@ -86,25 +80,26 @@ messageBtn.addEventListener('click', () => {
 
 profilImg.addEventListener('click', () => {
     sidebarLeft.classList.toggle('active-left')
+    shadowModeToggle()
     header.classList.toggle('shadowMode')
-    articleArea.classList.toggle('shadowMode')
-    footer.classList.toggle('shadowMode')
+    // articleArea.classList.toggle('shadowMode')
+    // footer.classList.toggle('shadowMode')
 })
 
 document.addEventListener('click', e => {
     if(!sidebarRight.contains(e.target) && e.target !== messageBtn && e.target !== profilImg) {
         sidebarLeft.classList.remove('active-left')
         sidebarRight.classList.remove('active-right')
-        header.classList.remove('shadowMode')
-        articleArea.classList.remove('shadowMode')
-        footer.classList.remove('shadowMode')
+        removeShadowMode1()
+        // header.classList.remove('shadowMode')
+        // articleArea.classList.remove('shadowMode')
+        // footer.classList.remove('shadowMode')
     }
 })
 const library = new Set();
 const likeIcons = document.querySelectorAll(".like-img")
 
 likeIcons.forEach((likeIcon, key) => {
-    // console.log(likeIcon, key)
     likeIcon.addEventListener("click", (event) => {
         const likeZone = event.target.parentNode
         const likeCounter = likeZone.querySelector("span")
@@ -124,26 +119,36 @@ const commentImg = document.querySelectorAll(".comment-img");
 const commentContainer = document.querySelector(".comment-container");
 const cancelButton = document.querySelector(".cancel");
 
+const commentsLibrary = new Set();
 
-commentImg.forEach(button =>
+commentImg.forEach((button, index) =>
     button.addEventListener('click', () => {
+    commentsLibrary.add(index)
     commentContainer.classList.add("showComment");
-    header.classList.add('shadowMode2');
-    articleArea.classList.add('shadowMode2');
-    footer.classList.add('shadowMode2');
-// const commentArea = e.target.parentNode
-// const span = commentArea.querySelector("span")
-// span.innerHTML++
+    addShadowMode()
     })
     )
 
 cancelButton.addEventListener('click', (e) => {
     e.preventDefault()
     commentContainer.classList.remove("showComment");
-    header.classList.remove('shadowMode2');
-    articleArea.classList.remove('shadowMode2');
-    footer.classList.remove('shadowMode2');
-} )
+    removeShadowMode();
+    commentsLibrary.clear()
+})
+
+const submitBtn = document.querySelector(".submit")
+submitBtn.addEventListener("click", (e) =>  {
+    e.preventDefault();
+    const commentsZoneTarget = commentImg[[...commentsLibrary][0]].parentNode
+    const commentsCounter = commentsZoneTarget.querySelector("span")
+    commentsCounter.innerHTML++
+    commentContainer.classList.remove("showComment");
+    removeShadowMode()
+    console.log()
+    //ajout pour l'iteration du bouton
+    commentsLibrary.clear()
+})
+
 
 
 
