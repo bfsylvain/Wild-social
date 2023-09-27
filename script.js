@@ -47,6 +47,13 @@ for (let messageSender of messageSenders) {
     createArticle(messageSender, messageArea)
 }
 
+
+const commentContainerContent = document.querySelector(".comment-container-content")
+
+for (let messageSender of messageSenders) {
+    createArticle(messageSender, commentContainerContent)
+}
+
 createProfile(user, profile)
 
 messageBtn.addEventListener('click', () => {
@@ -91,5 +98,18 @@ likeIcons.forEach((likeIcon, key) => {
         
      })
 })
+
+const commentImg = document.querySelectorAll(".comment-img");
+
+commentImg.forEach(button =>
+    button.addEventListener('click', (e) => {
+// const commentArea = e.target.parentNode
+// const span = commentArea.querySelector("span")
+// span.innerHTML++
+
+
+    })
+    )
+
 
 

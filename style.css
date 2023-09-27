@@ -1,14 +1,18 @@
+:root {
+    --wildColor: #F7146B;
+}
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: sans-serif;
 }
 
 body {
     display: flex;
     flex-direction: column;
-    --wildColor: #F7146B;
-    min-height: 100vh;
+;    min-height: 100vh;
 }
 
 .main {
@@ -195,4 +199,49 @@ a, .icon:hover {
 
 .website-img {
     color: black;
+}
+
+.comment-container {
+    padding: 20px;
+    position: fixed;
+    bottom:0;
+    border: 1px solid black;
+    z-index: 10;
+    background-color: white;
+    width: 100%;
+    border-radius: 5px;
+}
+
+.add-comment {
+    padding : 1rem 0;
+    display: flex;
+    align-items: center;
+}
+
+.add-comment input {
+    margin-left: 1rem;
+    padding: 8px;
+    width: 80%;
+    border: 1px solid black;
+    border-radius: 3px;
+}
+
+.send-comment {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.send-comment button {
+    margin: 0 1rem;
+    padding : 8px;
+    border-radius: 5px;
+}
+
+.cancel {
+    background-color: white;
+}
+
+.submit {
+    background-color: var(--wildColor);
+    color: white;
 }
