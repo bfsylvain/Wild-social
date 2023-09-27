@@ -29,14 +29,15 @@ body {
     background-color: var(--wildColor) ;
 }
 
-.icon {
+.header-icon {
     width: 2rem;
     height: 2rem;
     fill: black;
 }
 
-.icon:hover {
+a, .icon:hover {
     cursor: pointer;
+    text-decoration: none;
 }
 
 .main {
@@ -62,7 +63,6 @@ body {
 
 .post-img {
     width: 100%;
-
 }
 
 .article-interaction-area {
@@ -70,19 +70,22 @@ body {
     justify-content: space-around;
 }
 
-.comment-img:hover {
-    cursor: pointer;
+.like-img {
+    color:  var(--wildColor);
 }
 
 .sidebar-right {
     display: flex;
     flex-direction: column;
-    height: 84vh;
+    height: 42vh;
     width: 45vw;
     position: fixed;
-    top: 3rem;
     right: -45vw;
     top: 8vh;
+    border: 3px solid black;
+    border-radius: 5px;
+    background-color: #fff;
+    flex-grow: 0.6;
     list-style: none;
     transition: transform 300ms ease-in-out;
 }
@@ -90,23 +93,81 @@ body {
 .sidebar-left {
     display: flex;
     flex-direction: column;
-    height: 84vh;
+    height: 42vh;
     width: 45vw;
     position: fixed;
     left: -45vw;
     top: 8vh;
     list-style: none;
-    transition: transform 300ms ease-in-out;
-}
-
-.sidebar ul {
-    list-style: none;
     border: 3px solid black;
     border-radius: 5px;
     background-color: #fff;
     flex-grow: 0.6;
+    transition: transform 300ms ease-in-out;
 }
 
+.sidebar ul {
+    flex-grow: 1;
+    list-style: none;
+}
+
+.sidebar {
+    padding: 0 0.75rem 0 0.75rem;
+}
+
+.sidebar-title {
+    padding: 0.75rem 0 0.25rem 0;
+}
+
+.message-area {
+    flex: 1 0;
+    overflow: hidden;
+}
+
+.message {
+    display: flex;
+    flex-direction: column;
+    padding: 0.75rem 0 0.75rem 0;
+}
+
+.message-text {
+    padding-top: 0.25rem;
+}
+
+.sender {
+    padding-left: 1rem;
+}
+
+.sender-name {
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+
+.sender-time {
+    font-size: 0.75rem;
+}
+.sender-img {
+    width: 2.5rem;
+    height: 2.5rem;
+}
+
+.messages-footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 2rem;
+    background-color: #fff;
+}
+.profile-options {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.profile-link {
+    padding: 2rem 0 1rem 0;
+    
+}
 
 .active-right {
     transform: translateX(-100%);
