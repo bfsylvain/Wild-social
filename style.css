@@ -30,7 +30,8 @@ body {
     align-items: center;
     width: 100%;
     padding: 1.5rem;
-    background-color: var(--wildColor) ;
+    background-color: var(--wildColor);
+    transition: 0.6s;
 }
 
 .header-icon {
@@ -205,6 +206,8 @@ a, .icon:hover {
 }
 
 .comment-container {
+    display: flex;
+    flex-direction: column;
     padding: 20px;
     position: fixed;
     bottom: -50vh;
@@ -215,6 +218,24 @@ a, .icon:hover {
     height: 50vh;
     border-radius: 5px;
     transition: transform 300ms ease-in-out;
+}
+
+.comment-container::before {
+    content: "";
+    position: absolute;
+    width: 20%;
+    height: 1px;
+    border-bottom: 4px solid var(--wildColor);
+    left: 50%;
+    top: 10px;
+    transform: translate(-50%);
+
+}
+
+.comment-container-content {
+    height: 30vh;
+    overflow: scroll;
+    flex: 1 1;
 }
 .showComment {
     transform: translateY(-100%);
@@ -252,4 +273,19 @@ a, .icon:hover {
 .submit {
     background-color: var(--wildColor);
     color: white;
+}
+
+.post-button {
+    position: fixed;
+    bottom: 5rem;
+    right: 2rem;
+    height: 3rem;
+    width: 3rem;
+    background-color: var(--wildColor);
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    font-size: 2rem;
 }
