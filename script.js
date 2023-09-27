@@ -131,6 +131,7 @@ cancelBtn.addEventListener('click', (e) => {
     e.preventDefault()
     commentContainer.classList.remove("showComment");
     removeShadowMode();
+    commentInput.value = ""
     commentsLibrary.clear()
 })
 
@@ -146,6 +147,7 @@ submitBtn.addEventListener("click", (e) =>  {
     let newComment = commentInput.value
     user.message = newComment
     createArticle(user, lastComments[[...commentsLibrary][0]])
+    commentInput.value = ""
     commentsLibrary.clear()
 })
 
