@@ -1,3 +1,4 @@
+
 export function createArticle(objet, parent) {
     const message = document.createElement('div')
     message.classList.add('message')
@@ -58,3 +59,31 @@ export function createProfile(objet, parent) {
     msgTxt.appendChild(abonnements)
     msgTxt.appendChild(abonnes)
 }
+let header = document.querySelector('.header')
+let articleArea = document.querySelector('.article-area')
+let footer = document.querySelector('.footer')
+
+export function removeShadowMode1() {
+    header.classList.remove('shadowMode');
+    articleArea.classList.remove('shadowMode');
+    footer.classList.remove('shadowMode');
+}
+
+export function removeShadowMode() {
+    header.classList.remove('shadowMode2');
+    articleArea.classList.remove('shadowMode2');
+    footer.classList.remove('shadowMode2');
+}
+
+export function addShadowMode() {
+    header.classList.add('shadowMode2');
+    articleArea.classList.add('shadowMode2');
+    footer.classList.add('shadowMode2');
+}
+
+export function shadowModeToggle() {
+    header.classList.toggle('shadowMode')
+    articleArea.classList.toggle('shadowMode')
+    footer.classList.toggle('shadowMode')
+}
+

@@ -82,6 +82,7 @@ a, .icon:hover {
 .sidebar-right {
     display: flex;
     flex-direction: column;
+    min-height: 368px;
     height: 42vh;
     width: 45vw;
     position: fixed;
@@ -98,6 +99,7 @@ a, .icon:hover {
 .sidebar-left {
     display: flex;
     flex-direction: column;
+    min-height: 368px;
     height: 42vh;
     width: 45vw;
     position: fixed;
