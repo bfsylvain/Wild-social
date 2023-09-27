@@ -13,7 +13,8 @@ const likeBtns = document.querySelectorAll(".like-img")
 const commentBtn = document.querySelectorAll(".comment-img");
 
 const commentContainer = document.querySelector(".comment-container");
-
+const lastComments = document.querySelectorAll(".last-comment")
+console.log(lastComments)
 const cancelBtn = document.querySelector(".cancel");
 const submitBtn = document.querySelector(".submit")
 
@@ -130,10 +131,11 @@ cancelBtn.addEventListener('click', (e) => {
     e.preventDefault()
     commentContainer.classList.remove("showComment");
     removeShadowMode();
+    commentInput.value = ""
     commentsLibrary.clear()
 })
 
-
+let commentInput = document.querySelector(".comment-txt")
 submitBtn.addEventListener("click", (e) =>  {
     e.preventDefault();
     const commentsZoneTarget = commentBtn[[...commentsLibrary][0]].parentNode
@@ -141,8 +143,11 @@ submitBtn.addEventListener("click", (e) =>  {
     commentsCounter.innerHTML++
     commentContainer.classList.remove("showComment");
     removeShadowMode()
-    console.log()
-    //ajout pour l'iteration du bouton
+    console.log(commentInput.value)
+    let newComment = commentInput.value
+    user.message = newComment
+    createArticle(user, lastComments[[...commentsLibrary][0]])
+    commentInput.value = ""
     commentsLibrary.clear()
 })
 
