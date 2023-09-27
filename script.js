@@ -56,6 +56,27 @@ for (let messageSender of messageSenders) {
 
 createProfile(user, profile)
 
+// window.addEventListener('scroll', () =>{
+//     if (window.scrollY > 120) {
+//         header.style.top = ("-8vh")
+//     } else {
+//         header.style.top = 0
+//     }
+// })
+
+let lastScroll = 0;
+
+window.addEventListener("scroll", () => {
+    if(window.scrollY < lastScroll) {
+        header.style.top = 0;
+    } else {
+        header.style.top = "-8vh";
+    }
+    lastScroll = window.scrollY;
+})
+
+
+
 messageBtn.addEventListener('click', () => {
     sidebarRight.classList.toggle('active-right')
     header.classList.toggle('shadowMode')
@@ -101,6 +122,7 @@ likeIcons.forEach((likeIcon, key) => {
 
 const commentImg = document.querySelectorAll(".comment-img");
 const commentContainer = document.querySelector(".comment-container");
+const cancelButton = document.querySelector(".cancel");
 
 
 commentImg.forEach(button =>
@@ -109,9 +131,19 @@ commentImg.forEach(button =>
     header.classList.add('shadowMode2');
     articleArea.classList.add('shadowMode2');
     footer.classList.add('shadowMode2');
-    console.log("test")
 // const commentArea = e.target.parentNode
 // const span = commentArea.querySelector("span")
 // span.innerHTML++
     })
     )
+
+cancelButton.addEventListener('click', (e) => {
+    e.preventDefault()
+    commentContainer.classList.remove("showComment");
+    header.classList.remove('shadowMode2');
+    articleArea.classList.remove('shadowMode2');
+    footer.classList.remove('shadowMode2');
+} )
+
+
+
