@@ -83,7 +83,7 @@ const library = new Set();
 const likeIcons = document.querySelectorAll(".like-img")
 
 likeIcons.forEach((likeIcon, key) => {
-    console.log(likeIcon, key)
+    // console.log(likeIcon, key)
     likeIcon.addEventListener("click", (event) => {
         const likeZone = event.target.parentNode
         const likeCounter = likeZone.querySelector("span")
@@ -100,16 +100,18 @@ likeIcons.forEach((likeIcon, key) => {
 })
 
 const commentImg = document.querySelectorAll(".comment-img");
+const commentContainer = document.querySelector(".comment-container");
+
 
 commentImg.forEach(button =>
-    button.addEventListener('click', (e) => {
+    button.addEventListener('click', () => {
+    commentContainer.classList.add("showComment");
+    header.classList.add('shadowMode2');
+    articleArea.classList.add('shadowMode2');
+    footer.classList.add('shadowMode2');
+    console.log("test")
 // const commentArea = e.target.parentNode
 // const span = commentArea.querySelector("span")
 // span.innerHTML++
-
-
     })
     )
-
-
-
