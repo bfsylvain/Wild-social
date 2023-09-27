@@ -1,3 +1,4 @@
+
 export function createArticle(objet, parent) {
     const message = document.createElement('div')
     message.classList.add('message')
@@ -85,3 +86,4 @@ export function shadowModeToggle() {
     articleArea.classList.toggle('shadowMode')
     footer.classList.toggle('shadowMode')
 }
+
