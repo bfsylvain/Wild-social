@@ -20,7 +20,6 @@ const messageBtn = document.querySelector(".message-img");
 const profileBtn = document.querySelector(".user-img");
 
 const commentContainer = document.querySelector(".comment-container");
-const lastComments = document.querySelectorAll(".last-comment");
 const cancelBtns = document.querySelectorAll(".cancel");
 
 const submitBtn = document.querySelector(".submit");
@@ -38,6 +37,8 @@ const commentContainerContent = document.querySelector(
 
 const postBtn = document.querySelector(".post-button");
 const newpostContainer = document.querySelector(".newpost-container");
+
+const homeBtn = document.querySelector(".homeBtn");
 
 // Création d'un tableau d'objets représentant les messages du site
 const messageSenders = [
@@ -67,6 +68,7 @@ const user = {
   lastname: "Fantastic",
   abonnes: 1961,
   abonnements: 3,
+  date: "A l'instant"
 };
 
 const posts = [
@@ -127,6 +129,8 @@ for(let i = posts.length - 1; i >= 0; i--) {
 
 const likeBtns = document.querySelectorAll(".like-img");
 const commentBtn = document.querySelectorAll(".comment-img");
+const lastComments = document.querySelectorAll(".last-comment");
+
 console.log(commentBtn)
 
 // Affichage du profil utilisateur (barre latérale gauche)
@@ -272,16 +276,7 @@ postBtn.addEventListener("click", () => {
   addShadowMode();
 });
 
-
-
-
-
-
-
-
 // Le bouton "home" remonte en haut de la liste de posts
-const homeBtn = document.querySelector(".homeBtn");
-
 homeBtn.addEventListener("click", () => {
   window.scrollTo({
     top:0,
