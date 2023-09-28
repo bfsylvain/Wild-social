@@ -68,6 +68,34 @@ const user = {
   abonnements: 3,
 };
 
+const posts = [
+  {
+    profilePic: "assets/img/user1.png",
+    firstname: "John",
+    lastname: "John",
+    date: "demain",
+    text: "Un post blablabla",
+    picture: "assets/img/post1.png"
+  },
+  {
+    profilePic: "assets/img/user1.png",
+    firstname: "John",
+    lastname: "Wick",
+    date: "hier",
+    text: "Do you knox who I am ?!",
+    picture: "assets/img/post1.png"
+  },
+  {
+    profilePic: "assets/img/user1.png",
+    firstname: "John",
+    lastname: "Snow",
+    date: "avant-hier",
+    text: "You know nothing...",
+    picture: "assets/img/post1.png"
+  }
+
+]
+
 // Affichage du profil utilisateur (barre latérale gauche)
 createProfile(user, profile);
 
