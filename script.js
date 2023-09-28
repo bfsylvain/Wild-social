@@ -149,7 +149,6 @@ window.addEventListener("scroll", () => {
     header.style.top = 0;
   } else {
     header.style.top = "-8vh";
-    //tentative
     sidebarLeft.classList.remove("active-left");
     sidebarRight.classList.remove("active-right");
     removeShadowMode1();
@@ -170,16 +169,22 @@ profileBtn.addEventListener("click", () => {
   header.classList.toggle("shadowMode");
 });
 
-// Fermer la sidebar si on clique en dehors de la sidebar
+// Fermer la sidebar si on clique en dehors des sidebars ou du slider nouveau post
 document.addEventListener("click", (e) => {
   if (
     !sidebarRight.contains(e.target) &&
+    !sidebarLeft.contains(e.target) &&
+    !newpostContainer.contains(e.target) &&
     e.target !== messageBtn &&
-    e.target !== profileBtn
-  ) {
+    e.target !== profileBtn &&
+    e.target !== postBtn
+  ) 
+  {
     sidebarLeft.classList.remove("active-left");
     sidebarRight.classList.remove("active-right");
+    newpostContainer.classList.remove("showComment");
     removeShadowMode1();
+    removeShadowMode()
   }
 });
 
