@@ -8,6 +8,7 @@ import {
   removeShadowMode,
   addShadowMode,
   shadowModeToggle,
+  createPost
 } from "./functions.js";
 
 // Récupération des noeuds HTML dans des variables JS
@@ -18,13 +19,10 @@ const footer = document.querySelector(".footer");
 const messageBtn = document.querySelector(".message-img");
 const profileBtn = document.querySelector(".user-img");
 
-const likeBtns = document.querySelectorAll(".like-img");
-const commentBtn = document.querySelectorAll(".comment-img");
-
 const commentContainer = document.querySelector(".comment-container");
 const lastComments = document.querySelectorAll(".last-comment");
-console.log(lastComments);
-const cancelBtn = document.querySelector(".cancel");
+const cancelBtns = document.querySelectorAll(".cancel");
+
 const submitBtn = document.querySelector(".submit");
 
 const sidebarRight = document.querySelector(".sidebar-right");
@@ -37,6 +35,9 @@ const profile = document.querySelector(".user-profile");
 const commentContainerContent = document.querySelector(
   ".comment-container-content"
 );
+
+const postBtn = document.querySelector(".post-button");
+const newpostContainer = document.querySelector(".newpost-container");
 
 // Création d'un tableau d'objets représentant les messages du site
 const messageSenders = [
@@ -68,6 +69,66 @@ const user = {
   abonnements: 3,
 };
 
+const posts = [
+  {
+    profilePic: "assets/img/user1.png",
+    firstname: "John",
+    lastname: "John",
+    date: "demain",
+    text: "Un post blablabla",
+    picture: "assets/img/post1.png"
+  },
+  {
+    profilePic: "assets/img/user1.png",
+    firstname: "John",
+    lastname: "Wick",
+    date: "hier",
+    text: "Do you knox who I am ?!",
+    picture: "assets/img/post1.png"
+  },
+  {
+    profilePic: "assets/img/user1.png",
+    firstname: "John",
+    lastname: "Snow",
+    date: "avant-hier",
+    text: "You know nothing...",
+    picture: "assets/img/post1.png"
+  },
+  {
+    profilePic: "assets/img/user1.png",
+    firstname: "John",
+    lastname: "John",
+    date: "demain",
+    text: "Un post blablabla",
+    picture: "assets/img/post1.png"
+  },
+  {
+    profilePic: "assets/img/user1.png",
+    firstname: "John",
+    lastname: "Wick",
+    date: "hier",
+    text: "Do you knox who I am ?!",
+    picture: "assets/img/post1.png"
+  },
+  {
+    profilePic: "assets/img/user1.png",
+    firstname: "John",
+    lastname: "Rambo",
+    date: "avant-hier",
+    text: "C'était pas ma guerre, Adrienne !",
+    picture: "assets/img/post1.png"
+  }
+
+]
+// affichage des posts
+for(let i = posts.length - 1; i >= 0; i--) {
+  createPost(posts[i], articleArea)
+}
+
+const likeBtns = document.querySelectorAll(".like-img");
+const commentBtn = document.querySelectorAll(".comment-img");
+console.log(commentBtn)
+
 // Affichage du profil utilisateur (barre latérale gauche)
 createProfile(user, profile);
 
@@ -88,7 +149,6 @@ window.addEventListener("scroll", () => {
     header.style.top = 0;
   } else {
     header.style.top = "-8vh";
-    //tentative
     sidebarLeft.classList.remove("active-left");
     sidebarRight.classList.remove("active-right");
     removeShadowMode1();
@@ -109,16 +169,22 @@ profileBtn.addEventListener("click", () => {
   header.classList.toggle("shadowMode");
 });
 
-// Fermer la sidebar si on clique en dehors de la sidebar
+// Fermer la sidebar si on clique en dehors des sidebars ou du slider nouveau post
 document.addEventListener("click", (e) => {
   if (
     !sidebarRight.contains(e.target) &&
+    !sidebarLeft.contains(e.target) &&
+    !newpostContainer.contains(e.target) &&
     e.target !== messageBtn &&
-    e.target !== profileBtn
-  ) {
+    e.target !== profileBtn &&
+    e.target !== postBtn
+  ) 
+  {
     sidebarLeft.classList.remove("active-left");
     sidebarRight.classList.remove("active-right");
+    newpostContainer.classList.remove("showComment");
     removeShadowMode1();
+    removeShadowMode()
   }
 });
 
@@ -141,22 +207,27 @@ likeBtns.forEach((likeBtn, key) => {
 
 // Affiche la popup "commentaires" quand on clique sur l'icone dédiée
 const commentsLibrary = new Set();
+
 commentBtn.forEach((button, index) =>
   button.addEventListener("click", () => {
     commentsLibrary.add(index);
+    console.log(commentsLibrary)
     commentContainer.classList.add("showComment");
     addShadowMode();
   })
 );
 
 // Masque la popup "commentaires" quand on clique sur "Annuler"
-cancelBtn.addEventListener("click", (e) => {
-  e.preventDefault();
-  commentContainer.classList.remove("showComment");
-  removeShadowMode();
-  commentInput.value = "";
-  commentsLibrary.clear();
-});
+for(let cancelBtn of cancelBtns) {
+  cancelBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    commentContainer.classList.remove("showComment");
+    newpostContainer.classList.remove("showComment");
+    removeShadowMode();
+    commentInput.value = "";
+    commentsLibrary.clear();
+  })
+};
 
 // Crée le commentaire quand on clique sur "Envoyer"
 let commentInput = document.querySelector(".comment-txt");
@@ -174,3 +245,46 @@ submitBtn.addEventListener("click", (e) => {
   commentInput.value = "";
   commentsLibrary.clear();
 });
+
+let postInput = document.querySelector(".post-txt")
+let postSubmitBtn = document.querySelector(".submit-post")
+
+postSubmitBtn.addEventListener("click", (e) => {
+  e.preventDefault();
+  let userPost = user;
+  userPost.profilePic = "assets/img/user1.png";
+  userPost.date = "A l'instant";
+  userPost.text = postInput.value;
+  userPost.picture = "assets/img/post1.png";
+  posts.push(userPost)
+  articleArea.innerHTML = ""
+  for(let i = posts.length - 1; i >= 0; i--) {
+    createPost(posts[i], articleArea)
+  }
+  postInput.value = ""
+  newpostContainer.classList.remove("showComment")
+  removeShadowMode()
+})
+
+// Affiche la popup "New post" quand on clique sur le bouton "+"
+postBtn.addEventListener("click", () => {
+  newpostContainer.classList.add("showComment");
+  addShadowMode();
+});
+
+
+
+
+
+
+
+
+// Le bouton "home" remonte en haut de la liste de posts
+const homeBtn = document.querySelector(".homeBtn");
+
+homeBtn.addEventListener("click", () => {
+  window.scrollTo({
+    top:0,
+    left:0,
+  behavior:"smooth"})
+})

@@ -64,6 +64,63 @@ export function createProfile(objet, parent) {
   msgTxt.appendChild(abonnes);
 }
 
+export function createPost (object, parent) {
+  parent.innerHTML += `
+  <div class="article">
+  <div class="profile">
+    <img
+      class="profile-img"
+      src="${object.profilePic}"
+      alt=""
+    />
+    <div class="user-name">
+      <h2>${object.firstname} ${object.lastname}</h2>
+      <p>${object.date}</p>
+    </div>
+  </div>
+  <div class="post-text-area">
+    <p>
+      ${object.text}
+    </p>
+  </div>
+  <div class="post-picture-area">
+    <img
+      class="post-img"
+      src= ${object.picture}
+      alt=""
+    />
+  </div>
+  <div class="last-comment"></div>
+  <div class="article-interaction-area">
+    <div class="like-area">
+      <img
+        class="like-img icon"
+        src="assets/img/heart-img.png"
+        alt=""
+      />
+      <span>25</span>
+    </div>
+    <div class="comment-area">
+      <img
+        class="comment-img icon"
+        src="assets/img/Bubble-img.png"
+        alt=""
+      />
+      <span>35</span>
+    </div>
+    <div class="share-area">
+      <img
+        class="share-img icon"
+        src="assets/img/share-img.png"
+        alt=""
+      />
+      <span>38</span>
+    </div>
+  </div>
+</div>
+  `;
+}
+
 // Gestion du "shadow mode" : grise le reste de l'écran quand une popup ou sidebar est ouverte
 
 let header = document.querySelector(".header");
@@ -93,3 +150,4 @@ export function shadowModeToggle() {
   articleArea.classList.toggle("shadowMode");
   footer.classList.toggle("shadowMode");
 }
+
