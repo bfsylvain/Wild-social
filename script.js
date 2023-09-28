@@ -241,11 +241,33 @@ submitBtn.addEventListener("click", (e) => {
   commentsLibrary.clear();
 });
 
+let postInput = document.querySelector(".post-txt")
+let postSubmitBtn = document.querySelector(".submit-post")
+
+postSubmitBtn.addEventListener("click", (e) => {
+  e.preventDefault();
+  let userPost = user;
+  userPost.profilePic = "assets/img/user1.png";
+  userPost.date = "A l'instant";
+  userPost.text = postInput.value;
+  userPost.picture = "assets/img/post1.png";
+  posts.push(userPost)
+  articleArea.innerHTML = ""
+  for(let i = posts.length - 1; i >= 0; i--) {
+    createPost(posts[i], articleArea)
+  }
+  postInput.value = ""
+  newpostContainer.classList.remove("showComment")
+  removeShadowMode()
+})
+
 // Affiche la popup "New post" quand on clique sur le bouton "+"
 postBtn.addEventListener("click", () => {
   newpostContainer.classList.add("showComment");
   addShadowMode();
 });
+
+
 
 
 
