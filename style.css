@@ -284,7 +284,7 @@ a,
 
 .post-button {
   position: fixed;
-  bottom: 5rem;
+  bottom: calc(8vh + 0.5rem);
   right: 2rem;
   height: 3rem;
   width: 3rem;

@@ -93,8 +93,8 @@ const posts = [
 
 ]
 // affichage des posts
-for(let post of posts) {
-  createPost(post, articleArea)
+for(let i = posts.length - 1; i >= 0; i--) {
+  createPost(posts[i], articleArea)
 }
 
 const likeBtns = document.querySelectorAll(".like-img");
