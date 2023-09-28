@@ -150,3 +150,4 @@ export function shadowModeToggle() {
   articleArea.classList.toggle("shadowMode");
   footer.classList.toggle("shadowMode");
 }
+

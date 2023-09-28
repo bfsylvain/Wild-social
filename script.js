@@ -89,6 +89,30 @@ const posts = [
     date: "avant-hier",
     text: "You know nothing...",
     picture: "assets/img/post1.png"
+  },
+  {
+    profilePic: "assets/img/user1.png",
+    firstname: "John",
+    lastname: "John",
+    date: "demain",
+    text: "Un post blablabla",
+    picture: "assets/img/post1.png"
+  },
+  {
+    profilePic: "assets/img/user1.png",
+    firstname: "John",
+    lastname: "Wick",
+    date: "hier",
+    text: "Do you knox who I am ?!",
+    picture: "assets/img/post1.png"
+  },
+  {
+    profilePic: "assets/img/user1.png",
+    firstname: "John",
+    lastname: "Rambo",
+    date: "avant-hier",
+    text: "C'était pas ma guerre, Adrienne !",
+    picture: "assets/img/post1.png"
   }
 
 ]
@@ -209,3 +233,12 @@ submitBtn.addEventListener("click", (e) => {
   commentInput.value = "";
   commentsLibrary.clear();
 });
+
+const homeBtn = document.querySelector(".homeBtn");
+
+homeBtn.addEventListener("click", () => {
+  window.scrollTo({
+    top:0,
+    left:0,
+  behavior:"smooth"})
+})
