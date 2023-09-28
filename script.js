@@ -16,6 +16,7 @@ const header = document.querySelector(".header");
 const articleArea = document.querySelector(".article-area");
 const footer = document.querySelector(".footer");
 
+
 const messageBtn = document.querySelector(".message-img");
 const profileBtn = document.querySelector(".user-img");
 
@@ -131,6 +132,7 @@ const likeBtns = document.querySelectorAll(".like-img");
 const commentBtn = document.querySelectorAll(".comment-img");
 const lastComments = document.querySelectorAll(".last-comment");
 
+
 console.log(commentBtn)
 
 // Affichage du profil utilisateur (barre latérale gauche)
@@ -163,12 +165,16 @@ window.addEventListener("scroll", () => {
 // Le bouton "messages" ouvre la barre latérale droite
 messageBtn.addEventListener("click", () => {
   sidebarRight.classList.toggle("active-right");
+  // profileBtn.inert =true
+  // postBtn.inert = true
   shadowModeToggle();
 });
 
 // Le bouton "profil" ouvre la barre latérale gauche
 profileBtn.addEventListener("click", () => {
   sidebarLeft.classList.toggle("active-left");
+  // messageBtn.inert = true
+  // postBtn.inert = true
   shadowModeToggle();
   header.classList.toggle("shadowMode");
 });
@@ -187,6 +193,9 @@ document.addEventListener("click", (e) => {
     sidebarLeft.classList.remove("active-left");
     sidebarRight.classList.remove("active-right");
     newpostContainer.classList.remove("showComment");
+    // messageBtn.inert = false
+    // profileBtn.inert = false
+    // postBtn.inert = false
     removeShadowMode1();
     removeShadowMode()
   }
@@ -216,8 +225,10 @@ commentBtn.forEach((button, index) =>
   button.addEventListener("click", () => {
     commentsLibrary.add(index);
     console.log(commentsLibrary)
+    // header.style.filter = "brightness(50%)"
+    // articleArea.style.filter = "brightness(50%)"
+    // footer.style.filter = "brightness(50%)"
     commentContainer.classList.add("showComment");
-    addShadowMode();
   })
 );
 
@@ -227,7 +238,9 @@ for(let cancelBtn of cancelBtns) {
     e.preventDefault();
     commentContainer.classList.remove("showComment");
     newpostContainer.classList.remove("showComment");
-    removeShadowMode();
+    // header.style.filter = "brightness(100%)"
+    // articleArea.style.filter = "brightness(100%)"
+    // footer.style.filter = "brightness(100%)"
     commentInput.value = "";
     commentsLibrary.clear();
   })
@@ -241,7 +254,9 @@ submitBtn.addEventListener("click", (e) => {
   const commentsCounter = commentsZoneTarget.querySelector("span");
   commentsCounter.innerHTML++;
   commentContainer.classList.remove("showComment");
-  removeShadowMode();
+  // header.style.filter = "brightness(100%)"
+  // articleArea.style.filter = "brightness(100%)"
+  // footer.style.filter = "brightness(100%)"
   console.log(commentInput.value);
   let newComment = commentInput.value;
   user.message = newComment;
@@ -273,6 +288,8 @@ postSubmitBtn.addEventListener("click", (e) => {
 // Affiche la popup "New post" quand on clique sur le bouton "+"
 postBtn.addEventListener("click", () => {
   newpostContainer.classList.add("showComment");
+  messageBtn.inert = true
+    profileBtn.inert = true
   addShadowMode();
 });
 
@@ -283,3 +300,4 @@ homeBtn.addEventListener("click", () => {
     left:0,
   behavior:"smooth"})
 })
+
