@@ -8,6 +8,7 @@ import {
   removeShadowMode,
   addShadowMode,
   shadowModeToggle,
+  createPost
 } from "./functions.js";
 
 // Récupération des noeuds HTML dans des variables JS
@@ -18,12 +19,8 @@ const footer = document.querySelector(".footer");
 const messageBtn = document.querySelector(".message-img");
 const profileBtn = document.querySelector(".user-img");
 
-const likeBtns = document.querySelectorAll(".like-img");
-const commentBtn = document.querySelectorAll(".comment-img");
-
 const commentContainer = document.querySelector(".comment-container");
 const lastComments = document.querySelectorAll(".last-comment");
-console.log(lastComments);
 const cancelBtn = document.querySelector(".cancel");
 const submitBtn = document.querySelector(".submit");
 
@@ -95,6 +92,14 @@ const posts = [
   }
 
 ]
+// affichage des posts
+for(let post of posts) {
+  createPost(post, articleArea)
+}
+
+const likeBtns = document.querySelectorAll(".like-img");
+const commentBtn = document.querySelectorAll(".comment-img");
+console.log(commentBtn)
 
 // Affichage du profil utilisateur (barre latérale gauche)
 createProfile(user, profile);
@@ -169,9 +174,11 @@ likeBtns.forEach((likeBtn, key) => {
 
 // Affiche la popup "commentaires" quand on clique sur l'icone dédiée
 const commentsLibrary = new Set();
+
 commentBtn.forEach((button, index) =>
   button.addEventListener("click", () => {
     commentsLibrary.add(index);
+    console.log(commentsLibrary)
     commentContainer.classList.add("showComment");
     addShadowMode();
   })
