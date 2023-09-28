@@ -212,7 +212,8 @@ a,
   color: black;
 }
 
-.comment-container {
+.comment-container,
+.newpost-container {
   display: flex;
   flex-direction: column;
   padding: 20px;

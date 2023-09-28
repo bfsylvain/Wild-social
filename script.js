@@ -21,7 +21,8 @@ const profileBtn = document.querySelector(".user-img");
 
 const commentContainer = document.querySelector(".comment-container");
 const lastComments = document.querySelectorAll(".last-comment");
-const cancelBtn = document.querySelector(".cancel");
+const cancelBtns = document.querySelectorAll(".cancel");
+
 const submitBtn = document.querySelector(".submit");
 
 const sidebarRight = document.querySelector(".sidebar-right");
@@ -34,6 +35,9 @@ const profile = document.querySelector(".user-profile");
 const commentContainerContent = document.querySelector(
   ".comment-container-content"
 );
+
+const postBtn = document.querySelector(".post-button");
+const newpostContainer = document.querySelector(".newpost-container");
 
 // Création d'un tableau d'objets représentant les messages du site
 const messageSenders = [
@@ -209,13 +213,16 @@ commentBtn.forEach((button, index) =>
 );
 
 // Masque la popup "commentaires" quand on clique sur "Annuler"
-cancelBtn.addEventListener("click", (e) => {
-  e.preventDefault();
-  commentContainer.classList.remove("showComment");
-  removeShadowMode();
-  commentInput.value = "";
-  commentsLibrary.clear();
-});
+for(let cancelBtn of cancelBtns) {
+  cancelBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    commentContainer.classList.remove("showComment");
+    newpostContainer.classList.remove("showComment");
+    removeShadowMode();
+    commentInput.value = "";
+    commentsLibrary.clear();
+  })
+};
 
 // Crée le commentaire quand on clique sur "Envoyer"
 let commentInput = document.querySelector(".comment-txt");
@@ -234,6 +241,18 @@ submitBtn.addEventListener("click", (e) => {
   commentsLibrary.clear();
 });
 
+// Affiche la popup "New post" quand on clique sur le bouton "+"
+postBtn.addEventListener("click", () => {
+  newpostContainer.classList.add("showComment");
+  addShadowMode();
+});
+
+
+
+
+
+
+// Le bouton "home" remonte en haut de la liste de posts
 const homeBtn = document.querySelector(".homeBtn");
 
 homeBtn.addEventListener("click", () => {
