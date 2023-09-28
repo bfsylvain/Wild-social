@@ -165,16 +165,16 @@ window.addEventListener("scroll", () => {
 // Le bouton "messages" ouvre la barre latérale droite
 messageBtn.addEventListener("click", () => {
   sidebarRight.classList.toggle("active-right");
-  // profileBtn.inert =true
-  // postBtn.inert = true
+  profileBtn.inert =true
+  postBtn.inert = true
   shadowModeToggle();
 });
 
 // Le bouton "profil" ouvre la barre latérale gauche
 profileBtn.addEventListener("click", () => {
   sidebarLeft.classList.toggle("active-left");
-  // messageBtn.inert = true
-  // postBtn.inert = true
+  messageBtn.inert = true
+  postBtn.inert = true
   shadowModeToggle();
   header.classList.toggle("shadowMode");
 });
@@ -193,9 +193,9 @@ document.addEventListener("click", (e) => {
     sidebarLeft.classList.remove("active-left");
     sidebarRight.classList.remove("active-right");
     newpostContainer.classList.remove("showComment");
-    // messageBtn.inert = false
-    // profileBtn.inert = false
-    // postBtn.inert = false
+    messageBtn.inert = false
+    profileBtn.inert = false
+    postBtn.inert = false
     removeShadowMode1();
     removeShadowMode()
   }
@@ -213,7 +213,7 @@ likeBtns.forEach((likeBtn, key) => {
     } else {
       event.target.strokeStyle = "red";
       likeCounter.innerHTML++;
-      library.add(key);
+      library.add(key)
     }
   });
 });
@@ -225,6 +225,7 @@ commentBtn.forEach((button, index) =>
   button.addEventListener("click", () => {
     commentsLibrary.add(index);
     console.log(commentsLibrary)
+    addShadowMode()
     // header.style.filter = "brightness(50%)"
     // articleArea.style.filter = "brightness(50%)"
     // footer.style.filter = "brightness(50%)"
@@ -238,6 +239,7 @@ for(let cancelBtn of cancelBtns) {
     e.preventDefault();
     commentContainer.classList.remove("showComment");
     newpostContainer.classList.remove("showComment");
+    removeShadowMode()
     // header.style.filter = "brightness(100%)"
     // articleArea.style.filter = "brightness(100%)"
     // footer.style.filter = "brightness(100%)"
@@ -254,6 +256,7 @@ submitBtn.addEventListener("click", (e) => {
   const commentsCounter = commentsZoneTarget.querySelector("span");
   commentsCounter.innerHTML++;
   commentContainer.classList.remove("showComment");
+  removeShadowMode()
   // header.style.filter = "brightness(100%)"
   // articleArea.style.filter = "brightness(100%)"
   // footer.style.filter = "brightness(100%)"
