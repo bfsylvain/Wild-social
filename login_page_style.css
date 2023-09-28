@@ -1,16 +1,16 @@
 * {
-    padding: 0;
-    margin: 0;
+  padding: 0;
+  margin: 0;
 }
 
 body {
-    display: flex;
-    --wildColor: #F7146B;
-    background-color: var(--wildColor);
-    justify-content: center;
+  display: flex;
+  --wildColor: #f7146b;
+  background-color: var(--wildColor);
+  justify-content: center;
 }
 
 img {
-    width: 40vw;
-    margin-top: 100%;
+  width: 40vw;
+  margin-top: 100%;
 }
