@@ -74,6 +74,7 @@ const user = {
   date: "A l'instant"
 };
 
+// Création du tableau contenant les posts
 const posts = [
   {
     profilePic: "assets/img/user1.png",
@@ -129,7 +130,45 @@ const posts = [
     picture: "assets/img/post1.png",
     postId: 0
   }
-]
+
+];
+
+// Création du tableau contenant les commentaires
+const comments = [
+  {
+    postId: 0,
+    profilePic: "assets/img/user1.png",
+    firstname: "Post0",
+    lastname: "Commentaire1",
+    date: "avant-hier",
+    text: "Ceci est un commentaire",
+  },
+  {
+    postId: 1,
+    profilePic: "assets/img/user1.png",
+    firstname: "Post1",
+    lastname: "Commentaire1",
+    date: "avant-hier",
+    text: "Ceci est un commentaire",
+  },
+  {
+    postId: 2,
+    profilePic: "assets/img/user1.png",
+    firstname: "Post2",
+    lastname: "Commentaire1",
+    date: "avant-hier",
+    text: "Ceci est un commentaire",
+  },
+  {
+    postId: 1,
+    profilePic: "assets/img/user1.png",
+    firstname: "Post0",
+    lastname: "Commentaire2",
+    date: "il y a 2h",
+    text: "Ceci est un autre commentaire",
+  },
+];
+
 
 // affichage des posts
 for(let i = posts.length - 1; i >= 0; i--) {
