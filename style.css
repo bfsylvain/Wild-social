@@ -297,3 +297,14 @@ a,
   border-radius: 5px;
   font-size: 2rem;
 }
+
+.newpost-container::before {
+  content: "";
+  position: absolute;
+  width: 20%;
+  height: 1px;
+  border-bottom: 4px solid var(--wildColor);
+  left: 50%;
+  top: 10px;
+  transform: translate(-50%);
+}
