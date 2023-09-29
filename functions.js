@@ -62,7 +62,6 @@ export function createMessage(objet, parent) {
   msgTxt.appendChild(text);
 }
 
-
 // Fonction de création du profil utilisateur (barre latérale gauche) à partir de l'objet contenant le profil
 export function createProfile(objet, parent) {
   const message = document.createElement("div");
