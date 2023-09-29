@@ -16,11 +16,11 @@ const header = document.querySelector(".header");
 const articleArea = document.querySelector(".article-area");
 const footer = document.querySelector(".footer");
 
+
 const messageBtn = document.querySelector(".message-img");
 const profileBtn = document.querySelector(".user-img");
 
 const commentContainer = document.querySelector(".comment-container");
-const lastComments = document.querySelectorAll(".last-comment");
 const cancelBtns = document.querySelectorAll(".cancel");
 
 const submitBtn = document.querySelector(".submit");
@@ -38,6 +38,8 @@ const commentContainerContent = document.querySelector(
 
 const postBtn = document.querySelector(".post-button");
 const newpostContainer = document.querySelector(".newpost-container");
+
+const homeBtn = document.querySelector(".homeBtn");
 
 // Création d'un tableau d'objets représentant les messages du site
 const messageSenders = [
@@ -67,6 +69,7 @@ const user = {
   lastname: "Fantastic",
   abonnes: 1961,
   abonnements: 3,
+  date: "A l'instant"
 };
 
 const posts = [
@@ -127,6 +130,9 @@ for(let i = posts.length - 1; i >= 0; i--) {
 
 const likeBtns = document.querySelectorAll(".like-img");
 const commentBtn = document.querySelectorAll(".comment-img");
+const lastComments = document.querySelectorAll(".last-comment");
+
+
 console.log(commentBtn)
 
 // Affichage du profil utilisateur (barre latérale gauche)
@@ -159,12 +165,16 @@ window.addEventListener("scroll", () => {
 // Le bouton "messages" ouvre la barre latérale droite
 messageBtn.addEventListener("click", () => {
   sidebarRight.classList.toggle("active-right");
+  profileBtn.inert =true
+  postBtn.inert = true
   shadowModeToggle();
 });
 
 // Le bouton "profil" ouvre la barre latérale gauche
 profileBtn.addEventListener("click", () => {
   sidebarLeft.classList.toggle("active-left");
+  messageBtn.inert = true
+  postBtn.inert = true
   shadowModeToggle();
   header.classList.toggle("shadowMode");
 });
@@ -183,6 +193,9 @@ document.addEventListener("click", (e) => {
     sidebarLeft.classList.remove("active-left");
     sidebarRight.classList.remove("active-right");
     newpostContainer.classList.remove("showComment");
+    messageBtn.inert = false
+    profileBtn.inert = false
+    postBtn.inert = false
     removeShadowMode1();
     removeShadowMode()
   }
@@ -200,7 +213,7 @@ likeBtns.forEach((likeBtn, key) => {
     } else {
       event.target.strokeStyle = "red";
       likeCounter.innerHTML++;
-      library.add(key);
+      library.add(key)
     }
   });
 });
@@ -212,8 +225,11 @@ commentBtn.forEach((button, index) =>
   button.addEventListener("click", () => {
     commentsLibrary.add(index);
     console.log(commentsLibrary)
+    addShadowMode()
+    // header.style.filter = "brightness(50%)"
+    // articleArea.style.filter = "brightness(50%)"
+    // footer.style.filter = "brightness(50%)"
     commentContainer.classList.add("showComment");
-    addShadowMode();
   })
 );
 
@@ -223,7 +239,10 @@ for(let cancelBtn of cancelBtns) {
     e.preventDefault();
     commentContainer.classList.remove("showComment");
     newpostContainer.classList.remove("showComment");
-    removeShadowMode();
+    removeShadowMode()
+    // header.style.filter = "brightness(100%)"
+    // articleArea.style.filter = "brightness(100%)"
+    // footer.style.filter = "brightness(100%)"
     commentInput.value = "";
     commentsLibrary.clear();
   })
@@ -237,7 +256,10 @@ submitBtn.addEventListener("click", (e) => {
   const commentsCounter = commentsZoneTarget.querySelector("span");
   commentsCounter.innerHTML++;
   commentContainer.classList.remove("showComment");
-  removeShadowMode();
+  removeShadowMode()
+  // header.style.filter = "brightness(100%)"
+  // articleArea.style.filter = "brightness(100%)"
+  // footer.style.filter = "brightness(100%)"
   console.log(commentInput.value);
   let newComment = commentInput.value;
   user.message = newComment;
@@ -269,22 +291,16 @@ postSubmitBtn.addEventListener("click", (e) => {
 // Affiche la popup "New post" quand on clique sur le bouton "+"
 postBtn.addEventListener("click", () => {
   newpostContainer.classList.add("showComment");
+  messageBtn.inert = true
+    profileBtn.inert = true
   addShadowMode();
 });
 
-
-
-
-
-
-
-
 // Le bouton "home" remonte en haut de la liste de posts
-const homeBtn = document.querySelector(".homeBtn");
-
 homeBtn.addEventListener("click", () => {
   window.scrollTo({
     top:0,
     left:0,
   behavior:"smooth"})
 })
+
