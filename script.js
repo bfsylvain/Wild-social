@@ -83,7 +83,6 @@ const posts = [
     date: "demain",
     text: "Un post blablabla",
     picture: "assets/img/post1.png",
-    postId: 1
   },
   {
     profilePic: "assets/img/user1.png",
@@ -92,7 +91,6 @@ const posts = [
     date: "hier",
     text: "Do you knox who I am ?!",
     picture: "assets/img/post1.png",
-    postId: 0
   },
   {
     profilePic: "assets/img/user1.png",
@@ -101,7 +99,6 @@ const posts = [
     date: "avant-hier",
     text: "You know nothing...",
     picture: "assets/img/post1.png",
-    postId: 1
   },
   {
     profilePic: "assets/img/user1.png",
@@ -110,7 +107,6 @@ const posts = [
     date: "demain",
     text: "Un post blablabla",
     picture: "assets/img/post1.png",
-    postId: 0
   },
   {
     profilePic: "assets/img/user1.png",
@@ -128,7 +124,6 @@ const posts = [
     date: "avant-hier",
     text: "C'était pas ma guerre, Adrienne !",
     picture: "assets/img/post1.png",
-    postId: 0
   }
 
 ];
@@ -273,7 +268,8 @@ commentBtn.forEach((button, index) =>
     commentsLibrary.add(index);
     console.log(commentsLibrary)
     //test
-    let matchUser = posts.filter(post => post.postId === [...commentsLibrary][0])
+    commentContainerContent.innerHTML =""
+    let matchUser = comments.filter(comment => comment.postId === [...commentsLibrary][0])
     matchUser.forEach(match => createPost(match, commentContainerContent))
     addShadowMode()
     // header.style.filter = "brightness(50%)"
@@ -295,7 +291,7 @@ for(let cancelBtn of cancelBtns) {
     // footer.style.filter = "brightness(100%)"
     commentInput.value = "";
     commentsLibrary.clear();
-    commentContainerContent.innerHTML =""
+    
   })
 };
 
