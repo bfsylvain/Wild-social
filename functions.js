@@ -152,6 +152,36 @@ export function createPost (object, parent) {
   `;
 }
 
+export function createComment (object, parent) {
+  parent.innerHTML += `
+  <div class="article">
+  <div class="profile">
+    <img
+      class="profile-img"
+      src="${object.profilePic}"
+      alt=""
+    />
+    <div class="user-name">
+      <h2>${object.firstname} ${object.lastname}</h2>
+      <p>${object.date}</p>
+    </div>
+  </div>
+  <div class="post-text-area">
+    <p>
+      ${object.text}
+    </p>
+  </div>
+  <div class="post-picture-area">
+    <img
+      class="post-img"
+      src= ${object.picture}
+      alt=""
+    />
+  </div>
+</div>
+  `;
+}
+
 // Gestion du "shadow mode" : grise le reste de l'écran quand une popup ou sidebar est ouverte
 
 let header = document.querySelector(".header");

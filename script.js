@@ -8,7 +8,8 @@ import {
   removeShadowMode,
   addShadowMode,
   shadowModeToggle,
-  createPost
+  createPost,
+  createComment
 } from "./functions.js";
 
 // Récupération des noeuds HTML dans des variables JS
@@ -270,7 +271,7 @@ commentBtn.forEach((button, index) =>
     //test
     commentContainerContent.innerHTML =""
     let matchUser = comments.filter(comment => comment.postId === [...commentsLibrary][0])
-    matchUser.forEach(match => createPost(match, commentContainerContent))
+    matchUser.forEach(match => createComment(match, commentContainerContent))
     addShadowMode()
     // header.style.filter = "brightness(50%)"
     // articleArea.style.filter = "brightness(50%)"
