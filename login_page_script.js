@@ -1,5 +1,5 @@
-const userId = "azer"
-const userPassword = "azer"
+const userId = "4f"
+const userPassword = "4f"
 const loginBtn = document.querySelector('.login-btn')
 console.log(loginBtn)
 const email = document.getElementById("email")
