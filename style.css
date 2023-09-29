@@ -41,6 +41,23 @@ body {
   fill: black;
 }
 
+
+.profile {
+ display: flex;
+ padding-left: 4vw;
+ 
+}
+
+.user-name {
+  display: flex;
+  flex-direction: column;
+  padding: 3vw;
+}
+
+.post-text-area {
+  padding: 0.2vh 8vw 1vh 4vw;
+}
+
 a,
 .icon:hover {
   cursor: pointer;
@@ -75,6 +92,8 @@ a,
 .article-interaction-area {
   display: flex;
   justify-content: space-around;
+  padding-bottom: 1vh;
+  border-bottom: 1.2px solid rgb(82, 82, 82) ;
 }
 
 .like-img {
