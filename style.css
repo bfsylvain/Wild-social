@@ -1,0 +1,299 @@
+:root {
+  --wildColor: #f7146b;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: sans-serif;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  z-index: 3;
+  position: sticky;
+  top: 0;
+  height: 8vh;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 1.5rem;
+  background-color: var(--wildColor);
+  transition: 0.6s;
+}
+
+.header-icon {
+  width: 2rem;
+  height: 2rem;
+  fill: black;
+}
+
+a,
+.icon:hover {
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.main {
+  flex-grow: 1;
+  display: flex;
+  position: relative;
+  background-color: #fff;
+}
+
+.article-area {
+  flex-grow: 1;
+  background-color: #fff;
+}
+
+.profile {
+  display: flex;
+}
+
+.profile-img {
+  width: 3rem;
+  height: auto;
+}
+
+.post-img {
+  width: 100%;
+}
+
+.article-interaction-area {
+  display: flex;
+  justify-content: space-around;
+}
+
+.like-img {
+  color: var(--wildColor);
+}
+
+.sidebar-right {
+  display: flex;
+  flex-direction: column;
+  min-height: 368px;
+  height: 42vh;
+  width: 45vw;
+  position: fixed;
+  right: -45vw;
+  top: 8vh;
+  border: 3px solid black;
+  border-radius: 5px;
+  background-color: #fff;
+  flex-grow: 0.6;
+  list-style: none;
+  transition: transform 300ms ease-in-out;
+}
+
+.sidebar-left {
+  display: flex;
+  flex-direction: column;
+  min-height: 368px;
+  height: 42vh;
+  width: 45vw;
+  position: fixed;
+  left: -45vw;
+  top: 8vh;
+  list-style: none;
+  border: 3px solid black;
+  border-radius: 5px;
+  background-color: #fff;
+  flex-grow: 0.6;
+  transition: transform 300ms ease-in-out;
+}
+
+.sidebar ul {
+  flex-grow: 1;
+  list-style: none;
+}
+
+.sidebar {
+  padding: 0 0.75rem 0 0.75rem;
+}
+
+.sidebar-title {
+  padding: 0.75rem 0 0.25rem 0;
+}
+
+.message-area {
+  flex: 1 0;
+  overflow: hidden;
+}
+
+.message {
+  display: flex;
+  flex-direction: column;
+  padding: 0.75rem 0 0.75rem 0;
+}
+
+.message-text {
+  padding-top: 0.25rem;
+}
+
+.sender {
+  padding-left: 1rem;
+}
+
+.sender-name {
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+
+.sender-time {
+  font-size: 0.75rem;
+}
+.sender-img {
+  width: 2.5rem;
+  height: 2.5rem;
+}
+
+.messages-footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 2rem;
+  background-color: #fff;
+}
+
+.profile-options {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.profile-link {
+  padding: 2rem 0 1rem 0;
+}
+
+.active-right {
+  transform: translateX(-100%);
+}
+
+.active-left {
+  transform: translateX(100%);
+}
+
+.header.shadowMode,
+.footer.shadowMode,
+.article-area.shadowMode {
+  filter: brightness(50%);
+}
+
+.shadowMode2 {
+  filter: brightness(50%);
+}
+
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  bottom: 0;
+  width: 100%;
+  padding: 1.5rem;
+  height: 8vh;
+  background-color: lightgrey;
+}
+
+.website-img {
+  color: black;
+}
+
+.comment-container,
+.newpost-container {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  position: fixed;
+  bottom: -50vh;
+  border: 1px solid black;
+  z-index: 10;
+  background-color: white;
+  width: 100%;
+  height: 50vh;
+  border-radius: 5px;
+  transition: transform 300ms ease-in-out;
+}
+
+.comment-container::before {
+  content: "";
+  position: absolute;
+  width: 20%;
+  height: 1px;
+  border-bottom: 4px solid var(--wildColor);
+  left: 50%;
+  top: 10px;
+  transform: translate(-50%);
+}
+
+.comment-container-content {
+  height: 30vh;
+  overflow: scroll;
+  flex: 1 1;
+}
+
+.showComment {
+  transform: translateY(-100%);
+}
+
+.add-comment {
+  padding: 1rem 0;
+  display: flex;
+  align-items: center;
+}
+
+.add-comment input {
+  margin-left: 1rem;
+  padding: 8px;
+  width: 80%;
+  border: 1px solid black;
+  border-radius: 3px;
+}
+
+.send-comment {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.send-comment button {
+  margin: 0 1rem;
+  padding: 8px;
+  border-radius: 5px;
+}
+
+.cancel {
+  background-color: white;
+}
+
+.submit {
+  background-color: var(--wildColor);
+  color: white;
+}
+
+.post-button {
+  position: fixed;
+  bottom: calc(8vh + 0.5rem);
+  right: 2rem;
+  height: 3rem;
+  width: 3rem;
+  background-color: var(--wildColor);
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+  font-size: 2rem;
+}
