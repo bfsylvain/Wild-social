@@ -62,6 +62,8 @@ const messageSenders = [
   },
 ];
 
+
+
 // Création de l'objet "profil de l'utilisateur"
 const user = {
   firstname: "Mr",
@@ -71,6 +73,7 @@ const user = {
   date: "A l'instant",
 };
 
+// Création du tableau contenant les posts
 const posts = [
   {
     profilePic: "assets/img/profilPicture.svg",
@@ -78,7 +81,8 @@ const posts = [
     lastname: "John",
     date: "demain",
     text: "Un post blablabla",
-    picture: "assets/img/post1.png",
+    picture: "assets/img/post1.png",,
+    postId: 1
   },
   {
     profilePic: "assets/img/profilPicture.svg",
@@ -87,6 +91,7 @@ const posts = [
     date: "hier",
     text: "Do you knox who I am ?!",
     picture: "assets/img/post1.png",
+    postId: 0
   },
   {
     profilePic: "assets/img/profilPicture.svg",
@@ -95,6 +100,7 @@ const posts = [
     date: "avant-hier",
     text: "You know nothing...",
     picture: "assets/img/post1.png",
+    postId: 1
   },
   {
     profilePic: "assets/img/profilPicture.svg",
@@ -103,6 +109,7 @@ const posts = [
     date: "demain",
     text: "Un post blablabla",
     picture: "assets/img/post1.png",
+    postId: 0
   },
   {
     profilePic: "assets/img/profilPicture.svg",
@@ -110,7 +117,8 @@ const posts = [
     lastname: "Wick",
     date: "hier",
     text: "Do you knox who I am ?!",
-    picture: "assets/img/post1.png",
+    picture: "assets/img/post1.png", 
+    postId: 1
   },
   {
     profilePic: "assets/img/profilPicture.svg",
@@ -119,8 +127,48 @@ const posts = [
     date: "avant-hier",
     text: "C'était pas ma guerre, Adrienne !",
     picture: "assets/img/post1.png",
+    postId: 0
+  }
+
+];
+
+// Création du tableau contenant les commentaires
+const comments = [
+  {
+    postId: 0,
+    profilePic: "assets/img/user1.png",
+    firstname: "Post0",
+    lastname: "Commentaire1",
+    date: "avant-hier",
+    text: "Ceci est un commentaire",
+  },
+  {
+    postId: 1,
+    profilePic: "assets/img/user1.png",
+    firstname: "Post1",
+    lastname: "Commentaire1",
+    date: "avant-hier",
+    text: "Ceci est un commentaire",
+  },
+  {
+    postId: 2,
+    profilePic: "assets/img/user1.png",
+    firstname: "Post2",
+    lastname: "Commentaire1",
+    date: "avant-hier",
+    text: "Ceci est un commentaire",
+  },
+  {
+    postId: 1,
+    profilePic: "assets/img/user1.png",
+    firstname: "Post0",
+    lastname: "Commentaire2",
+    date: "il y a 2h",
+    text: "Ceci est un autre commentaire",
   },
 ];
+
+
 // affichage des posts
 for (let i = posts.length - 1; i >= 0; i--) {
   createPost(posts[i], articleArea);
@@ -220,8 +268,11 @@ const commentsLibrary = new Set();
 commentBtn.forEach((button, index) =>
   button.addEventListener("click", () => {
     commentsLibrary.add(index);
-    console.log(commentsLibrary);
-    addShadowMode();
+    console.log(commentsLibrary)
+    //test
+    let matchUser = posts.filter(post => post.postId === [...commentsLibrary][0])
+    matchUser.forEach(match => createPost(match, commentContainerContent))
+    addShadowMode()
     // header.style.filter = "brightness(50%)"
     // articleArea.style.filter = "brightness(50%)"
     // footer.style.filter = "brightness(50%)"
@@ -241,8 +292,9 @@ for (let cancelBtn of cancelBtns) {
     // footer.style.filter = "brightness(100%)"
     commentInput.value = "";
     commentsLibrary.clear();
-  });
-}
+    commentContainerContent.innerHTML =""
+  })
+};
 
 // Crée le commentaire quand on clique sur "Envoyer"
 let commentInput = document.querySelector(".comment-txt");
@@ -262,6 +314,7 @@ submitBtn.addEventListener("click", (e) => {
   createArticle(user, lastComments[[...commentsLibrary][0]]);
   commentInput.value = "";
   commentsLibrary.clear();
+  commentContainerContent.innerHTML =""
 });
 
 let postInput = document.querySelector(".post-txt");
