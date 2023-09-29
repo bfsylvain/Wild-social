@@ -63,6 +63,8 @@ const messageSenders = [
   },
 ];
 
+
+
 // Création de l'objet "profil de l'utilisateur"
 const user = {
   firstname: "Mr",
@@ -80,7 +82,8 @@ const posts = [
     lastname: "John",
     date: "demain",
     text: "Un post blablabla",
-    picture: "assets/img/post1.png"
+    picture: "assets/img/post1.png",
+    postId: 1
   },
   {
     profilePic: "assets/img/user1.png",
@@ -88,7 +91,8 @@ const posts = [
     lastname: "Wick",
     date: "hier",
     text: "Do you knox who I am ?!",
-    picture: "assets/img/post1.png"
+    picture: "assets/img/post1.png",
+    postId: 0
   },
   {
     profilePic: "assets/img/user1.png",
@@ -96,7 +100,8 @@ const posts = [
     lastname: "Snow",
     date: "avant-hier",
     text: "You know nothing...",
-    picture: "assets/img/post1.png"
+    picture: "assets/img/post1.png",
+    postId: 1
   },
   {
     profilePic: "assets/img/user1.png",
@@ -104,7 +109,8 @@ const posts = [
     lastname: "John",
     date: "demain",
     text: "Un post blablabla",
-    picture: "assets/img/post1.png"
+    picture: "assets/img/post1.png",
+    postId: 0
   },
   {
     profilePic: "assets/img/user1.png",
@@ -112,7 +118,8 @@ const posts = [
     lastname: "Wick",
     date: "hier",
     text: "Do you knox who I am ?!",
-    picture: "assets/img/post1.png"
+    picture: "assets/img/post1.png", 
+    postId: 1
   },
   {
     profilePic: "assets/img/user1.png",
@@ -120,7 +127,8 @@ const posts = [
     lastname: "Rambo",
     date: "avant-hier",
     text: "C'était pas ma guerre, Adrienne !",
-    picture: "assets/img/post1.png"
+    picture: "assets/img/post1.png",
+    postId: 0
   }
 
 ];
@@ -160,6 +168,7 @@ const comments = [
     text: "Ceci est un autre commentaire",
   },
 ];
+
 
 // affichage des posts
 for(let i = posts.length - 1; i >= 0; i--) {
@@ -263,6 +272,9 @@ commentBtn.forEach((button, index) =>
   button.addEventListener("click", () => {
     commentsLibrary.add(index);
     console.log(commentsLibrary)
+    //test
+    let matchUser = posts.filter(post => post.postId === [...commentsLibrary][0])
+    matchUser.forEach(match => createPost(match, commentContainerContent))
     addShadowMode()
     // header.style.filter = "brightness(50%)"
     // articleArea.style.filter = "brightness(50%)"
@@ -283,6 +295,7 @@ for(let cancelBtn of cancelBtns) {
     // footer.style.filter = "brightness(100%)"
     commentInput.value = "";
     commentsLibrary.clear();
+    commentContainerContent.innerHTML =""
   })
 };
 
@@ -304,6 +317,7 @@ submitBtn.addEventListener("click", (e) => {
   createArticle(user, lastComments[[...commentsLibrary][0]]);
   commentInput.value = "";
   commentsLibrary.clear();
+  commentContainerContent.innerHTML =""
 });
 
 let postInput = document.querySelector(".post-txt")
@@ -341,4 +355,6 @@ homeBtn.addEventListener("click", () => {
     left:0,
   behavior:"smooth"})
 })
+
+
 
