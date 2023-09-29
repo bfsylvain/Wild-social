@@ -20,7 +20,6 @@ const messageBtn = document.querySelector(".message-img");
 const profileBtn = document.querySelector(".user-img");
 
 const commentContainer = document.querySelector(".comment-container");
-const lastComments = document.querySelectorAll(".last-comment");
 const cancelBtns = document.querySelectorAll(".cancel");
 
 const submitBtn = document.querySelector(".submit");
@@ -38,6 +37,8 @@ const commentContainerContent = document.querySelector(
 
 const postBtn = document.querySelector(".post-button");
 const newpostContainer = document.querySelector(".newpost-container");
+
+const homeBtn = document.querySelector(".homeBtn");
 
 // Création d'un tableau d'objets représentant les messages du site
 const messageSenders = [
@@ -67,58 +68,103 @@ const user = {
   lastname: "Fantastic",
   abonnes: 1961,
   abonnements: 3,
+  date: "A l'instant",
 };
 
+// Création du tableau contenant les posts
 const posts = [
   {
-    profilePic: "assets/img/user1.png",
+    profilePic: "assets/img/profilPicture.svg",
     firstname: "John",
     lastname: "John",
     date: "demain",
     text: "Un post blablabla",
     picture: "assets/img/post1.png",
+    postId: 1,
   },
   {
-    profilePic: "assets/img/user1.png",
+    profilePic: "assets/img/profilPicture.svg",
     firstname: "John",
     lastname: "Wick",
     date: "hier",
     text: "Do you knox who I am ?!",
     picture: "assets/img/post1.png",
+    postId: 0,
   },
   {
-    profilePic: "assets/img/user1.png",
+    profilePic: "assets/img/profilPicture.svg",
     firstname: "John",
     lastname: "Snow",
     date: "avant-hier",
     text: "You know nothing...",
     picture: "assets/img/post1.png",
+    postId: 1,
   },
   {
-    profilePic: "assets/img/user1.png",
+    profilePic: "assets/img/profilPicture.svg",
     firstname: "John",
     lastname: "John",
     date: "demain",
     text: "Un post blablabla",
     picture: "assets/img/post1.png",
+    postId: 0,
   },
   {
-    profilePic: "assets/img/user1.png",
+    profilePic: "assets/img/profilPicture.svg",
     firstname: "John",
     lastname: "Wick",
     date: "hier",
     text: "Do you knox who I am ?!",
     picture: "assets/img/post1.png",
+    postId: 1,
   },
   {
-    profilePic: "assets/img/user1.png",
+    profilePic: "assets/img/profilPicture.svg",
     firstname: "John",
     lastname: "Rambo",
     date: "avant-hier",
     text: "C'était pas ma guerre, Adrienne !",
     picture: "assets/img/post1.png",
+    postId: 0,
   },
 ];
+
+// Création du tableau contenant les commentaires
+const comments = [
+  {
+    postId: 0,
+    profilePic: "assets/img/user1.png",
+    firstname: "Post0",
+    lastname: "Commentaire1",
+    date: "avant-hier",
+    text: "Ceci est un commentaire",
+  },
+  {
+    postId: 1,
+    profilePic: "assets/img/user1.png",
+    firstname: "Post1",
+    lastname: "Commentaire1",
+    date: "avant-hier",
+    text: "Ceci est un commentaire",
+  },
+  {
+    postId: 2,
+    profilePic: "assets/img/user1.png",
+    firstname: "Post2",
+    lastname: "Commentaire1",
+    date: "avant-hier",
+    text: "Ceci est un commentaire",
+  },
+  {
+    postId: 1,
+    profilePic: "assets/img/user1.png",
+    firstname: "Post0",
+    lastname: "Commentaire2",
+    date: "il y a 2h",
+    text: "Ceci est un autre commentaire",
+  },
+];
+
 // affichage des posts
 for (let i = posts.length - 1; i >= 0; i--) {
   createPost(posts[i], articleArea);
@@ -126,6 +172,8 @@ for (let i = posts.length - 1; i >= 0; i--) {
 
 const likeBtns = document.querySelectorAll(".like-img");
 const commentBtn = document.querySelectorAll(".comment-img");
+const lastComments = document.querySelectorAll(".last-comment");
+
 console.log(commentBtn);
 
 // Affichage du profil utilisateur (barre latérale gauche)
@@ -158,12 +206,16 @@ window.addEventListener("scroll", () => {
 // Le bouton "messages" ouvre la barre latérale droite
 messageBtn.addEventListener("click", () => {
   sidebarRight.classList.toggle("active-right");
+  profileBtn.inert = true;
+  postBtn.inert = true;
   shadowModeToggle();
 });
 
 // Le bouton "profil" ouvre la barre latérale gauche
 profileBtn.addEventListener("click", () => {
   sidebarLeft.classList.toggle("active-left");
+  messageBtn.inert = true;
+  postBtn.inert = true;
   shadowModeToggle();
   header.classList.toggle("shadowMode");
 });
@@ -181,6 +233,9 @@ document.addEventListener("click", (e) => {
     sidebarLeft.classList.remove("active-left");
     sidebarRight.classList.remove("active-right");
     newpostContainer.classList.remove("showComment");
+    messageBtn.inert = false;
+    profileBtn.inert = false;
+    postBtn.inert = false;
     removeShadowMode1();
     removeShadowMode();
   }
@@ -210,8 +265,16 @@ commentBtn.forEach((button, index) =>
   button.addEventListener("click", () => {
     commentsLibrary.add(index);
     console.log(commentsLibrary);
-    commentContainer.classList.add("showComment");
+    //test
+    let matchUser = posts.filter(
+      (post) => post.postId === [...commentsLibrary][0]
+    );
+    matchUser.forEach((match) => createPost(match, commentContainerContent));
     addShadowMode();
+    // header.style.filter = "brightness(50%)"
+    // articleArea.style.filter = "brightness(50%)"
+    // footer.style.filter = "brightness(50%)"
+    commentContainer.classList.add("showComment");
   })
 );
 
@@ -222,8 +285,12 @@ for (let cancelBtn of cancelBtns) {
     commentContainer.classList.remove("showComment");
     newpostContainer.classList.remove("showComment");
     removeShadowMode();
+    // header.style.filter = "brightness(100%)"
+    // articleArea.style.filter = "brightness(100%)"
+    // footer.style.filter = "brightness(100%)"
     commentInput.value = "";
     commentsLibrary.clear();
+    commentContainerContent.innerHTML = "";
   });
 }
 
@@ -236,12 +303,16 @@ submitBtn.addEventListener("click", (e) => {
   commentsCounter.innerHTML++;
   commentContainer.classList.remove("showComment");
   removeShadowMode();
+  // header.style.filter = "brightness(100%)"
+  // articleArea.style.filter = "brightness(100%)"
+  // footer.style.filter = "brightness(100%)"
   console.log(commentInput.value);
   let newComment = commentInput.value;
   user.message = newComment;
   createArticle(user, lastComments[[...commentsLibrary][0]]);
   commentInput.value = "";
   commentsLibrary.clear();
+  commentContainerContent.innerHTML = "";
 });
 
 let postInput = document.querySelector(".post-txt");
@@ -267,12 +338,12 @@ postSubmitBtn.addEventListener("click", (e) => {
 // Affiche la popup "New post" quand on clique sur le bouton "+"
 postBtn.addEventListener("click", () => {
   newpostContainer.classList.add("showComment");
+  messageBtn.inert = true;
+  profileBtn.inert = true;
   addShadowMode();
 });
 
 // Le bouton "home" remonte en haut de la liste de posts
-const homeBtn = document.querySelector(".homeBtn");
-
 homeBtn.addEventListener("click", () => {
   window.scrollTo({
     top: 0,

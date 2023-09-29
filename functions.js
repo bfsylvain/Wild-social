@@ -31,6 +31,37 @@ export function createArticle(objet, parent) {
   message.appendChild(msgTxt);
   msgTxt.appendChild(text);
 }
+//test
+export function createMessage(objet, parent) {
+  const message = document.createElement("div");
+  message.classList.add("message");
+  const profile = document.createElement("div");
+  profile.classList.add("profile");
+  const senderImg = document.createElement("img");
+  senderImg.classList.add("sender-img");
+  senderImg.setAttribute("src", "assets/img/WF Image Placeholder.png");
+  const sender = document.createElement("div");
+  sender.classList.add("sender");
+  const senderName = document.createElement("p");
+  senderName.classList.add("sender-name");
+  senderName.innerHTML = `${objet.firstname} ${objet.lastname}`;
+  const senderTime = document.createElement("p");
+  senderTime.innerHTML = objet.date;
+  const msgTxt = document.createElement("div");
+  msgTxt.classList.add("message-text");
+  const text = document.createElement("p");
+  text.classList.add("text");
+  text.innerText = objet.message;
+  parent.appendChild(message);
+  message.appendChild(profile);
+  profile.appendChild(senderImg);
+  profile.appendChild(sender);
+  sender.appendChild(senderName);
+  sender.appendChild(senderTime);
+  message.appendChild(msgTxt);
+  msgTxt.appendChild(text);
+}
+
 
 // Fonction de création du profil utilisateur (barre latérale gauche) à partir de l'objet contenant le profil
 export function createProfile(objet, parent) {
@@ -64,7 +95,7 @@ export function createProfile(objet, parent) {
   msgTxt.appendChild(abonnes);
 }
 
-export function createPost (object, parent) {
+export function createPost(object, parent) {
   parent.innerHTML += `
   <div class="article">
   <div class="profile">
@@ -108,13 +139,6 @@ export function createPost (object, parent) {
       />
       <span>35</span>
     </div>
-    <div class="share-area">
-      <img
-        class="share-img icon"
-        src="assets/img/share-img.png"
-        alt=""
-      />
-      <span>38</span>
     </div>
   </div>
 </div>
@@ -150,4 +174,3 @@ export function shadowModeToggle() {
   articleArea.classList.toggle("shadowMode");
   footer.classList.toggle("shadowMode");
 }
-

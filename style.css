@@ -41,6 +41,23 @@ body {
   fill: black;
 }
 
+
+.profile {
+ display: flex;
+ padding-left: 4vw;
+ 
+}
+
+.user-name {
+  display: flex;
+  flex-direction: column;
+  padding: 3vw;
+}
+
+.post-text-area {
+  padding: 0.2vh 8vw 1vh 4vw;
+}
+
 a,
 .icon:hover {
   cursor: pointer;
@@ -65,7 +82,9 @@ a,
 
 .profile-img {
   width: 3rem;
-  height: auto;
+  height: 3rem;
+  object-fit: cover;
+  border-radius: 50%;
 }
 
 .post-img {
@@ -75,6 +94,8 @@ a,
 .article-interaction-area {
   display: flex;
   justify-content: space-around;
+  padding-bottom: 1vh;
+  border-bottom: 1.2px solid rgb(82, 82, 82) ;
 }
 
 .like-img {
@@ -158,6 +179,8 @@ a,
 .sender-img {
   width: 2.5rem;
   height: 2.5rem;
+  object-fit: cover;
+  border-radius: 50%;
 }
 
 .messages-footer {
@@ -296,4 +319,15 @@ a,
   align-items: center;
   border-radius: 5px;
   font-size: 2rem;
+}
+
+.newpost-container::before {
+  content: "";
+  position: absolute;
+  width: 20%;
+  height: 1px;
+  border-bottom: 4px solid var(--wildColor);
+  left: 50%;
+  top: 10px;
+  transform: translate(-50%);
 }
