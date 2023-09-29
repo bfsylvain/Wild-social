@@ -65,7 +65,9 @@ a,
 
 .profile-img {
   width: 3rem;
-  height: auto;
+  height: 3rem;
+  object-fit: cover;
+  border-radius: 50%;
 }
 
 .post-img {
@@ -158,6 +160,8 @@ a,
 .sender-img {
   width: 2.5rem;
   height: 2.5rem;
+  object-fit: cover;
+  border-radius: 50%;
 }
 
 .messages-footer {
