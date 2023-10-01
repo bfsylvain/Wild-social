@@ -371,10 +371,4 @@ homeBtn.addEventListener("click", () => {
 
 
 
-const phrase1 = "je ne fais pas moins de 20 caracteres"
-const phrase2 = "hello you"
-console.log(sliceOrNot(phrase1))
-console.log(sliceOrNot(phrase2))
-
-
 
