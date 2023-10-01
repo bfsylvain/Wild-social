@@ -1,6 +1,6 @@
 // FICHIER JS CONTENANT LES FONCTIONS
 
-// Fonction de création des articles (messages et commentaires)
+// Fonction de création des articles (commentaires)
 // paramètres : contenu du message (objet JS) et noeud HTML parent
 export function createArticle(objet, parent) {
   const message = document.createElement("div");
@@ -31,7 +31,16 @@ export function createArticle(objet, parent) {
   message.appendChild(msgTxt);
   msgTxt.appendChild(text);
 }
-//test
+//Fonction qui fait se terminer par '...' la phrase 
+//après 20 caracteres si elle fait plus de 20 caracteres
+function sliceOrNot(sentence) {
+  if(sentence.length > 20) {
+    return `${[...sentence].slice(0, 20).join('')}...`
+  } else{
+    return sentence
+  }
+}
+//fonction de création des messages dans la barre latérale droite
 export function createMessage(objet, parent) {
   const message = document.createElement("div");
   message.classList.add("message");
@@ -51,7 +60,8 @@ export function createMessage(objet, parent) {
   msgTxt.classList.add("message-text");
   const text = document.createElement("p");
   text.classList.add("text");
-  text.innerText = objet.message;
+  const messageToSlice = objet.message
+  text.innerText = sliceOrNot(messageToSlice)
   parent.appendChild(message);
   message.appendChild(profile);
   profile.appendChild(senderImg);

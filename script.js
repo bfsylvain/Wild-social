@@ -9,7 +9,8 @@ import {
   addShadowMode,
   shadowModeToggle,
   createPost,
-  createComment
+  createComment,
+  createMessage
 } from "./functions.js";
 
 // Récupération des noeuds HTML dans des variables JS
@@ -54,7 +55,7 @@ const messageSenders = [
     date: "hier",
     firstname: "John",
     lastname: "John",
-    message: "Banana Banana Banana Banana Banana",
+    message: "Hey hey hey ! What's up bro ?",
   },
   {
     date: "hier",
@@ -183,7 +184,8 @@ createProfile(user, profile);
 
 // Affichage des messages (barre latérale droite)
 for (let messageSender of messageSenders) {
-  createArticle(messageSender, messageArea);
+  createMessage(messageSender, messageArea)
+  //createArticle(messageSender, messageArea);
 }
 
 // Affichage des commentaires (popup en bas)
@@ -296,22 +298,36 @@ for(let cancelBtn of cancelBtns) {
   })
 };
 
+// essai creation class pour commentaire d'un post
+class Post{
+  constructor(id, comment) {
+    this.postId = id,
+    this.profilePic = "assets/img/user1.png",
+    this.firstname = user.firstname,
+    this.lastname = user.lastname,
+    this.date = "Maintenant",
+    this.text = comment
+  }
+}
+////////////////////////////////////////////////
+
 // Crée le commentaire quand on clique sur "Envoyer"
 let commentInput = document.querySelector(".comment-txt");
 submitBtn.addEventListener("click", (e) => {
   e.preventDefault();
-  const commentsZoneTarget = commentBtn[[...commentsLibrary][0]].parentNode;
+  const targetPost = [...commentsLibrary][0]
+  const commentsZoneTarget = commentBtn[targetPost].parentNode;
   const commentsCounter = commentsZoneTarget.querySelector("span");
   commentsCounter.innerHTML++;
   commentContainer.classList.remove("showComment");
   removeShadowMode()
-  // header.style.filter = "brightness(100%)"
-  // articleArea.style.filter = "brightness(100%)"
-  // footer.style.filter = "brightness(100%)"
   console.log(commentInput.value);
   let newComment = commentInput.value;
+  const essaiCommentaire = new Post(targetPost,newComment)
+  //console.log(essaiCommentaire)
+  comments.push(essaiCommentaire)
+  //console.log(comments)//
   user.message = newComment;
-  createArticle(user, lastComments[[...commentsLibrary][0]]);
   commentInput.value = "";
   commentsLibrary.clear();
   commentContainerContent.innerHTML =""
@@ -354,18 +370,11 @@ homeBtn.addEventListener("click", () => {
 })
 
 
-// class Post{
-//   constructor(message) {
-//     this.postId = 1,
-//     this.profilePic = "assets/img/user1.png",
-//     this.firstname = "Post0",
-//     this.lastname = "Commentaire2",
-//     this.date = "il y a 2h",
-//     this.text = message
-//   }
-// }
 
-
+const phrase1 = "je ne fais pas moins de 20 caracteres"
+const phrase2 = "hello you"
+console.log(sliceOrNot(phrase1))
+console.log(sliceOrNot(phrase2))
 
 
 
