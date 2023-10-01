@@ -354,4 +354,18 @@ homeBtn.addEventListener("click", () => {
 })
 
 
+// class Post{
+//   constructor(message) {
+//     this.postId = 1,
+//     this.profilePic = "assets/img/user1.png",
+//     this.firstname = "Post0",
+//     this.lastname = "Commentaire2",
+//     this.date = "il y a 2h",
+//     this.text = message
+//   }
+// }
+
+
+
+
 
