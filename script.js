@@ -10,8 +10,15 @@ import {
   shadowModeToggle,
   createPost,
   createComment,
-  createMessage
+  createMessage,
 } from "./functions.js";
+
+import {
+  user, 
+  comments,
+  posts,
+  messageSenders
+} from "./objects_to_localStorage.js";
 
 // Récupération des noeuds HTML dans des variables JS
 const header = document.querySelector(".header");
@@ -43,129 +50,139 @@ const newpostContainer = document.querySelector(".newpost-container");
 
 const homeBtn = document.querySelector(".homeBtn");
 
+//Envoi des données dans le local storage
+
 // Création d'un tableau d'objets représentant les messages du site
-const messageSenders = [
-  {
-    date: "hier",
-    firstname: "Cédric",
-    lastname: "D",
-    message: "Apéro ?",
-  },
-  {
-    date: "hier",
-    firstname: "John",
-    lastname: "John",
-    message: "Hey hey hey ! What's up bro ?",
-  },
-  {
-    date: "hier",
-    firstname: "John",
-    lastname: "Bob",
-    message: "Banana Banana Banana Banana Banana",
-  },
-];
+// const messageSenders = [
+//   {
+//     date: "hier",
+//     firstname: "Cédric",
+//     lastname: "D",
+//     message: "Apéro ?",
+//   },
+//   {
+//     date: "hier",
+//     firstname: "John",
+//     lastname: "John",
+//     message: "Hey hey hey ! What's up bro ?",
+//   },
+//   {
+//     date: "hier",
+//     firstname: "John",
+//     lastname: "Bob",
+//     message: "Banana Banana Banana Banana Banana",
+//   },
+// ];
+
+let messageStorage = JSON.stringify(messageSenders)
+window.localStorage.setItem("messages", messageStorage)
 
 
 
 // Création de l'objet "profil de l'utilisateur"
-const user = {
-  firstname: "Mr",
-  lastname: "Fantastic",
-  abonnes: 1961,
-  abonnements: 3,
-  date: "A l'instant"
-};
+// const user = {
+//   firstname: "Mr",
+//   lastname: "Fantastic",
+//   abonnes: 1961,
+//   abonnements: 3,
+//   date: "A l'instant"
+// };
 
 // Création du tableau contenant les posts
-const posts = [
-  {
-    profilePic: "assets/img/user1.png",
-    firstname: "John",
-    lastname: "John",
-    date: "demain",
-    text: "Un post blablabla",
-    picture: "assets/img/post1.png",
-  },
-  {
-    profilePic: "assets/img/user1.png",
-    firstname: "John",
-    lastname: "Wick",
-    date: "hier",
-    text: "Do you knox who I am ?!",
-    picture: "assets/img/post1.png",
-  },
-  {
-    profilePic: "assets/img/user1.png",
-    firstname: "John",
-    lastname: "Snow",
-    date: "avant-hier",
-    text: "You know nothing...",
-    picture: "assets/img/post1.png",
-  },
-  {
-    profilePic: "assets/img/user1.png",
-    firstname: "John",
-    lastname: "John",
-    date: "demain",
-    text: "Un post blablabla",
-    picture: "assets/img/post1.png",
-  },
-  {
-    profilePic: "assets/img/user1.png",
-    firstname: "John",
-    lastname: "Wick",
-    date: "hier",
-    text: "Do you knox who I am ?!",
-    picture: "assets/img/post1.png", 
-    postId: 1
-  },
-  {
-    profilePic: "assets/img/user1.png",
-    firstname: "John",
-    lastname: "Rambo",
-    date: "avant-hier",
-    text: "C'était pas ma guerre, Adrienne !",
-    picture: "assets/img/post1.png",
-  }
+// const posts = [
+//   {
+//     profilePic: "assets/img/user1.png",
+//     firstname: "John",
+//     lastname: "John",
+//     date: "demain",
+//     text: "Un post blablabla",
+//     picture: "assets/img/post1.png",
+//   },
+//   {
+//     profilePic: "assets/img/user1.png",
+//     firstname: "John",
+//     lastname: "Wick",
+//     date: "hier",
+//     text: "Do you knox who I am ?!",
+//     picture: "assets/img/post1.png",
+//   },
+//   {
+//     profilePic: "assets/img/user1.png",
+//     firstname: "John",
+//     lastname: "Snow",
+//     date: "avant-hier",
+//     text: "You know nothing...",
+//     picture: "assets/img/post1.png",
+//   },
+//   {
+//     profilePic: "assets/img/user1.png",
+//     firstname: "John",
+//     lastname: "John",
+//     date: "demain",
+//     text: "Un post blablabla",
+//     picture: "assets/img/post1.png",
+//   },
+//   {
+//     profilePic: "assets/img/user1.png",
+//     firstname: "John",
+//     lastname: "Wick",
+//     date: "hier",
+//     text: "Do you knox who I am ?!",
+//     picture: "assets/img/post1.png", 
+//     postId: 1
+//   },
+//   {
+//     profilePic: "assets/img/user1.png",
+//     firstname: "John",
+//     lastname: "Rambo",
+//     date: "avant-hier",
+//     text: "C'était pas ma guerre, Adrienne !",
+//     picture: "assets/img/post1.png",
+//   }
+// ];
 
-];
+let postsStorage = JSON.stringify(posts)
+window.localStorage.setItem("posts", postsStorage)
+
 
 // Création du tableau contenant les commentaires
-const comments = [
-  {
-    postId: 0,
-    profilePic: "assets/img/user1.png",
-    firstname: "Post0",
-    lastname: "Commentaire1",
-    date: "avant-hier",
-    text: "Ceci est un commentaire",
-  },
-  {
-    postId: 1,
-    profilePic: "assets/img/user1.png",
-    firstname: "Post1",
-    lastname: "Commentaire1",
-    date: "avant-hier",
-    text: "Ceci est un commentaire",
-  },
-  {
-    postId: 2,
-    profilePic: "assets/img/user1.png",
-    firstname: "Post2",
-    lastname: "Commentaire1",
-    date: "avant-hier",
-    text: "Ceci est un commentaire",
-  },
-  {
-    postId: 1,
-    profilePic: "assets/img/user1.png",
-    firstname: "Post0",
-    lastname: "Commentaire2",
-    date: "il y a 2h",
-    text: "Ceci est un autre commentaire",
-  },
-];
+// const comments = [
+//   {
+//     postId: 0,
+//     profilePic: "assets/img/user1.png",
+//     firstname: "Post0",
+//     lastname: "Commentaire1",
+//     date: "avant-hier",
+//     text: "Ceci est un commentaire",
+//   },
+//   {
+//     postId: 1,
+//     profilePic: "assets/img/user1.png",
+//     firstname: "Post1",
+//     lastname: "Commentaire1",
+//     date: "avant-hier",
+//     text: "Ceci est un commentaire",
+//   },
+//   {
+//     postId: 2,
+//     profilePic: "assets/img/user1.png",
+//     firstname: "Post2",
+//     lastname: "Commentaire1",
+//     date: "avant-hier",
+//     text: "Ceci est un commentaire",
+//   },
+//   {
+//     postId: 1,
+//     profilePic: "assets/img/user1.png",
+//     firstname: "Post0",
+//     lastname: "Commentaire2",
+//     date: "il y a 2h",
+//     text: "Ceci est un autre commentaire",
+//   },
+// ];
 
+let commentsStorage = JSON.stringify(comments)
+window.localStorage.setItem("comments", commentsStorage)
 
 // affichage des posts
 for(let i = posts.length - 1; i >= 0; i--) {
@@ -275,9 +292,6 @@ commentBtn.forEach((button, index) =>
     let matchUser = comments.filter(comment => comment.postId === [...commentsLibrary][0])
     matchUser.forEach(match => createComment(match, commentContainerContent))
     addShadowMode()
-    // header.style.filter = "brightness(50%)"
-    // articleArea.style.filter = "brightness(50%)"
-    // footer.style.filter = "brightness(50%)"
     commentContainer.classList.add("showComment");
   })
 );
@@ -289,9 +303,6 @@ for(let cancelBtn of cancelBtns) {
     commentContainer.classList.remove("showComment");
     newpostContainer.classList.remove("showComment");
     removeShadowMode()
-    // header.style.filter = "brightness(100%)"
-    // articleArea.style.filter = "brightness(100%)"
-    // footer.style.filter = "brightness(100%)"
     commentInput.value = "";
     commentsLibrary.clear();
     
@@ -309,7 +320,6 @@ class Post{
     this.text = comment
   }
 }
-////////////////////////////////////////////////
 
 // Crée le commentaire quand on clique sur "Envoyer"
 let commentInput = document.querySelector(".comment-txt");
@@ -327,6 +337,14 @@ submitBtn.addEventListener("click", (e) => {
   //console.log(essaiCommentaire)
   comments.push(essaiCommentaire)
   //console.log(comments)//
+
+  //Envoi d'un nouveau commentaire dans le local storage
+  let commentSenders = window.localStorage.getItem("comments")
+  let commentsList = JSON.parse(commentSenders)
+  commentsList.push(essaiCommentaire)
+  commentsStorage = JSON.stringify(commentsList)
+  window.localStorage.setItem("comments", commentsStorage)
+  ////////////////////////////////////////////////////////
   user.message = newComment;
   commentInput.value = "";
   commentsLibrary.clear();
