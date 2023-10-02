@@ -2,7 +2,7 @@
 
 // Import des fonctions depuis functions.js
 import {
-  createArticle,
+  //createArticle,
   createProfile,
   removeShadowMode1,
   removeShadowMode,
@@ -64,7 +64,7 @@ if (localStorage.getItem("posts")) {
 // affichage des posts
 postsStorage = JSON.parse(localStorage.getItem("posts"));
 for (let i = postsStorage.length - 1; i >= 0; i--) {
-  createPost(postsStorage[i], articleArea);
+  createPost(postsStorage[i], articleArea, postsStorage[i]);
 }
 
 let commentsStorage;
@@ -165,6 +165,7 @@ commentBtn.forEach((button, index) =>
   button.addEventListener("click", () => {
     commentsLibrary.add(index);
     console.log(commentsLibrary);
+    
     commentContainerContent.innerHTML = "";
     commentsStorage = JSON.parse(localStorage.getItem("comments"));
 
