@@ -72,7 +72,6 @@ export function createMessage(objet, parent) {
   msgTxt.appendChild(text);
 }
 
-
 // Fonction de création du profil utilisateur (barre latérale gauche) à partir de l'objet contenant le profil
 export function createProfile(objet, parent) {
   const message = document.createElement("div");
@@ -105,7 +104,7 @@ export function createProfile(objet, parent) {
   msgTxt.appendChild(abonnes);
 }
 
-export function createPost (object, parent) {
+export function createPost(object, parent) {
   parent.innerHTML += `
   <div class="article">
   <div class="profile">
@@ -149,13 +148,6 @@ export function createPost (object, parent) {
       />
       <span>35</span>
     </div>
-    <div class="share-area">
-      <img
-        class="share-img icon"
-        src="assets/img/share-img.png"
-        alt=""
-      />
-      <span>38</span>
     </div>
   </div>
 </div>
@@ -221,5 +213,4 @@ export function shadowModeToggle() {
   articleArea.classList.toggle("shadowMode");
   footer.classList.toggle("shadowMode");
 }
-
 

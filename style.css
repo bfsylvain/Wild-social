@@ -33,12 +33,30 @@ body {
   padding: 1.5rem;
   background-color: var(--wildColor);
   transition: 0.6s;
+  border-radius: 3px;
 }
 
 .header-icon {
   width: 2rem;
   height: 2rem;
   fill: black;
+}
+
+
+.profile {
+ display: flex;
+ padding-left: 4vw;
+ 
+}
+
+.user-name {
+  display: flex;
+  flex-direction: column;
+  padding: 3vw;
+}
+
+.post-text-area {
+  padding: 0.2vh 8vw 1vh 4vw;
 }
 
 a,
@@ -65,7 +83,10 @@ a,
 
 .profile-img {
   width: 3rem;
-  height: auto;
+  height: 3rem;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-top: 14px;
 }
 
 .post-img {
@@ -75,6 +96,8 @@ a,
 .article-interaction-area {
   display: flex;
   justify-content: space-around;
+  padding-bottom: 1vh;
+  border-bottom: 1.2px solid rgb(82, 82, 82) ;
 }
 
 .like-img {
@@ -158,6 +181,8 @@ a,
 .sender-img {
   width: 2.5rem;
   height: 2.5rem;
+  object-fit: cover;
+  border-radius: 50%;
 }
 
 .messages-footer {
@@ -198,12 +223,10 @@ a,
 
 .footer {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   position: sticky;
   bottom: 0;
   width: 100%;
-  padding: 1.5rem;
   height: 8vh;
   background-color: lightgrey;
 }

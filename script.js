@@ -49,6 +49,7 @@ const newpostContainer = document.querySelector(".newpost-container");
 
 const homeBtn = document.querySelector(".homeBtn");
 
+
 let messageStorage = JSON.stringify(messageSenders);
 window.localStorage.setItem("messages", messageStorage);
 
@@ -82,6 +83,7 @@ if (localStorage.getItem("comments")) {
 const likeBtns = document.querySelectorAll(".like-img");
 const commentBtn = document.querySelectorAll(".comment-img");
 const lastComments = document.querySelectorAll(".last-comment");
+
 
 // Affichage du profil utilisateur (barre latérale gauche)
 createProfile(user, profile);
@@ -173,6 +175,7 @@ commentBtn.forEach((button, index) =>
   button.addEventListener("click", () => {
     commentsLibrary.add(index);
     console.log(commentsLibrary);
+  
     commentContainerContent.innerHTML = "";
     commentsStorage = JSON.parse(localStorage.getItem("comments"));
     let matchUser = commentsStorage.filter(
@@ -180,6 +183,7 @@ commentBtn.forEach((button, index) =>
     );
     matchUser.forEach((match) => createComment(match, commentContainerContent));
     addShadowMode();
+
     commentContainer.classList.add("showComment");
   })
 );
@@ -191,6 +195,7 @@ for (let cancelBtn of cancelBtns) {
     commentContainer.classList.remove("showComment");
     newpostContainer.classList.remove("showComment");
     removeShadowMode();
+
     commentInput.value = "";
     commentsLibrary.clear();
   });
@@ -208,6 +213,7 @@ class Post {
   }
 }
 
+
 // Crée le commentaire quand on clique sur "Envoyer"
 let commentInput = document.querySelector(".comment-txt");
 submitBtn.addEventListener("click", (e) => {
@@ -218,6 +224,7 @@ submitBtn.addEventListener("click", (e) => {
   commentsCounter.innerHTML++;
   commentContainer.classList.remove("showComment");
   removeShadowMode();
+
   console.log(commentInput.value);
   let newComment = commentInput.value;
   const essaiCommentaire = new Post(targetPost, newComment);
@@ -246,6 +253,7 @@ postSubmitBtn.addEventListener("click", (e) => {
   userPost.profilePic = "assets/img/user1.png";
   userPost.date = "A l'instant";
   userPost.text = postInput.value;
+
   let postsStorage = JSON.parse(localStorage.getItem("posts"))
   console.log(postsStorage)
   postsStorage.push(userPost);
@@ -255,6 +263,7 @@ postSubmitBtn.addEventListener("click", (e) => {
   }
   let newPostStorage = JSON.stringify(postsStorage)
   window.localStorage.setItem("posts", newPostStorage)
+
   postInput.value = "";
   newpostContainer.classList.remove("showComment");
   removeShadowMode();
