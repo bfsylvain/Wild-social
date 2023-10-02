@@ -9,7 +9,16 @@ import {
   addShadowMode,
   shadowModeToggle,
   createPost,
+  createComment,
+  createMessage,
 } from "./functions.js";
+
+import {
+  user,
+  comments,
+  posts,
+  messageSenders,
+} from "./objects_to_localStorage.js";
 
 // Récupération des noeuds HTML dans des variables JS
 const header = document.querySelector(".header");
@@ -40,148 +49,49 @@ const newpostContainer = document.querySelector(".newpost-container");
 
 const homeBtn = document.querySelector(".homeBtn");
 
-// Création d'un tableau d'objets représentant les messages du site
-const messageSenders = [
-  {
-    date: "hier",
-    firstname: "Cédric",
-    lastname: "D",
-    message: "Apéro ?",
-  },
-  {
-    date: "hier",
-    firstname: "John",
-    lastname: "John",
-    message: "Banana Banana Banana Banana Banana",
-  },
-  {
-    date: "hier",
-    firstname: "John",
-    lastname: "Bob",
-    message: "Banana Banana Banana Banana Banana",
-  },
-];
 
-// Création de l'objet "profil de l'utilisateur"
-const user = {
-  firstname: "Mr",
-  lastname: "Fantastic",
-  abonnes: 1961,
-  abonnements: 3,
-  date: "A l'instant",
-};
+let messageStorage = JSON.stringify(messageSenders);
+window.localStorage.setItem("messages", messageStorage);
 
-// Création du tableau contenant les posts
-const posts = [
-  {
-    profilePic: "assets/img/profilPicture.svg",
-    firstname: "John",
-    lastname: "John",
-    date: "demain",
-    text: "Un post blablabla",
-    picture: "assets/img/post1.png",
-    postId: 1,
-  },
-  {
-    profilePic: "assets/img/profilPicture.svg",
-    firstname: "John",
-    lastname: "Wick",
-    date: "hier",
-    text: "Do you knox who I am ?!",
-    picture: "assets/img/post1.png",
-    postId: 0,
-  },
-  {
-    profilePic: "assets/img/profilPicture.svg",
-    firstname: "John",
-    lastname: "Snow",
-    date: "avant-hier",
-    text: "You know nothing...",
-    picture: "assets/img/post1.png",
-    postId: 1,
-  },
-  {
-    profilePic: "assets/img/profilPicture.svg",
-    firstname: "John",
-    lastname: "John",
-    date: "demain",
-    text: "Un post blablabla",
-    picture: "assets/img/post1.png",
-    postId: 0,
-  },
-  {
-    profilePic: "assets/img/profilPicture.svg",
-    firstname: "John",
-    lastname: "Wick",
-    date: "hier",
-    text: "Do you knox who I am ?!",
-    picture: "assets/img/post1.png",
-    postId: 1,
-  },
-  {
-    profilePic: "assets/img/profilPicture.svg",
-    firstname: "John",
-    lastname: "Rambo",
-    date: "avant-hier",
-    text: "C'était pas ma guerre, Adrienne !",
-    picture: "assets/img/post1.png",
-    postId: 0,
-  },
-];
 
-// Création du tableau contenant les commentaires
-const comments = [
-  {
-    postId: 0,
-    profilePic: "assets/img/user1.png",
-    firstname: "Post0",
-    lastname: "Commentaire1",
-    date: "avant-hier",
-    text: "Ceci est un commentaire",
-  },
-  {
-    postId: 1,
-    profilePic: "assets/img/user1.png",
-    firstname: "Post1",
-    lastname: "Commentaire1",
-    date: "avant-hier",
-    text: "Ceci est un commentaire",
-  },
-  {
-    postId: 2,
-    profilePic: "assets/img/user1.png",
-    firstname: "Post2",
-    lastname: "Commentaire1",
-    date: "avant-hier",
-    text: "Ceci est un commentaire",
-  },
-  {
-    postId: 1,
-    profilePic: "assets/img/user1.png",
-    firstname: "Post0",
-    lastname: "Commentaire2",
-    date: "il y a 2h",
-    text: "Ceci est un autre commentaire",
-  },
-];
+// Utiliser le local storage pour les posts
+let postsStorage;
+if (localStorage.getItem("posts")) {
+  postsStorage = JSON.parse(localStorage.getItem("posts"));
+} else {
+  postsStorage = JSON.stringify(posts);
+  window.localStorage.setItem("posts", postsStorage);
+}
 
 // affichage des posts
-for (let i = posts.length - 1; i >= 0; i--) {
-  createPost(posts[i], articleArea);
+postsStorage = JSON.parse(localStorage.getItem("posts"));
+console.log(postsStorage)
+for (let i = postsStorage.length - 1; i >= 0; i--) {
+  createPost(postsStorage[i], articleArea);
 }
+
+let commentsStorage;
+// Utiliser le local storage pour les commentaires
+if (localStorage.getItem("comments")) {
+  commentsStorage = JSON.parse(localStorage.getItem("comments"));
+} else {
+  commentsStorage = JSON.stringify(comments);
+  window.localStorage.setItem("comments", commentsStorage);
+}
+
 
 const likeBtns = document.querySelectorAll(".like-img");
 const commentBtn = document.querySelectorAll(".comment-img");
 const lastComments = document.querySelectorAll(".last-comment");
 
-console.log(commentBtn);
 
 // Affichage du profil utilisateur (barre latérale gauche)
 createProfile(user, profile);
 
 // Affichage des messages (barre latérale droite)
 for (let messageSender of messageSenders) {
-  createArticle(messageSender, messageArea);
+  createMessage(messageSender, messageArea);
+  //createArticle(messageSender, messageArea);
 }
 
 // Affichage des commentaires (popup en bas)
@@ -265,15 +175,15 @@ commentBtn.forEach((button, index) =>
   button.addEventListener("click", () => {
     commentsLibrary.add(index);
     console.log(commentsLibrary);
-    //test
-    let matchUser = posts.filter(
-      (post) => post.postId === [...commentsLibrary][0]
+  
+    commentContainerContent.innerHTML = "";
+    commentsStorage = JSON.parse(localStorage.getItem("comments"));
+    let matchUser = commentsStorage.filter(
+      (comment) => comment.postId === [...commentsLibrary][0]
     );
-    matchUser.forEach((match) => createPost(match, commentContainerContent));
+    matchUser.forEach((match) => createComment(match, commentContainerContent));
     addShadowMode();
-    // header.style.filter = "brightness(50%)"
-    // articleArea.style.filter = "brightness(50%)"
-    // footer.style.filter = "brightness(50%)"
+
     commentContainer.classList.add("showComment");
   })
 );
@@ -285,31 +195,49 @@ for (let cancelBtn of cancelBtns) {
     commentContainer.classList.remove("showComment");
     newpostContainer.classList.remove("showComment");
     removeShadowMode();
-    // header.style.filter = "brightness(100%)"
-    // articleArea.style.filter = "brightness(100%)"
-    // footer.style.filter = "brightness(100%)"
+
     commentInput.value = "";
     commentsLibrary.clear();
-    commentContainerContent.innerHTML = "";
   });
 }
+
+// essai creation class pour commentaire d'un post
+class Post {
+  constructor(id, comment) {
+    (this.postId = id),
+      (this.profilePic = "assets/img/user1.png"),
+      (this.firstname = user.firstname),
+      (this.lastname = user.lastname),
+      (this.date = "Maintenant"),
+      (this.text = comment);
+  }
+}
+
 
 // Crée le commentaire quand on clique sur "Envoyer"
 let commentInput = document.querySelector(".comment-txt");
 submitBtn.addEventListener("click", (e) => {
   e.preventDefault();
-  const commentsZoneTarget = commentBtn[[...commentsLibrary][0]].parentNode;
+  const targetPost = [...commentsLibrary][0];
+  const commentsZoneTarget = commentBtn[targetPost].parentNode;
   const commentsCounter = commentsZoneTarget.querySelector("span");
   commentsCounter.innerHTML++;
   commentContainer.classList.remove("showComment");
   removeShadowMode();
-  // header.style.filter = "brightness(100%)"
-  // articleArea.style.filter = "brightness(100%)"
-  // footer.style.filter = "brightness(100%)"
+
   console.log(commentInput.value);
   let newComment = commentInput.value;
+  const essaiCommentaire = new Post(targetPost, newComment);
+  comments.push(essaiCommentaire);
+  //Envoi d'un nouveau commentaire dans le local storage
+  let commentSenders = window.localStorage.getItem("comments");
+  let commentsList = JSON.parse(commentSenders);
+  commentsList.push(essaiCommentaire);
+  console.log(commentsList)
+  commentsStorage = JSON.stringify(commentsList);
+  window.localStorage.setItem("comments", commentsStorage);
+  ////////////////////////////////////////////////////////
   user.message = newComment;
-  createArticle(user, lastComments[[...commentsLibrary][0]]);
   commentInput.value = "";
   commentsLibrary.clear();
   commentContainerContent.innerHTML = "";
@@ -318,18 +246,24 @@ submitBtn.addEventListener("click", (e) => {
 let postInput = document.querySelector(".post-txt");
 let postSubmitBtn = document.querySelector(".submit-post");
 
+//Ajouter un nouveau post
 postSubmitBtn.addEventListener("click", (e) => {
   e.preventDefault();
   let userPost = user;
   userPost.profilePic = "assets/img/user1.png";
   userPost.date = "A l'instant";
   userPost.text = postInput.value;
-  userPost.picture = "assets/img/post1.png";
-  posts.push(userPost);
+
+  let postsStorage = JSON.parse(localStorage.getItem("posts"))
+  console.log(postsStorage)
+  postsStorage.push(userPost);
   articleArea.innerHTML = "";
-  for (let i = posts.length - 1; i >= 0; i--) {
-    createPost(posts[i], articleArea);
+  for (let i = postsStorage.length - 1; i >= 0; i--) {
+    createPost(postsStorage[i], articleArea);
   }
+  let newPostStorage = JSON.stringify(postsStorage)
+  window.localStorage.setItem("posts", newPostStorage)
+
   postInput.value = "";
   newpostContainer.classList.remove("showComment");
   removeShadowMode();

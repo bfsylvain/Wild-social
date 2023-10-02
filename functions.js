@@ -1,6 +1,6 @@
 // FICHIER JS CONTENANT LES FONCTIONS
 
-// Fonction de création des articles (messages et commentaires)
+// Fonction de création des articles (commentaires)
 // paramètres : contenu du message (objet JS) et noeud HTML parent
 export function createArticle(objet, parent) {
   const message = document.createElement("div");
@@ -31,7 +31,16 @@ export function createArticle(objet, parent) {
   message.appendChild(msgTxt);
   msgTxt.appendChild(text);
 }
-//test
+//Fonction qui fait se terminer par '...' la phrase 
+//après 20 caracteres si elle fait plus de 20 caracteres
+function sliceOrNot(sentence) {
+  if(sentence.length > 20) {
+    return `${[...sentence].slice(0, 20).join('')}...`
+  } else{
+    return sentence
+  }
+}
+//fonction de création des messages dans la barre latérale droite
 export function createMessage(objet, parent) {
   const message = document.createElement("div");
   message.classList.add("message");
@@ -51,7 +60,8 @@ export function createMessage(objet, parent) {
   msgTxt.classList.add("message-text");
   const text = document.createElement("p");
   text.classList.add("text");
-  text.innerText = objet.message;
+  const messageToSlice = objet.message
+  text.innerText = sliceOrNot(messageToSlice)
   parent.appendChild(message);
   message.appendChild(profile);
   profile.appendChild(senderImg);
@@ -144,6 +154,36 @@ export function createPost(object, parent) {
   `;
 }
 
+export function createComment (object, parent) {
+  parent.innerHTML += `
+  <div class="article">
+  <div class="profile">
+    <img
+      class="profile-img"
+      src="${object.profilePic}"
+      alt=""
+    />
+    <div class="user-name">
+      <h2>${object.firstname} ${object.lastname}</h2>
+      <p>${object.date}</p>
+    </div>
+  </div>
+  <div class="post-text-area">
+    <p>
+      ${object.text}
+    </p>
+  </div>
+  <div class="post-picture-area">
+    <img
+      class="post-img"
+      src= ${object.picture}
+      alt=""
+    />
+  </div>
+</div>
+  `;
+}
+
 // Gestion du "shadow mode" : grise le reste de l'écran quand une popup ou sidebar est ouverte
 
 let header = document.querySelector(".header");
@@ -173,3 +213,4 @@ export function shadowModeToggle() {
   articleArea.classList.toggle("shadowMode");
   footer.classList.toggle("shadowMode");
 }
+
