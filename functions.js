@@ -48,7 +48,7 @@ export function createMessage(objet, parent) {
   profile.classList.add("profile");
   const senderImg = document.createElement("img");
   senderImg.classList.add("sender-img");
-  senderImg.setAttribute("src", "assets/img/WF Image Placeholder.png");
+  senderImg.setAttribute("src", "assets/img/profile/damien-jean.jpeg");
   const sender = document.createElement("div");
   sender.classList.add("sender");
   const senderName = document.createElement("p");
@@ -80,7 +80,7 @@ export function createProfile(objet, parent) {
   profile.classList.add("profile");
   const senderImg = document.createElement("img");
   senderImg.classList.add("sender-img");
-  senderImg.setAttribute("src", "assets/img/WF Image Placeholder.png");
+  senderImg.setAttribute("src", "assets/img/profile/damien-jean.jpeg");
   const sender = document.createElement("div");
   sender.classList.add("sender");
   const senderName = document.createElement("p");
