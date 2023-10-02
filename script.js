@@ -23,7 +23,6 @@ import {
 // Récupération des noeuds HTML dans des variables JS
 const header = document.querySelector(".header");
 const articleArea = document.querySelector(".article-area");
-const footer = document.querySelector(".footer");
 
 const messageBtn = document.querySelector(".message-img");
 const profileBtn = document.querySelector(".user-img");
@@ -64,7 +63,7 @@ if (localStorage.getItem("posts")) {
 // affichage des posts
 postsStorage = JSON.parse(localStorage.getItem("posts"));
 for (let i = postsStorage.length - 1; i >= 0; i--) {
-  createPost(postsStorage[i], articleArea, postsStorage[i]);
+  createPost(postsStorage[i], articleArea, [i]);
 }
 
 let commentsStorage;
@@ -161,18 +160,18 @@ likeBtns.forEach((likeBtn, key) => {
 // Affiche la popup "commentaires" quand on clique sur l'icone dédiée
 const commentsLibrary = new Set();
 
-commentBtn.forEach((button, index) =>
+commentBtn.forEach((button) =>
   button.addEventListener("click", () => {
-    commentsLibrary.add(index);
-    console.log(commentsLibrary);
-    
+    const targetPost = event.target.parentNode.parentNode.parentNode
+    console.log("l'Id du post: ", parseInt(targetPost.id))
+    commentsLibrary.add(parseInt(targetPost.id))
     commentContainerContent.innerHTML = "";
     commentsStorage = JSON.parse(localStorage.getItem("comments"));
 
     let matchUser = commentsStorage.filter(
-      (comment) => comment.postId === [...commentsLibrary][0]
+      (comment) => comment.postId === parseInt(targetPost.id)
     );
-    console.log(matchUser);
+    console.log("voici la liste: ", matchUser);
     matchUser.forEach((match) => createComment(match, commentContainerContent));
     addShadowMode();
 
@@ -193,7 +192,7 @@ for (let cancelBtn of cancelBtns) {
   });
 }
 
-// essai creation class pour commentaire d'un post
+//Creation class pour commentaire d'un post
 class Post {
   constructor(id, comment) {
     this.postId = id;
@@ -209,16 +208,16 @@ class Post {
 let commentInput = document.querySelector(".comment-txt");
 submitBtn.addEventListener("click", (e) => {
   e.preventDefault();
-  const targetPost = [...commentsLibrary][0];
-  const commentsZoneTarget = commentBtn[targetPost].parentNode;
-  const commentsCounter = commentsZoneTarget.querySelector("span");
-  commentsCounter.innerHTML++;
+  let commentBtnTarget = commentBtn[[...commentsLibrary][0]]
+  let commentCounter = commentBtnTarget.parentNode.querySelector("span")
+  console.log("voici le contenu de la span ciblee", commentCounter.innerHTML)
+  commentCounter.innerHTML++;
   commentContainer.classList.remove("showComment");
   removeShadowMode();
 
-  console.log(commentInput.value);
   let newComment = commentInput.value;
-  const essaiCommentaire = new Post(targetPost, newComment);
+  const essaiCommentaire = new Post([...commentsLibrary][0], newComment);
+  console.log("voici le nouveau commentaire : ", essaiCommentaire)
   comments.push(essaiCommentaire);
   //Envoi d'un nouveau commentaire dans le local storage
   let commentSenders = window.localStorage.getItem("comments");
@@ -240,53 +239,45 @@ let postSubmitBtn = document.querySelector(".submit-post");
 //Ajouter un nouveau post
 postSubmitBtn.addEventListener("click", (e) => {
   e.preventDefault();
-
+  let postsStorage = JSON.parse(localStorage.getItem("posts"));
+  console.log(postsStorage);
   let userPost = user;
   userPost.profilePic = "assets/img/profile/damien-jean.jpeg";
   userPost.date = "A l'instant";
   userPost.text = postInput.value;
+  userPost.id = postsStorage.length
 
-  let postsStorage = JSON.parse(localStorage.getItem("posts"));
-  console.log(postsStorage);
+  
   postsStorage.push(userPost);
   articleArea.innerHTML = "";
   for (let i = postsStorage.length - 1; i >= 0; i--) {
-    createPost(postsStorage[i], articleArea);
+    createPost(postsStorage[i], articleArea,[i]);
   }
   let newPostStorage = JSON.stringify(postsStorage);
   window.localStorage.setItem("posts", newPostStorage);
 
   //remets à jour la liste des msg btns apres creation post
   commentBtn = document.querySelectorAll(".comment-img");
-  console.log(commentBtn);
-  commentBtn.forEach((button, index) =>
-    button.addEventListener("click", () => {
-      commentsLibrary.add(index);
-      console.log(commentsLibrary);
-    })
-  );
 
   //Réactive tous les boutons message apres creation d'un nouveau post
-  commentBtn.forEach((button, index) =>
-    button.addEventListener("click", () => {
-      commentsLibrary.add(index);
-      console.log(commentsLibrary);
+  commentBtn.forEach((button) =>
+  button.addEventListener("click", () => {
+    const targetPost = event.target.parentNode.parentNode.parentNode
+    console.log("l'Id du post: ", parseInt(targetPost.id))
+    commentsLibrary.add(parseInt(targetPost.id))
+    commentContainerContent.innerHTML = "";
+    commentsStorage = JSON.parse(localStorage.getItem("comments"));
 
-      commentContainerContent.innerHTML = "";
-      commentsStorage = JSON.parse(localStorage.getItem("comments"));
+    let matchUser = commentsStorage.filter(
+      (comment) => comment.postId === parseInt(targetPost.id)
+    );
+    console.log("voici la liste: ", matchUser);
+    matchUser.forEach((match) => createComment(match, commentContainerContent));
+    addShadowMode();
 
-      let matchUser = commentsStorage.filter(
-        (comment) => comment.postId === [...commentsLibrary][0]
-      );
-      console.log(matchUser);
-      matchUser.forEach((match) =>
-        createComment(match, commentContainerContent)
-      );
-      addShadowMode();
-
-      commentContainer.classList.add("showComment");
-    })
-  );
+    commentContainer.classList.add("showComment");
+  })
+);
   //remets à jour la liste des boutons like après création d'un post
   likeBtns = document.querySelectorAll(".like-img");
 

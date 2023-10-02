@@ -88,7 +88,7 @@ export const posts = [
 // Création d'un tableau contenant les commentaires
 export const comments = [
     {
-      postId: 0,
+      postId: 7,
       profilePic: "assets/img/profile/dimitri.jpeg",
       firstname: "Dimitri",
       lastname: "",
@@ -96,7 +96,7 @@ export const comments = [
       text: "Sylvain t'as toujours été mon chouchou",
     },
     {
-      postId: 0,
+      postId: 7,
       profilePic: "assets/img/profile/cedric.jpg",
       firstname: "Cédric",
       lastname: "",
@@ -104,7 +104,7 @@ export const comments = [
       text: "J'ai soif !",
     },
     {
-      postId: 1,
+      postId: 6,
       profilePic: "assets/img/profile/raphael.jpg",
       firstname: "Raph",
       lastname: "",
@@ -112,7 +112,7 @@ export const comments = [
       text: "Les macs ça sert juste à caler des tables",
     },
     {
-      postId: 1,
+      postId: 6,
       profilePic: "assets/img/profile/dimitri.jpeg",
       firstname: "Dimitri",
       lastname: "",
@@ -120,7 +120,7 @@ export const comments = [
       text: "Raph t'es plus mon chouchou #appleforever",
     },
     {
-      postId: 2,
+      postId: 5,
       profilePic: "assets/img/profile/victor-gu.jpg",
       firstname: "Le coach",
       lastname: "",
@@ -128,7 +128,7 @@ export const comments = [
       text: "Ah ça vient de là le marcel !",
     },
     {
-      postId: 3,
+      postId: 4,
       profilePic: "assets/img/profile/elea.jpeg",
       firstname: "Elea",
       lastname: "",
@@ -136,7 +136,7 @@ export const comments = [
       text: "Je connais ça...",
     },
     {
-      postId: 4,
+      postId: 3,
       profilePic: "assets/img/profile/antoine.jpg",
       firstname: "Antoine",
       lastname: "",
@@ -144,7 +144,7 @@ export const comments = [
       text: "Ce mec est exceptionnel au quotidien ! 👮‍♂️",
     },
     {
-      postId: 5,
+      postId: 2,
       profilePic: "assets/img/profile/dimitri.jpeg",
       firstname: "Dimitri",
       lastname: "",
@@ -152,7 +152,7 @@ export const comments = [
       text: "Nassime t'es mon chouchou",
     },
     {
-      postId: 6,
+      postId: 1,
       profilePic: "assets/img/profile/david.jpg",
       firstname: "David",
       lastname: "",
@@ -160,7 +160,7 @@ export const comments = [
       text: "Ouiiii 😍",
     },
     {
-      postId: 7,
+      postId: 0,
       profilePic: "assets/img/profile/raphael.jpg",
       firstname: "Raph",
       lastname: "",
