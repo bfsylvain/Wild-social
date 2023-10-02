@@ -49,10 +49,8 @@ const newpostContainer = document.querySelector(".newpost-container");
 
 const homeBtn = document.querySelector(".homeBtn");
 
-
 let messageStorage = JSON.stringify(messageSenders);
 window.localStorage.setItem("messages", messageStorage);
-
 
 // Utiliser le local storage pour les posts
 let postsStorage;
@@ -65,7 +63,6 @@ if (localStorage.getItem("posts")) {
 
 // affichage des posts
 postsStorage = JSON.parse(localStorage.getItem("posts"));
-console.log(postsStorage)
 for (let i = postsStorage.length - 1; i >= 0; i--) {
   createPost(postsStorage[i], articleArea);
 }
@@ -79,11 +76,8 @@ if (localStorage.getItem("comments")) {
   window.localStorage.setItem("comments", commentsStorage);
 }
 
-
-const likeBtns = document.querySelectorAll(".like-img");
-const commentBtn = document.querySelectorAll(".comment-img");
-const lastComments = document.querySelectorAll(".last-comment");
-
+let likeBtns = document.querySelectorAll(".like-img");
+let commentBtn = document.querySelectorAll(".comment-img");
 
 // Affichage du profil utilisateur (barre latérale gauche)
 createProfile(user, profile);
@@ -92,11 +86,6 @@ createProfile(user, profile);
 for (let messageSender of messageSenders) {
   createMessage(messageSender, messageArea);
   //createArticle(messageSender, messageArea);
-}
-
-// Affichage des commentaires (popup en bas)
-for (let messageSender of messageSenders) {
-  createArticle(messageSender, commentContainerContent);
 }
 
 // Afficher ou masquer le header en fonction du scroll
@@ -164,6 +153,7 @@ likeBtns.forEach((likeBtn, key) => {
       event.target.strokeStyle = "red";
       likeCounter.innerHTML++;
       library.add(key);
+      console.log(key);
     }
   });
 });
@@ -175,12 +165,13 @@ commentBtn.forEach((button, index) =>
   button.addEventListener("click", () => {
     commentsLibrary.add(index);
     console.log(commentsLibrary);
-  
     commentContainerContent.innerHTML = "";
     commentsStorage = JSON.parse(localStorage.getItem("comments"));
+
     let matchUser = commentsStorage.filter(
       (comment) => comment.postId === [...commentsLibrary][0]
     );
+    console.log(matchUser);
     matchUser.forEach((match) => createComment(match, commentContainerContent));
     addShadowMode();
 
@@ -204,7 +195,7 @@ for (let cancelBtn of cancelBtns) {
 // essai creation class pour commentaire d'un post
 class Post {
   constructor(id, comment) {
-    (this.postId = id),
+    this.postId = id;
       (this.profilePic = "assets/img/profile/damien-jean.jpeg"),
       (this.firstname = user.firstname),
       (this.lastname = user.lastname),
@@ -212,7 +203,6 @@ class Post {
       (this.text = comment);
   }
 }
-
 
 // Crée le commentaire quand on clique sur "Envoyer"
 let commentInput = document.querySelector(".comment-txt");
@@ -233,7 +223,7 @@ submitBtn.addEventListener("click", (e) => {
   let commentSenders = window.localStorage.getItem("comments");
   let commentsList = JSON.parse(commentSenders);
   commentsList.push(essaiCommentaire);
-  console.log(commentsList)
+  console.log(commentsList);
   commentsStorage = JSON.stringify(commentsList);
   window.localStorage.setItem("comments", commentsStorage);
   ////////////////////////////////////////////////////////
@@ -249,20 +239,73 @@ let postSubmitBtn = document.querySelector(".submit-post");
 //Ajouter un nouveau post
 postSubmitBtn.addEventListener("click", (e) => {
   e.preventDefault();
+
   let userPost = user;
   userPost.profilePic = "assets/img/profile/damien-jean.jpeg";
   userPost.date = "A l'instant";
   userPost.text = postInput.value;
 
-  let postsStorage = JSON.parse(localStorage.getItem("posts"))
-  console.log(postsStorage)
+  let postsStorage = JSON.parse(localStorage.getItem("posts"));
+  console.log(postsStorage);
   postsStorage.push(userPost);
   articleArea.innerHTML = "";
   for (let i = postsStorage.length - 1; i >= 0; i--) {
     createPost(postsStorage[i], articleArea);
   }
-  let newPostStorage = JSON.stringify(postsStorage)
-  window.localStorage.setItem("posts", newPostStorage)
+  let newPostStorage = JSON.stringify(postsStorage);
+  window.localStorage.setItem("posts", newPostStorage);
+
+  //remets à jour la liste des msg btns apres creation post
+  commentBtn = document.querySelectorAll(".comment-img");
+  console.log(commentBtn);
+  commentBtn.forEach((button, index) =>
+    button.addEventListener("click", () => {
+      commentsLibrary.add(index);
+      console.log(commentsLibrary);
+    })
+  );
+
+  //Réactive tous les boutons message apres creation d'un nouveau post
+  commentBtn.forEach((button, index) =>
+    button.addEventListener("click", () => {
+      commentsLibrary.add(index);
+      console.log(commentsLibrary);
+
+      commentContainerContent.innerHTML = "";
+      commentsStorage = JSON.parse(localStorage.getItem("comments"));
+
+      let matchUser = commentsStorage.filter(
+        (comment) => comment.postId === [...commentsLibrary][0]
+      );
+      console.log(matchUser);
+      matchUser.forEach((match) =>
+        createComment(match, commentContainerContent)
+      );
+      addShadowMode();
+
+      commentContainer.classList.add("showComment");
+    })
+  );
+  //remets à jour la liste des boutons like après création d'un post
+  likeBtns = document.querySelectorAll(".like-img");
+
+  //Réactive tous les boutons like après création d'un post
+  const library = new Set();
+  likeBtns.forEach((likeBtn, key) => {
+    likeBtn.addEventListener("click", (event) => {
+      const likeZone = event.target.parentNode;
+      const likeCounter = likeZone.querySelector("span");
+      if (library.has(key)) {
+        likeCounter.innerHTML--;
+        library.delete(key);
+      } else {
+        event.target.strokeStyle = "red";
+        likeCounter.innerHTML++;
+        library.add(key);
+        console.log(key);
+      }
+    });
+  });
 
   postInput.value = "";
   newpostContainer.classList.remove("showComment");
