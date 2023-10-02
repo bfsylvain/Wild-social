@@ -196,7 +196,7 @@ for (let cancelBtn of cancelBtns) {
 class Post {
   constructor(id, comment) {
     this.postId = id;
-    (this.profilePic = "assets/img/user1.png"),
+      (this.profilePic = "assets/img/profile/damien-jean.jpeg"),
       (this.firstname = user.firstname),
       (this.lastname = user.lastname),
       (this.date = "Maintenant"),
@@ -241,7 +241,7 @@ postSubmitBtn.addEventListener("click", (e) => {
   e.preventDefault();
 
   let userPost = user;
-  userPost.profilePic = "assets/img/user1.png";
+  userPost.profilePic = "assets/img/profile/damien-jean.jpeg";
   userPost.date = "A l'instant";
   userPost.text = postInput.value;
 
