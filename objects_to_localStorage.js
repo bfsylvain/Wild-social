@@ -174,24 +174,28 @@ export const comments = [
 //creation d'un tableau contenant les messages
 export const messageSenders = [
     {
+      profilePic: "assets/img/profile/cedric.jpg",
       date: "hier",
       firstname: "Cédric",
       lastname: "",
       message: "Apéro ce soir ?",
     },
     {
+      profilePic: "assets/img/profile/dimitri.jpeg",
       date: "hier",
       firstname: "Dimitri",
       lastname: "",
       message: "C'est toi mon chouchou",
     },
     {
+      profilePic: "assets/img/profile/antoine.jpg",
       date: "hier",
       firstname: "Antoine",
       lastname: "",
       message: "T'es es où sur le projet ??",
     },
     {
+      profilePic: "assets/img/profile/adam.jpg",
       date: "hier",
       firstname: "Adam",
       lastname: "",

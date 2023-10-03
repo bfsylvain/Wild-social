@@ -378,6 +378,7 @@ a,
     font-size: medium;
     left: 1rem;
     right: auto;
+    bottom: 1rem;
   }
   .newpost-container,
   .comment-container {
