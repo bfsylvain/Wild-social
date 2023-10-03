@@ -26,6 +26,7 @@ const articleArea = document.querySelector(".article-area");
 
 const messageBtn = document.querySelector(".message-img");
 const profileBtn = document.querySelector(".user-img");
+const wildBtn = document.querySelector(".website-img");
 
 const commentContainer = document.querySelector(".comment-container");
 const cancelBtns = document.querySelectorAll(".cancel");
@@ -102,6 +103,16 @@ window.addEventListener("scroll", () => {
     lastScroll = window.scrollY;
   }
 });
+// Bouton Wild Home remonte les posts
+wildBtn.addEventListener("click", () => {
+  if (window.innerWidth > 768) {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "smooth",
+    });
+  }
+});
 
 // Le bouton "messages" ouvre la barre latérale droite
 messageBtn.addEventListener("click", () => {
@@ -152,10 +163,11 @@ likeBtns.forEach((likeBtn, key) => {
     const likeZone = event.target.parentNode;
     const likeCounter = likeZone.querySelector("span");
     if (library.has(key)) {
+      event.target.src = "assets/icons/icon-heart.svg";
       likeCounter.innerHTML--;
       library.delete(key);
     } else {
-      event.target.strokeStyle = "red";
+      event.target.src = "assets/icons/icon-heart-red-outline.svg";
       likeCounter.innerHTML++;
       library.add(key);
       console.log(key);
@@ -167,7 +179,7 @@ likeBtns.forEach((likeBtn, key) => {
 const commentsLibrary = new Set();
 
 commentBtn.forEach((button) =>
-  button.addEventListener("click", () => {
+  button.addEventListener("click", (event) => {
     const targetPost = event.target.parentNode.parentNode.parentNode;
     console.log("l'Id du post: ", parseInt(targetPost.id));
     commentsLibrary.add(parseInt(targetPost.id));
