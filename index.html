@@ -34,7 +34,6 @@
         <h2 class="sidebar-title">Profil</h2>
         <div class="user-profile"></div>
         <div class="profile-options">
-          <a class="profile-link parameters" href="">Paramètres</a>
           <a class="profile-link disconnect" href="login_page.html"
             >Se déconnecter</a
           >
@@ -75,7 +74,7 @@
       </div>
 
       <div class="newpost-container">
-        <div class="comment-container-content">
+        <div id="newPost">
           <h2>Nouveau post</h2>
         </div>
         <div class="add-comment">
@@ -84,12 +83,9 @@
             src="assets/img/profile/damien-jean.jpeg"
             alt=""
           />
-          <input
-            class="post-txt"
-            type="text"
-            placeholder="Ton nouveau message"
-          />
+          <textarea class="post-txt" placeholder="Ton nouveau message" rows="5" cols="33"></textarea>
         </div>
+        <div class="comment-container-content"></div>
         <form class="send-comment">
           <button class="cancel">Annuler</button>
           <button type="submit" class="submit-post">
