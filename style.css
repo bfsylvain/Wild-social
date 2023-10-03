@@ -13,7 +13,6 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  
 }
 
 .main {
@@ -371,16 +370,15 @@ a,
     width: 20vw;
     height: 100vh;
     border: none;
-    background: lightgrey;
+    background: #eeeeeed7;
   }
   .sidebar-right {
     right: 0;
     width: 20vw;
     height: 100vh;
     border: none;
-    background: lightgrey;
+    background: #eeeeeed7;
   }
-  
 
   .post-button {
     padding: 1.5rem;
