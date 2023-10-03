@@ -1,12 +1,12 @@
 // FICHIER JS CONTENANT LES FONCTIONS
 
-//Fonction qui fait se terminer par '...' la phrase 
+//Fonction qui fait se terminer par '...' la phrase
 //après 20 caracteres si elle fait plus de 20 caracteres
 function sliceOrNot(sentence) {
-  if(sentence.length > 20) {
-    return `${[...sentence].slice(0, 20).join('')}...`
-  } else{
-    return sentence
+  if (sentence.length > 20) {
+    return `${[...sentence].slice(0, 20).join("")}...`;
+  } else {
+    return sentence;
   }
 }
 //fonction de création des messages dans la barre latérale droite
@@ -29,8 +29,12 @@ export function createMessage(objet, parent) {
   msgTxt.classList.add("message-text");
   const text = document.createElement("p");
   text.classList.add("text");
-  const messageToSlice = objet.message
-  text.innerText = sliceOrNot(messageToSlice)
+  const messageToSlice = objet.message;
+  if (window.innerWidth < 768) {
+    text.innerText = sliceOrNot(messageToSlice);
+  } else {
+    text.innerText = messageToSlice;
+  }
   parent.appendChild(message);
   message.appendChild(profile);
   profile.appendChild(senderImg);
@@ -59,9 +63,11 @@ export function createProfile(objet, parent) {
   msgTxt.classList.add("message-text");
   const abonnements = document.createElement("p");
   abonnements.classList.add("text");
+  abonnements.classList.add("profile-text");
   abonnements.innerText = `${objet.abonnements} abonnements`;
   const abonnes = document.createElement("p");
   abonnes.classList.add("text");
+  abonnes.classList.add("profile-text");
   abonnes.innerHTML = `${objet.abonnes} abonnés`;
   parent.appendChild(message);
   message.appendChild(profile);
@@ -100,14 +106,14 @@ export function createPost(object, parent, number) {
     </div>
     <div class="comment-area">
       <img class="comment-img icon" src="assets/img/Bubble-img.png" alt=""/>
-      <span class="comment-span">35</span>
+      <span class="comment-span">2</span>
     </div>
   </div>
 </div>
   `;
 }
 
-export function createComment (object, parent) {
+export function createComment(object, parent) {
   parent.innerHTML += `
   <div class="article">
   <div class="profile">
@@ -166,4 +172,3 @@ export function shadowModeToggle() {
   articleArea.classList.toggle("shadowMode");
   footer.classList.toggle("shadowMode");
 }
-
