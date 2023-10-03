@@ -30,7 +30,11 @@ export function createMessage(objet, parent) {
   const text = document.createElement("p");
   text.classList.add("text");
   const messageToSlice = objet.message;
-  text.innerText = sliceOrNot(messageToSlice);
+  if (window.innerWidth < 768) {
+    text.innerText = sliceOrNot(messageToSlice);
+  } else {
+    text.innerText = messageToSlice;
+  }
   parent.appendChild(message);
   message.appendChild(profile);
   profile.appendChild(senderImg);
@@ -59,9 +63,11 @@ export function createProfile(objet, parent) {
   msgTxt.classList.add("message-text");
   const abonnements = document.createElement("p");
   abonnements.classList.add("text");
+  abonnements.classList.add("profile-text");
   abonnements.innerText = `${objet.abonnements} abonnements`;
   const abonnes = document.createElement("p");
   abonnes.classList.add("text");
+  abonnes.classList.add("profile-text");
   abonnes.innerHTML = `${objet.abonnes} abonnés`;
   parent.appendChild(message);
   message.appendChild(profile);

@@ -13,6 +13,7 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  
 }
 
 .main {
@@ -362,17 +363,25 @@ a,
     margin-top: 8vh;
     padding: 0 5vw;
   }
-
+  .profile-text {
+    margin: 4vh 0;
+  }
   .sidebar-left {
     left: 0;
     width: 20vw;
     height: 100vh;
+    border: none;
+    background: lightgrey;
   }
   .sidebar-right {
     right: 0;
     width: 20vw;
     height: 100vh;
+    border: none;
+    background: lightgrey;
   }
+  
+
   .post-button {
     padding: 1.5rem;
     font-size: medium;
