@@ -358,8 +358,9 @@ a,
   }
 
   .article-area {
-    margin: 0 25vw;
+    margin: 0 20vw;
     margin-top: 8vh;
+    padding: 0 5vw;
   }
 
   .sidebar-left {

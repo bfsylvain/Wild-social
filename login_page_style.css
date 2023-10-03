@@ -21,9 +21,6 @@ img {
 .login-box {
   width: 60%;
   margin-top: 2rem;
-  
-  /* border: 2px black solid;
-  border-radius: 45px 15px; */
 }
 
 h1 {
@@ -32,7 +29,9 @@ h1 {
   font-size: 4vw;
 }
 
-.logo, .login-box, .input-box {
+.logo,
+.login-box,
+.input-box {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -68,4 +67,13 @@ h1 {
 
 #email {
   margin: 10px;
+}
+
+@media screen and (min-width: 768px) {
+  img {
+    width: 20vw;
+  }
+  h1 {
+    font-size: 2vw;
+  }
 }
