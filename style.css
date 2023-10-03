@@ -343,6 +343,7 @@ a,
   
   .header {
     position: fixed;
+    border-radius: 0;
   }
 
   .article-area {
@@ -370,5 +371,13 @@ right: auto;
   .footer {
     display: none;
   }
-
+.profile,.post-text-area  {
+  padding-left: 0;
+}
+.post-text-area {
+  padding: 0 0 1vw 0;
+}
+.user-name {
+  padding: 1.5vw 2vw;
+}
 }
