@@ -79,7 +79,7 @@ export function createProfile(objet, parent) {
   msgTxt.appendChild(abonnes);
 }
 
-export function createPost(object, parent, number) {
+export function createPost(object, parent, number, picture) {
   parent.innerHTML += `
 <div class="article" id="${number}">
 
