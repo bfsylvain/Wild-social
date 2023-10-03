@@ -60,6 +60,12 @@ h2 {
 .post-text-area {
   padding: 0.2vh 8vw 1vh 4vw;
 }
+.post-txt {
+  border: 1px solid black;
+  margin: 0 20px;
+  padding: 5px;
+  width: 100%;
+}
 
 a,
 .icon:hover {
@@ -309,6 +315,10 @@ a,
 .submit {
   background-color: var(--wildColor);
   color: white;
+}
+.submit-post {
+  background-color: var(--wildColor);
+  color: #fff;
 }
 
 .post-button {
