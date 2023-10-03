@@ -1,36 +1,5 @@
 // FICHIER JS CONTENANT LES FONCTIONS
 
-// Fonction de création des articles (commentaires)
-// paramètres : contenu du message (objet JS) et noeud HTML parent
-export function createArticle(objet, parent) {
-  const message = document.createElement("div");
-  message.classList.add("message");
-  const profile = document.createElement("div");
-  profile.classList.add("profile");
-  const senderImg = document.createElement("img");
-  senderImg.classList.add("sender-img");
-  senderImg.setAttribute("src", "assets/img/WF Image Placeholder.png");
-  const sender = document.createElement("div");
-  sender.classList.add("sender");
-  const senderName = document.createElement("p");
-  senderName.classList.add("sender-name");
-  senderName.innerHTML = `${objet.firstname} ${objet.lastname}`;
-  const senderTime = document.createElement("p");
-  senderTime.innerHTML = objet.date;
-  const msgTxt = document.createElement("div");
-  msgTxt.classList.add("message-text");
-  const text = document.createElement("p");
-  text.classList.add("text");
-  text.innerText = objet.message;
-  parent.appendChild(message);
-  message.appendChild(profile);
-  profile.appendChild(senderImg);
-  profile.appendChild(sender);
-  sender.appendChild(senderName);
-  sender.appendChild(senderTime);
-  message.appendChild(msgTxt);
-  msgTxt.appendChild(text);
-}
 //Fonction qui fait se terminer par '...' la phrase 
 //après 20 caracteres si elle fait plus de 20 caracteres
 function sliceOrNot(sentence) {
@@ -104,50 +73,34 @@ export function createProfile(objet, parent) {
   msgTxt.appendChild(abonnes);
 }
 
-export function createPost(object, parent) {
+export function createPost(object, parent, number) {
   parent.innerHTML += `
-  <div class="article">
+<div class="article" id="${number}">
+
   <div class="profile">
-    <img
-      class="profile-img"
-      src="${object.profilePic}"
-      alt=""
-    />
+    <img class="profile-img" src="${object.profilePic}" alt=""/>
     <div class="user-name">
       <h2>${object.firstname} ${object.lastname}</h2>
       <p>${object.date}</p>
     </div>
   </div>
+
   <div class="post-text-area">
-    <p>
-      ${object.text}
-    </p>
+    <p>${object.text}</p>
   </div>
+
   <div class="post-picture-area">
-    <img
-      class="post-img"
-      src= ${object.picture}
-      alt=""
-    />
+    <img class="post-img" src= ${object.picture} alt=""/>
   </div>
-  <div class="last-comment"></div>
+
   <div class="article-interaction-area">
     <div class="like-area">
-      <img
-        class="like-img icon"
-        src="assets/img/heart-img.png"
-        alt=""
-      />
+      <img class="like-img icon" src="assets/img/heart-img.png" alt=""/>
       <span>25</span>
     </div>
     <div class="comment-area">
-      <img
-        class="comment-img icon"
-        src="assets/img/Bubble-img.png"
-        alt=""
-      />
-      <span>35</span>
-    </div>
+      <img class="comment-img icon" src="assets/img/Bubble-img.png" alt=""/>
+      <span class="comment-span">35</span>
     </div>
   </div>
 </div>
