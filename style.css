@@ -348,6 +348,7 @@ a,
 
   .article-area {
     margin: 0 25vw;
+    margin-top: 8vh;
   }
   .sidebar-left {
 left: 0;
@@ -359,14 +360,15 @@ height: 100vh;
     width: 20vw;
     height: 100vh;
   }
-  .article-area {
-    margin-top: 8vh;
-  }
   .post-button {
 padding: 1.5rem;
 font-size: medium;
 left: 1rem;
 right: auto;
+  }
+  .newpost-container, .comment-container{
+    margin: 0 20vw;
+  width: 60vw;
   }
   .footer {
     display: none;
@@ -380,4 +382,5 @@ right: auto;
 .user-name {
   padding: 1.5vw 2vw;
 }
+
 }
