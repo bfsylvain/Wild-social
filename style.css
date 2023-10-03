@@ -42,11 +42,9 @@ body {
   fill: black;
 }
 
-
 .profile {
- display: flex;
- padding-left: 4vw;
- 
+  display: flex;
+  padding-left: 4vw;
 }
 
 .user-name {
@@ -104,7 +102,7 @@ a,
   display: flex;
   justify-content: space-around;
   padding-bottom: 1vh;
-  border-bottom: 1.2px solid rgb(82, 82, 82) ;
+  border-bottom: 1.2px solid rgb(82, 82, 82);
 }
 
 .like-img {
@@ -339,8 +337,11 @@ a,
   transform: translate(-50%);
 }
 
+.comment-container-content .article .post-picture-area {
+  display: none;
+}
+
 @media screen and (min-width: 768px) {
-  
   .header {
     position: fixed;
     border-radius: 0;
@@ -350,10 +351,11 @@ a,
     margin: 0 25vw;
     margin-top: 8vh;
   }
+
   .sidebar-left {
-left: 0;
-width: 20vw;
-height: 100vh;
+    left: 0;
+    width: 20vw;
+    height: 100vh;
   }
   .sidebar-right {
     right: 0;
@@ -361,26 +363,27 @@ height: 100vh;
     height: 100vh;
   }
   .post-button {
-padding: 1.5rem;
-font-size: medium;
-left: 1rem;
-right: auto;
+    padding: 1.5rem;
+    font-size: medium;
+    left: 1rem;
+    right: auto;
   }
-  .newpost-container, .comment-container{
+  .newpost-container,
+  .comment-container {
     margin: 0 20vw;
-  width: 60vw;
+    width: 60vw;
   }
   .footer {
     display: none;
   }
-.profile,.post-text-area  {
-  padding-left: 0;
-}
-.post-text-area {
-  padding: 0 0 1vw 0;
-}
-.user-name {
-  padding: 1.5vw 2vw;
-}
-
+  .profile,
+  .post-text-area {
+    padding-left: 0;
+  }
+  .post-text-area {
+    padding: 0 0 1vw 0;
+  }
+  .user-name {
+    padding: 1.5vw 2vw;
+  }
 }
