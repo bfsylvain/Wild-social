@@ -90,32 +90,38 @@ for (let messageSender of messageSenders) {
 // Afficher ou masquer le header en fonction du scroll
 let lastScroll = 0;
 window.addEventListener("scroll", () => {
-  if (window.scrollY < lastScroll) {
-    header.style.top = 0;
-  } else {
-    header.style.top = "-8vh";
-    sidebarLeft.classList.remove("active-left");
-    sidebarRight.classList.remove("active-right");
-    removeShadowMode1();
+  if (window.innerWidth < 768) {
+    if (window.scrollY < lastScroll) {
+      header.style.top = 0;
+    } else {
+      header.style.top = "-8vh";
+      sidebarLeft.classList.remove("active-left");
+      sidebarRight.classList.remove("active-right");
+      removeShadowMode1();
+    }
+    lastScroll = window.scrollY;
   }
-  lastScroll = window.scrollY;
 });
 
 // Le bouton "messages" ouvre la barre latérale droite
 messageBtn.addEventListener("click", () => {
-  sidebarRight.classList.toggle("active-right");
-  profileBtn.inert = true;
-  postBtn.inert = true;
-  shadowModeToggle();
+  if (window.innerWidth < 768) {
+    sidebarRight.classList.toggle("active-right");
+    profileBtn.inert = true;
+    postBtn.inert = true;
+    shadowModeToggle();
+  }
 });
 
 // Le bouton "profil" ouvre la barre latérale gauche
 profileBtn.addEventListener("click", () => {
-  sidebarLeft.classList.toggle("active-left");
-  messageBtn.inert = true;
-  postBtn.inert = true;
-  shadowModeToggle();
-  header.classList.toggle("shadowMode");
+  if (window.innerWidth < 768) {
+    sidebarLeft.classList.toggle("active-left");
+    messageBtn.inert = true;
+    postBtn.inert = true;
+    shadowModeToggle();
+    header.classList.toggle("shadowMode");
+  }
 });
 
 // Fermer la sidebar si on clique en dehors des sidebars ou du slider nouveau post
@@ -162,9 +168,9 @@ const commentsLibrary = new Set();
 
 commentBtn.forEach((button) =>
   button.addEventListener("click", () => {
-    const targetPost = event.target.parentNode.parentNode.parentNode
-    console.log("l'Id du post: ", parseInt(targetPost.id))
-    commentsLibrary.add(parseInt(targetPost.id))
+    const targetPost = event.target.parentNode.parentNode.parentNode;
+    console.log("l'Id du post: ", parseInt(targetPost.id));
+    commentsLibrary.add(parseInt(targetPost.id));
     commentContainerContent.innerHTML = "";
     commentsStorage = JSON.parse(localStorage.getItem("comments"));
 
@@ -196,7 +202,7 @@ for (let cancelBtn of cancelBtns) {
 class Post {
   constructor(id, comment) {
     this.postId = id;
-      (this.profilePic = "assets/img/profile/damien-jean.jpeg"),
+    (this.profilePic = "assets/img/profile/damien-jean.jpeg"),
       (this.firstname = user.firstname),
       (this.lastname = user.lastname),
       (this.date = "Maintenant"),
@@ -208,16 +214,16 @@ class Post {
 let commentInput = document.querySelector(".comment-txt");
 submitBtn.addEventListener("click", (e) => {
   e.preventDefault();
-  let commentBtnTarget = commentBtn[[...commentsLibrary][0]]
-  let commentCounter = commentBtnTarget.parentNode.querySelector("span")
-  console.log("voici le contenu de la span ciblee", commentCounter.innerHTML)
+  let commentBtnTarget = commentBtn[[...commentsLibrary][0]];
+  let commentCounter = commentBtnTarget.parentNode.querySelector("span");
+  console.log("voici le contenu de la span ciblee", commentCounter.innerHTML);
   commentCounter.innerHTML++;
   commentContainer.classList.remove("showComment");
   removeShadowMode();
 
   let newComment = commentInput.value;
   const essaiCommentaire = new Post([...commentsLibrary][0], newComment);
-  console.log("voici le nouveau commentaire : ", essaiCommentaire)
+  console.log("voici le nouveau commentaire : ", essaiCommentaire);
   comments.push(essaiCommentaire);
   //Envoi d'un nouveau commentaire dans le local storage
   let commentSenders = window.localStorage.getItem("comments");
@@ -245,13 +251,12 @@ postSubmitBtn.addEventListener("click", (e) => {
   userPost.profilePic = "assets/img/profile/damien-jean.jpeg";
   userPost.date = "A l'instant";
   userPost.text = postInput.value;
-  userPost.id = postsStorage.length
+  userPost.id = postsStorage.length;
 
-  
   postsStorage.push(userPost);
   articleArea.innerHTML = "";
   for (let i = postsStorage.length - 1; i >= 0; i--) {
-    createPost(postsStorage[i], articleArea,[i]);
+    createPost(postsStorage[i], articleArea, [i]);
   }
   let newPostStorage = JSON.stringify(postsStorage);
   window.localStorage.setItem("posts", newPostStorage);
@@ -261,23 +266,25 @@ postSubmitBtn.addEventListener("click", (e) => {
 
   //Réactive tous les boutons message apres creation d'un nouveau post
   commentBtn.forEach((button) =>
-  button.addEventListener("click", () => {
-    const targetPost = event.target.parentNode.parentNode.parentNode
-    console.log("l'Id du post: ", parseInt(targetPost.id))
-    commentsLibrary.add(parseInt(targetPost.id))
-    commentContainerContent.innerHTML = "";
-    commentsStorage = JSON.parse(localStorage.getItem("comments"));
+    button.addEventListener("click", () => {
+      const targetPost = event.target.parentNode.parentNode.parentNode;
+      console.log("l'Id du post: ", parseInt(targetPost.id));
+      commentsLibrary.add(parseInt(targetPost.id));
+      commentContainerContent.innerHTML = "";
+      commentsStorage = JSON.parse(localStorage.getItem("comments"));
 
-    let matchUser = commentsStorage.filter(
-      (comment) => comment.postId === parseInt(targetPost.id)
-    );
-    console.log("voici la liste: ", matchUser);
-    matchUser.forEach((match) => createComment(match, commentContainerContent));
-    addShadowMode();
+      let matchUser = commentsStorage.filter(
+        (comment) => comment.postId === parseInt(targetPost.id)
+      );
+      console.log("voici la liste: ", matchUser);
+      matchUser.forEach((match) =>
+        createComment(match, commentContainerContent)
+      );
+      addShadowMode();
 
-    commentContainer.classList.add("showComment");
-  })
-);
+      commentContainer.classList.add("showComment");
+    })
+  );
   //remets à jour la liste des boutons like après création d'un post
   likeBtns = document.querySelectorAll(".like-img");
 
@@ -320,3 +327,8 @@ homeBtn.addEventListener("click", () => {
     behavior: "smooth",
   });
 });
+
+if (window.innerWidth > 768) {
+  postBtn.innerHTML = "+ Nouveau post";
+  postBtn.style.width = "auto";
+}
