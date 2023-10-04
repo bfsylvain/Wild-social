@@ -166,6 +166,12 @@ a,
   flex: 1 0;
   overflow: hidden;
 }
+.message-area .profile {
+  padding-left: 0;
+}
+.user-profile .profile {
+  padding-left: 0;
+}
 
 .message {
   display: flex;
@@ -211,7 +217,7 @@ a,
 }
 
 .profile-link {
-  padding: 2rem 0 1rem 0;
+  margin: 2rem 0 1rem 0;
 }
 
 .active-right {
