@@ -75,7 +75,6 @@ if (localStorage.getItem("comments")) {
 // affichage des posts
 postsStorage = JSON.parse(localStorage.getItem("posts"));
 for (let i = postsStorage.length - 1; i >= 0; i--) {
-  //-------------------------ICI---------------------------------
   let comments = JSON.parse(localStorage.getItem("comments"))
   let commentsAffiliated = comments.filter((comment) => comment.postId === i)
   console.log(commentsAffiliated)
@@ -143,13 +142,13 @@ const seeAllBtn = document.querySelector(".messages-footer")
 const commentsPopup = document.querySelector(".commentsPopup")
 const commentsPopupMsgArea = document.querySelector(".commentsPopup-msgArea")
 
+// Affiche la popup avec tous les messages complets
 seeAllBtn.addEventListener("click", (e) => {
   e.preventDefault()
   sidebarRight.classList.remove("active-right")
   commentsPopup.classList.add("pop")
-
+  body.classList.add("scroll-freeze")
 })
-
 
 // Le bouton "profil" ouvre la barre latérale gauche
 profileBtn.addEventListener("click", () => {
@@ -177,6 +176,7 @@ document.addEventListener("click", (e) => {
     sidebarRight.classList.remove("active-right");
     newpostContainer.classList.remove("showComment");
     commentsPopup.classList.remove("pop")
+    body.classList.remove("scroll-freeze")
     messageBtn.inert = false;
     profileBtn.inert = false;
     postBtn.inert = false;
@@ -221,6 +221,8 @@ commentBtn.forEach((button) =>
     matchUser.forEach((match) => createComment(match, commentContainerContent));
     commentContainer.classList.add("showComment");
     body.classList.add("scroll-freeze")
+    header.inert = true
+
   })
 );
 
@@ -253,7 +255,9 @@ class Post {
 // Crée le commentaire quand on clique sur "Envoyer"
 let commentInput = document.querySelector(".comment-txt");
 submitBtn.addEventListener("click", (e) => {
+  let newComment = commentInput.value;
   e.preventDefault();
+  if(newComment) {
   const allPosts = document.querySelectorAll(".article");
   const targetPost = Array.from(allPosts).filter(
     (post) => parseInt(post.id) === [...commentsLibrary][0]
@@ -264,7 +268,7 @@ submitBtn.addEventListener("click", (e) => {
   removeShadowMode();
   body.classList.remove("scroll-freeze")
 
-  let newComment = commentInput.value;
+  
   const essaiCommentaire = new Post([...commentsLibrary][0], newComment);
   comments.push(essaiCommentaire);
   //Envoi d'un nouveau commentaire dans le local storage
@@ -279,6 +283,8 @@ submitBtn.addEventListener("click", (e) => {
   commentInput.value = "";
   commentsLibrary.clear();
   commentContainerContent.innerHTML = "";
+  console.log(commentInput.value? "cest true" : "cest false")
+  }
 });
 
 let postInput = document.querySelector(".post-txt");
@@ -286,7 +292,9 @@ let postSubmitBtn = document.querySelector(".submit-post");
 
 //Ajouter un nouveau post
 postSubmitBtn.addEventListener("click", (e) => {
+  let newPost = postInput.value
   e.preventDefault();
+  if(newPost) {
   let postsStorage = JSON.parse(localStorage.getItem("posts"));
   let userPost = user;
   userPost.profilePic = "assets/img/profile/damien-jean.jpeg";
@@ -356,6 +364,7 @@ postSubmitBtn.addEventListener("click", (e) => {
   newpostContainer.classList.remove("showComment");
   removeShadowMode();
   body.classList.remove("scroll-freeze")
+}
 });
 
 // Affiche la popup "New post" quand on clique sur le bouton "+"
