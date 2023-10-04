@@ -1,4 +1,5 @@
 * {
+  font-family: sans-serif;
   padding: 0;
   margin: 0;
 }
@@ -21,9 +22,6 @@ img {
 .login-box {
   width: 60%;
   margin-top: 2rem;
-  
-  /* border: 2px black solid;
-  border-radius: 45px 15px; */
 }
 
 h1 {
@@ -32,7 +30,9 @@ h1 {
   font-size: 4vw;
 }
 
-.logo, .login-box, .input-box {
+.logo,
+.login-box,
+.input-box {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -67,4 +67,30 @@ h1 {
 
 #email {
   margin: 10px;
+}
+
+.popupAlert {
+  display: none;
+}
+
+.show-popup {
+  top: 0;
+  height: 7vh;
+  width: 100vw;
+  text-align: center;
+  justify-content: center;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  
+}
+
+@media screen and (min-width: 768px) {
+  img {
+    width: 20vw;
+  }
+  h1 {
+    font-size: 2vw;
+  }
 }

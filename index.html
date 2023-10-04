@@ -13,31 +13,29 @@
       <header class="header">
         <img
           class="user-img header-icon"
-          src="assets/img/icon-user.svg"
+          src="assets/icons/icon-user.svg"
           alt="user-img"
         />
         <img
           class="website-img"
-          src="assets/img/icon-wild 1.svg"
+          src="assets/icons/icon-wild.svg"
           alt="website-img"
         />
         <img
           class="message-img header-icon"
-          src="assets/img/icon-mail.svg"
+          src="assets/icons/icon-mail.svg"
           alt="profile-img"
         />
       </header>
 
-      <div class="article-area">
-      </div>
+      <div class="article-area"></div>
 
       <div class="sidebar sidebar-left">
         <h2 class="sidebar-title">Profil</h2>
         <div class="user-profile"></div>
         <div class="profile-options">
-          <a class="profile-link parameters" href="">Parametres</a>
           <a class="profile-link disconnect" href="login_page.html"
-            >Se deconecter</a
+            >Se déconnecter</a
           >
         </div>
       </div>
@@ -57,7 +55,7 @@
         <div class="add-comment">
           <img
             class="sender-img"
-            src="assets\img\WF Image Placeholder.png"
+            src="assets/img/profile/damien-jean.jpeg"
             alt=""
           />
           <input
@@ -76,27 +74,41 @@
       </div>
 
       <div class="newpost-container">
-          <div class="comment-container-content">
-            <h2>Nouveau post</h2>
-          </div>
-          <div class="add-comment">
-            <img class="sender-img" src="assets\img\WF Image Placeholder.png" alt="">
-            <input class="post-txt" type="text" placeholder="Ton nouveau message">
-          </div>
-          <form class="send-comment">
-            <button class="cancel">Annuler
-            </button>
-            <button type="submit" class="submit-post">Envoyer
-              <img src="" alt="">
-            </button>
-          </form>
+        <div id="newPost">
+          <h2>Nouveau post</h2>
         </div>
+        <div class="add-comment">
+          <img
+            class="sender-img"
+            src="assets/img/profile/damien-jean.jpeg"
+            alt=""
+          />
+          <textarea class="post-txt" placeholder="Ton nouveau message" rows="5" cols="33"></textarea>
+        </div>
+        <div class="comment-container-content">
+        </div>
+        <form class="send-comment">
+          <button class="cancel">Annuler</button>
+          <button type="submit" class="submit-post">
+            Envoyer
+            <img src="" alt="" />
+          </button>
+        </form>
+      </div>
+      <div class="commentsPopup">
+        <div class="commentsPopup-msgArea">
+          <h2>Messages</h2>
+          <div class="commentsPopup-msgs"></div>
+        </div>
+      </div>
     </main>
 
     <footer class="footer">
-      <img class="icon homeBtn" src="assets/img/icon-home.svg" alt="icon-home" />
-      <img class="icon" src="assets/img/icon-search.svg" alt="icon-search" />
-      <img class="icon" src="assets/img/icon-bell.svg" alt="icon-bell" />
+      <img
+        class="icon homeBtn"
+        src="assets/icons/icon-home.svg"
+        alt="icon-home"
+      />
     </footer>
 
     <script type="module" src="script.js"></script>
