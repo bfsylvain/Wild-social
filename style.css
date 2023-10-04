@@ -389,6 +389,10 @@ a,
   display: none;
 }
 
+.desktop-only {
+  display: none;
+}
+
 @media screen and (min-width: 768px) {
   .header {
     position: fixed;
@@ -429,6 +433,7 @@ a,
     left: 1rem;
     right: auto;
     bottom: 1rem;
+    width: auto;
   }
   .newpost-container,
   .comment-container {
@@ -447,5 +452,8 @@ a,
   }
   .user-name {
     padding: 1.5vw 2vw;
+  }
+  .desktop-only {
+    display: inline;
   }
 }
