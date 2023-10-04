@@ -395,8 +395,9 @@ a,
     background: #eeeeeed7;
     display: block;
   }
+  
   .messages-footer {
-    margin-top: 45vh;
+    margin-top: 15vh;
   }
 
   .post-button {
