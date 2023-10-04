@@ -102,11 +102,11 @@ export function createPost(object, parent, number, picture) {
   <div class="article-interaction-area">
     <div class="like-area">
       <img class="like-img icon" src="assets/img/heart-img.png" alt=""/>
-      <span>25</span>
+      <span>${object.likesNumber === undefined ? 0 : object.likesNumber}</span>
     </div>
     <div class="comment-area">
       <img class="comment-img icon" src="assets/img/Bubble-img.png" alt=""/>
-      <span class="comment-span">2</span>
+      <span class="comment-span">${(object.commentsNumber ??= 0)}</span>
     </div>
   </div>
 </div>
