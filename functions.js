@@ -30,10 +30,10 @@ export function createMessage(objet, parent) {
   const text = document.createElement("p");
   text.classList.add("text");
   const messageToSlice = objet.message;
-  if (window.innerWidth < 768) {
-    text.innerText = sliceOrNot(messageToSlice);
-  } else {
+  if (window.innerWidth > 768 ) {
     text.innerText = messageToSlice;
+  } else {
+    text.innerText = sliceOrNot(messageToSlice);
   }
   parent.appendChild(message);
   message.appendChild(profile);

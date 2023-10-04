@@ -87,6 +87,14 @@ createProfile(user, profile);
 for (let messageSender of messageSenders) {
   createMessage(messageSender, messageArea);
 }
+const commentsPopupMsgs = document.querySelector(".commentsPopup-msgs")
+
+for (let messageSender of messageSenders) {
+  
+  createMessage(messageSender, commentsPopupMsgs);
+}
+
+
 
 // Afficher ou masquer le header en fonction du scroll
 let lastScroll = 0;
@@ -123,6 +131,16 @@ messageBtn.addEventListener("click", () => {
     shadowModeToggle();
   }
 });
+
+const seeAllBtn = document.querySelector(".messages-footer")
+const commentsPopup = document.querySelector(".commentsPopup")
+
+seeAllBtn.addEventListener("click", (e) => {
+  e.preventDefault()
+  commentsPopup.classList.add("pop")
+
+})
+
 
 // Le bouton "profil" ouvre la barre latérale gauche
 profileBtn.addEventListener("click", () => {
