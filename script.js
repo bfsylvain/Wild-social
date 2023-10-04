@@ -23,7 +23,7 @@ import {
 // Récupération des noeuds HTML dans des variables JS
 const header = document.querySelector(".header");
 const articleArea = document.querySelector(".article-area");
-const main = document.querySelector(".main")
+const main = document.querySelector(".main");
 
 const messageBtn = document.querySelector(".message-img");
 const profileBtn = document.querySelector(".user-img");
@@ -209,7 +209,6 @@ commentBtn.forEach((button) =>
     );
     matchUser.forEach((match) => createComment(match, commentContainerContent));
     commentContainer.classList.add("showComment");
-    
   })
 );
 
@@ -233,7 +232,7 @@ class Post {
     (this.profilePic = "assets/img/profile/damien-jean.jpeg"),
       (this.firstname = user.firstname),
       (this.lastname = user.lastname),
-      (this.date = "Maintenant"),
+      (this.date = getCurrentDate()),
       (this.text = comment);
   }
 }
@@ -242,10 +241,12 @@ class Post {
 let commentInput = document.querySelector(".comment-txt");
 submitBtn.addEventListener("click", (e) => {
   e.preventDefault();
-  const allPosts = document.querySelectorAll(".article")
-  const targetPost = Array.from(allPosts).filter((post) => parseInt(post.id) === [...commentsLibrary][0])
-  const commentCounter = targetPost[0].querySelector(".comment-span")
-  commentCounter.innerHTML++
+  const allPosts = document.querySelectorAll(".article");
+  const targetPost = Array.from(allPosts).filter(
+    (post) => parseInt(post.id) === [...commentsLibrary][0]
+  );
+  const commentCounter = targetPost[0].querySelector(".comment-span");
+  commentCounter.innerHTML++;
   commentContainer.classList.remove("showComment");
   removeShadowMode();
 
@@ -275,7 +276,7 @@ postSubmitBtn.addEventListener("click", (e) => {
   let postsStorage = JSON.parse(localStorage.getItem("posts"));
   let userPost = user;
   userPost.profilePic = "assets/img/profile/damien-jean.jpeg";
-  userPost.date = "A l'instant";
+  userPost.date = getCurrentDate();
   userPost.text = postInput.value;
   userPost.id = postsStorage.length;
 
@@ -358,4 +359,17 @@ if (window.innerWidth > 768) {
   postBtn.innerHTML = "+ Nouveau post";
   postBtn.style.width = "auto";
 }
-console.log(articleArea)
+
+function getCurrentDate() {
+  let date = new Date();
+
+  let options = {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+    hour: "numeric",
+    minute: "numeric",
+  };
+
+  return date.toLocaleString("fr-FR", options);
+}

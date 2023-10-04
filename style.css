@@ -47,6 +47,7 @@ body {
 .profile {
   display: flex;
   padding-left: 4vw;
+  
 }
 
 .user-name {
@@ -172,6 +173,7 @@ a,
   padding-left: 0;
 }
 .user-profile .profile {
+  align-items: center;
   padding-left: 0;
 }
 
@@ -210,6 +212,8 @@ a,
   align-items: center;
   height: 2rem;
   background-color: #fff;
+  border-radius: 5px;
+  color: var(--wildColor);
 }
 
 .profile-options {
@@ -220,6 +224,7 @@ a,
 
 .profile-link {
   margin: 2rem 0 1rem 0;
+  color: var(--wildColor);
 }
 
 .active-right {
@@ -321,10 +326,12 @@ a,
 }
 
 .submit {
+  border: none;
   background-color: var(--wildColor);
   color: white;
 }
 .submit-post {
+  border: none;
   background-color: var(--wildColor);
   color: #fff;
 }
@@ -409,6 +416,11 @@ a,
     height: 100vh;
     border: none;
     background: #eeeeeed7;
+    display: block;
+  }
+  
+  .messages-footer {
+    margin-top: 15vh;
   }
 
   .post-button {
