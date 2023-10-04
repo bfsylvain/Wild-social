@@ -81,11 +81,12 @@ export function createProfile(objet, parent) {
 }
 
 export function createPost(object, parent, number, length) {
+
   parent.innerHTML += `
 <div class="article" id="${number}">
 
   <div class="profile">
-    <img class="profile-img" src="${object.profilePic}" alt=""/>
+    <img class="profile-img" src="${object.profilePic}" alt="Photo user"/>
     <div class="user-name">
       <h2>${object.firstname} ${object.lastname}</h2>
       <p>${object.date}</p>
@@ -97,7 +98,7 @@ export function createPost(object, parent, number, length) {
   </div>
 
   <div class="post-picture-area">
-    <img class="post-img" src= ${object.picture} alt=""/>
+    <img class="post-img" src= "${(object.picture ??= "")}" alt=""/>
   </div>
 
   <div class="article-interaction-area">
@@ -117,28 +118,22 @@ export function createPost(object, parent, number, length) {
 export function createComment(object, parent) {
   parent.innerHTML += `
   <div class="article">
-  <div class="profile">
-    <img
-      class="profile-img"
-      src="${object.profilePic}"
-      alt=""
-    />
-    <div class="user-name">
-      <h2>${object.firstname} ${object.lastname}</h2>
-      <p>${object.date}</p>
+    <div class="profile">
+      <img
+        class="profile-img"
+        src="${object.profilePic}"
+        alt=""
+      />
+      <div class="user-name">
+        <h2>${object.firstname} ${object.lastname}</h2>
+        <p>${object.date}</p>
+      </div>
     </div>
-  </div>
-  <div class="post-text-area">
-    <p>
-      ${object.text}
-    </p>
-  </div>
-  <div class="post-picture-area">
-    <img
-      class="post-img"
-      src= ${object.picture}
-      alt=""
-    />
+    <div class="post-text-area">
+      <p>
+        ${object.text}
+      </p>
+    </div>
   </div>
 </div>
   `;

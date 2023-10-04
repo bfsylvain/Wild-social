@@ -94,13 +94,12 @@ for (let messageSender of messageSenders) {
   createMessage(messageSender, messageArea);
 }
 
+
 // Création des messages (popup messages)
 const commentsPopupMsgs = document.querySelector(".commentsPopup-msgs")
 for (let messageSender of messageSenders) {
   createMessage(messageSender, commentsPopupMsgs);
 }
-
-
 
 // Afficher ou masquer le header en fonction du scroll
 let lastScroll = 0;
@@ -142,6 +141,7 @@ const seeAllBtn = document.querySelector(".messages-footer")
 const commentsPopup = document.querySelector(".commentsPopup")
 const commentsPopupMsgArea = document.querySelector(".commentsPopup-msgArea")
 
+
 // Affiche la popup avec tous les messages complets
 seeAllBtn.addEventListener("click", (e) => {
   e.preventDefault()
@@ -149,6 +149,7 @@ seeAllBtn.addEventListener("click", (e) => {
   commentsPopup.classList.add("pop")
   body.classList.add("scroll-freeze")
 })
+
 
 // Le bouton "profil" ouvre la barre latérale gauche
 profileBtn.addEventListener("click", () => {
@@ -199,7 +200,6 @@ likeBtns.forEach((likeBtn, key) => {
       event.target.src = "assets/icons/icon-heart-red-outline.svg";
       likeCounter.innerHTML++;
       library.add(key);
-      console.log(key);
     }
   });
 });
@@ -275,7 +275,6 @@ submitBtn.addEventListener("click", (e) => {
   let commentSenders = window.localStorage.getItem("comments");
   let commentsList = JSON.parse(commentSenders);
   commentsList.push(essaiCommentaire);
-  console.log(commentsList);
   commentsStorage = JSON.stringify(commentsList);
   window.localStorage.setItem("comments", commentsStorage);
   ////////////////////////////////////////////////////////
@@ -322,7 +321,6 @@ postSubmitBtn.addEventListener("click", (e) => {
   commentBtn.forEach((button) =>
     button.addEventListener("click", (event) => {
       const targetPost = event.target.parentNode.parentNode.parentNode;
-      console.log("l'Id du post: ", parseInt(targetPost.id));
       commentsLibrary.add(parseInt(targetPost.id));
       commentContainerContent.innerHTML = "";
       commentsStorage = JSON.parse(localStorage.getItem("comments"));
@@ -330,7 +328,6 @@ postSubmitBtn.addEventListener("click", (e) => {
       let matchUser = commentsStorage.filter(
         (comment) => comment.postId === parseInt(targetPost.id)
       );
-      console.log("voici la liste: ", matchUser);
       matchUser.forEach((match) =>
         createComment(match, commentContainerContent)
       );
@@ -355,7 +352,6 @@ postSubmitBtn.addEventListener("click", (e) => {
         event.target.strokeStyle = "red";
         likeCounter.innerHTML++;
         library.add(key);
-        console.log(key);
       }
     });
   });
@@ -385,11 +381,7 @@ homeBtn.addEventListener("click", () => {
   });
 });
 
-if (window.innerWidth > 768) {
-  postBtn.innerHTML = "+ Nouveau post";
-  postBtn.style.width = "auto";
-}
-
+// Affichage Dates
 function getCurrentDate() {
   let date = new Date();
 
