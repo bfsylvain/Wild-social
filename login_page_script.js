@@ -7,8 +7,6 @@ const loginBtn = document.querySelector('.login-btn')
 const alertMsg = document.querySelector(".alert-msg")
 const email = document.getElementById("email")
 const password = document.getElementById("password")
-console.log(userId, userPassword)
-console.log(password)
 
 loginBtn.addEventListener("click", () => {
     alertMsg.innerHTML = ""

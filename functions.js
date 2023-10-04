@@ -11,6 +11,7 @@ function sliceOrNot(sentence) {
 }
 //fonction de création des messages dans la barre latérale droite
 export function createMessage(objet, parent) {
+
   const message = document.createElement("div");
   message.classList.add("message");
   const profile = document.createElement("div");
@@ -30,7 +31,7 @@ export function createMessage(objet, parent) {
   const text = document.createElement("p");
   text.classList.add("text");
   const messageToSlice = objet.message;
-  if (window.innerWidth > 768) {
+  if (window.innerWidth > 768 || parent.id === "pop") {
     text.innerText = messageToSlice;
   } else {
     text.innerText = sliceOrNot(messageToSlice);
@@ -79,7 +80,8 @@ export function createProfile(objet, parent) {
   msgTxt.appendChild(abonnes);
 }
 
-export function createPost(object, parent, number) {
+export function createPost(object, parent, number, length) {
+
   parent.innerHTML += `
 <div class="article" id="${number}">
 
@@ -101,12 +103,12 @@ export function createPost(object, parent, number) {
 
   <div class="article-interaction-area">
     <div class="like-area">
-      <img class="like-img icon" src="assets/img/heart-img.png" alt="Icon like"/>
-      <span>${object.likesNumber === undefined ? 0 : object.likesNumber}</span>
+      <img class="like-img icon" src="assets/img/heart-img.png" alt=""/>
+      <span>${object.likesNumber ??= 0}</span>
     </div>
     <div class="comment-area">
-      <img class="comment-img icon" src="assets/img/Bubble-img.png" alt="icon comment"/>
-      <span class="comment-span">${(object.commentsNumber ??= 0)}</span>
+      <img class="comment-img icon" src="assets/img/Bubble-img.png" alt=""/>
+      <span class="comment-span">${length}</span>
     </div>
   </div>
 </div>

@@ -86,6 +86,7 @@ a,
 .article-area {
   flex-grow: 1;
   background-color: #fff;
+
 }
 
 .profile {
@@ -245,6 +246,11 @@ a,
   filter: brightness(50%);
 }
 
+.scroll-freeze {
+  overflow: hidden;
+  height: 100%;
+}
+
 .footer {
   display: flex;
   justify-content: center;
@@ -367,7 +373,7 @@ a,
 }
 
 .commentsPopup-msgArea {
-  width: 75vw;
+  width: 60vw;
   height: 84vh;
   background-color: #fff;
 }
@@ -424,13 +430,16 @@ a,
   }
   
   .messages-footer {
-    margin-top: 15vh;
+    position: fixed;
+    right: calc((20vw - 107px)/2);
+    bottom: 1rem;
+    padding: 1.5rem;
   }
 
   .post-button {
     padding: 1.5rem;
     font-size: medium;
-    left: 1rem;
+    left: calc((20vw - 162px)/2);
     right: auto;
     bottom: 1rem;
     width: auto;
@@ -439,6 +448,7 @@ a,
   .comment-container {
     margin: 0 20vw;
     width: 60vw;
+    
   }
   .footer {
     display: none;

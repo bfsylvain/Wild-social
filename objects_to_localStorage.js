@@ -187,7 +187,7 @@ export const comments = [
 export const messageSenders = [
   {
     profilePic: "assets/img/profile/cedric.jpg",
-    date: "4 oct 15:02",
+    date: "4 oct 12:29",
     firstname: "Cédric",
     lastname: "",
     message: "Apéro ce soir ?",
@@ -201,14 +201,21 @@ export const messageSenders = [
   },
   {
     profilePic: "assets/img/profile/antoine.jpg",
-    date: "4 oct 15:02",
+    date: "1 oct 23:02",
     firstname: "Antoine",
     lastname: "",
     message: "T'es es où sur le projet ??",
   },
   {
+    profilePic: "assets/img/profile/cedric.jpg",
+    date: "29 sept 12:12",
+    firstname: "Cédric",
+    lastname: "",
+    message: "Apéro ?",
+  },
+  {
     profilePic: "assets/img/profile/adam.jpg",
-    date: "4 oct 15:02",
+    date: "23 sept 10:57",
     firstname: "Adam",
     lastname: "",
     message: "Petite game ce soir ?",
