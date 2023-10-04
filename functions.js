@@ -30,7 +30,7 @@ export function createMessage(objet, parent) {
   const text = document.createElement("p");
   text.classList.add("text");
   const messageToSlice = objet.message;
-  if (window.innerWidth > 768 ) {
+  if (window.innerWidth > 768) {
     text.innerText = messageToSlice;
   } else {
     text.innerText = sliceOrNot(messageToSlice);
