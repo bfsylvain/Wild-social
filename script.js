@@ -2,25 +2,34 @@
 
 // Import des fonctions depuis functions.js
 import {
-  createArticle,
+  //createArticle,
   createProfile,
   removeShadowMode1,
   removeShadowMode,
   addShadowMode,
   shadowModeToggle,
-  createPost
+  createPost,
+  createComment,
+  createMessage,
 } from "./functions.js";
+
+import {
+  user,
+  comments,
+  posts,
+  messageSenders,
+} from "./objects_to_localStorage.js";
 
 // Récupération des noeuds HTML dans des variables JS
 const header = document.querySelector(".header");
 const articleArea = document.querySelector(".article-area");
-const footer = document.querySelector(".footer");
+const main = document.querySelector(".main")
 
 const messageBtn = document.querySelector(".message-img");
 const profileBtn = document.querySelector(".user-img");
+const wildBtn = document.querySelector(".website-img");
 
 const commentContainer = document.querySelector(".comment-container");
-const lastComments = document.querySelectorAll(".last-comment");
 const cancelBtns = document.querySelectorAll(".cancel");
 
 const submitBtn = document.querySelector(".submit");
@@ -39,134 +48,91 @@ const commentContainerContent = document.querySelector(
 const postBtn = document.querySelector(".post-button");
 const newpostContainer = document.querySelector(".newpost-container");
 
-// Création d'un tableau d'objets représentant les messages du site
-const messageSenders = [
-  {
-    date: "hier",
-    firstname: "Cédric",
-    lastname: "D",
-    message: "Apéro ?",
-  },
-  {
-    date: "hier",
-    firstname: "John",
-    lastname: "John",
-    message: "Banana Banana Banana Banana Banana",
-  },
-  {
-    date: "hier",
-    firstname: "John",
-    lastname: "Bob",
-    message: "Banana Banana Banana Banana Banana",
-  },
-];
+const homeBtn = document.querySelector(".homeBtn");
 
-// Création de l'objet "profil de l'utilisateur"
-const user = {
-  firstname: "Mr",
-  lastname: "Fantastic",
-  abonnes: 1961,
-  abonnements: 3,
-};
+let messageStorage = JSON.stringify(messageSenders);
+window.localStorage.setItem("messages", messageStorage);
 
-const posts = [
-  {
-    profilePic: "assets/img/user1.png",
-    firstname: "John",
-    lastname: "John",
-    date: "demain",
-    text: "Un post blablabla",
-    picture: "assets/img/post1.png"
-  },
-  {
-    profilePic: "assets/img/user1.png",
-    firstname: "John",
-    lastname: "Wick",
-    date: "hier",
-    text: "Do you knox who I am ?!",
-    picture: "assets/img/post1.png"
-  },
-  {
-    profilePic: "assets/img/user1.png",
-    firstname: "John",
-    lastname: "Snow",
-    date: "avant-hier",
-    text: "You know nothing...",
-    picture: "assets/img/post1.png"
-  },
-  {
-    profilePic: "assets/img/user1.png",
-    firstname: "John",
-    lastname: "John",
-    date: "demain",
-    text: "Un post blablabla",
-    picture: "assets/img/post1.png"
-  },
-  {
-    profilePic: "assets/img/user1.png",
-    firstname: "John",
-    lastname: "Wick",
-    date: "hier",
-    text: "Do you knox who I am ?!",
-    picture: "assets/img/post1.png"
-  },
-  {
-    profilePic: "assets/img/user1.png",
-    firstname: "John",
-    lastname: "Rambo",
-    date: "avant-hier",
-    text: "C'était pas ma guerre, Adrienne !",
-    picture: "assets/img/post1.png"
-  }
-
-]
-// affichage des posts
-for(let i = posts.length - 1; i >= 0; i--) {
-  createPost(posts[i], articleArea)
+// Utiliser le local storage pour les posts
+let postsStorage;
+if (localStorage.getItem("posts")) {
+  postsStorage = JSON.parse(localStorage.getItem("posts"));
+} else {
+  postsStorage = JSON.stringify(posts);
+  window.localStorage.setItem("posts", postsStorage);
 }
 
-const likeBtns = document.querySelectorAll(".like-img");
-const commentBtn = document.querySelectorAll(".comment-img");
-console.log(commentBtn)
+// affichage des posts
+postsStorage = JSON.parse(localStorage.getItem("posts"));
+for (let i = postsStorage.length - 1; i >= 0; i--) {
+  createPost(postsStorage[i], articleArea, [i]);
+}
+
+let commentsStorage;
+// Utiliser le local storage pour les commentaires
+if (localStorage.getItem("comments")) {
+  commentsStorage = JSON.parse(localStorage.getItem("comments"));
+} else {
+  commentsStorage = JSON.stringify(comments);
+  window.localStorage.setItem("comments", commentsStorage);
+}
+
+let likeBtns = document.querySelectorAll(".like-img");
+let commentBtn = document.querySelectorAll(".comment-img");
 
 // Affichage du profil utilisateur (barre latérale gauche)
 createProfile(user, profile);
 
 // Affichage des messages (barre latérale droite)
 for (let messageSender of messageSenders) {
-  createArticle(messageSender, messageArea);
-}
-
-// Affichage des commentaires (popup en bas)
-for (let messageSender of messageSenders) {
-  createArticle(messageSender, commentContainerContent);
+  createMessage(messageSender, messageArea);
 }
 
 // Afficher ou masquer le header en fonction du scroll
 let lastScroll = 0;
 window.addEventListener("scroll", () => {
-  if (window.scrollY < lastScroll) {
-    header.style.top = 0;
-  } else {
-    header.style.top = "-8vh";
-    sidebarLeft.classList.remove("active-left");
-    sidebarRight.classList.remove("active-right");
-    removeShadowMode1();
+  if (window.innerWidth < 768) {
+    if (window.scrollY < lastScroll) {
+      header.style.top = 0;
+    } else {
+      header.style.top = "-8vh";
+      sidebarLeft.classList.remove("active-left");
+      sidebarRight.classList.remove("active-right");
+      removeShadowMode1();
+    }
+    lastScroll = window.scrollY;
   }
-  lastScroll = window.scrollY;
+});
+// Bouton Wild Home remonte les posts
+wildBtn.addEventListener("click", () => {
+  if (window.innerWidth > 768) {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "smooth",
+    });
+  }
 });
 
 // Le bouton "messages" ouvre la barre latérale droite
 messageBtn.addEventListener("click", () => {
-  sidebarRight.classList.toggle("active-right");
-  shadowModeToggle();
+  if (window.innerWidth < 768) {
+    sidebarRight.classList.toggle("active-right");
+    profileBtn.inert = true;
+    postBtn.inert = true;
+    shadowModeToggle();
+  }
 });
 
 // Le bouton "profil" ouvre la barre latérale gauche
 profileBtn.addEventListener("click", () => {
-  sidebarLeft.classList.toggle("active-left");
-  shadowModeToggle();
-  header.classList.toggle("shadowMode");
+  if (window.innerWidth < 768) {
+    sidebarLeft.classList.toggle("active-left");
+    messageBtn.inert = true;
+    postBtn.inert = true;
+    shadowModeToggle();
+    header.classList.toggle("shadowMode");
+  }
 });
 
 // Fermer la sidebar si on clique en dehors des sidebars ou du slider nouveau post
@@ -178,13 +144,15 @@ document.addEventListener("click", (e) => {
     e.target !== messageBtn &&
     e.target !== profileBtn &&
     e.target !== postBtn
-  ) 
-  {
+  ) {
     sidebarLeft.classList.remove("active-left");
     sidebarRight.classList.remove("active-right");
     newpostContainer.classList.remove("showComment");
+    messageBtn.inert = false;
+    profileBtn.inert = false;
+    postBtn.inert = false;
     removeShadowMode1();
-    removeShadowMode()
+    removeShadowMode();
   }
 });
 
@@ -195,12 +163,14 @@ likeBtns.forEach((likeBtn, key) => {
     const likeZone = event.target.parentNode;
     const likeCounter = likeZone.querySelector("span");
     if (library.has(key)) {
+      event.target.src = "assets/icons/icon-heart.svg";
       likeCounter.innerHTML--;
       library.delete(key);
     } else {
-      event.target.strokeStyle = "red";
+      event.target.src = "assets/icons/icon-heart-red-outline.svg";
       likeCounter.innerHTML++;
       library.add(key);
+      console.log(key);
     }
   });
 });
@@ -208,83 +178,166 @@ likeBtns.forEach((likeBtn, key) => {
 // Affiche la popup "commentaires" quand on clique sur l'icone dédiée
 const commentsLibrary = new Set();
 
-commentBtn.forEach((button, index) =>
-  button.addEventListener("click", () => {
-    commentsLibrary.add(index);
-    console.log(commentsLibrary)
+commentBtn.forEach((button) =>
+  button.addEventListener("click", (event) => {
+    const targetPost = event.target.parentNode.parentNode.parentNode;
+    commentsLibrary.add(parseInt(targetPost.id));
+    //remets le conteneur à vide
+    commentContainerContent.innerHTML = "";
+    //recupere les commentaires et trie ceux liés à l'article
+    commentsStorage = JSON.parse(localStorage.getItem("comments"));
+    let matchUser = commentsStorage.filter(
+      (comment) => comment.postId === parseInt(targetPost.id)
+    );
+    matchUser.forEach((match) => createComment(match, commentContainerContent));
     commentContainer.classList.add("showComment");
-    addShadowMode();
+    
   })
 );
 
 // Masque la popup "commentaires" quand on clique sur "Annuler"
-for(let cancelBtn of cancelBtns) {
+for (let cancelBtn of cancelBtns) {
   cancelBtn.addEventListener("click", (e) => {
     e.preventDefault();
     commentContainer.classList.remove("showComment");
     newpostContainer.classList.remove("showComment");
     removeShadowMode();
+
     commentInput.value = "";
     commentsLibrary.clear();
-  })
-};
+  });
+}
+
+//Creation class pour commentaire d'un post
+class Post {
+  constructor(id, comment) {
+    this.postId = id;
+    (this.profilePic = "assets/img/profile/damien-jean.jpeg"),
+      (this.firstname = user.firstname),
+      (this.lastname = user.lastname),
+      (this.date = "Maintenant"),
+      (this.text = comment);
+  }
+}
 
 // Crée le commentaire quand on clique sur "Envoyer"
 let commentInput = document.querySelector(".comment-txt");
 submitBtn.addEventListener("click", (e) => {
   e.preventDefault();
-  const commentsZoneTarget = commentBtn[[...commentsLibrary][0]].parentNode;
-  const commentsCounter = commentsZoneTarget.querySelector("span");
-  commentsCounter.innerHTML++;
+  const allPosts = document.querySelectorAll(".article")
+  const targetPost = Array.from(allPosts).filter((post) => parseInt(post.id) === [...commentsLibrary][0])
+  const commentCounter = targetPost[0].querySelector(".comment-span")
+  commentCounter.innerHTML++
   commentContainer.classList.remove("showComment");
   removeShadowMode();
-  console.log(commentInput.value);
+
   let newComment = commentInput.value;
+  const essaiCommentaire = new Post([...commentsLibrary][0], newComment);
+  comments.push(essaiCommentaire);
+  //Envoi d'un nouveau commentaire dans le local storage
+  let commentSenders = window.localStorage.getItem("comments");
+  let commentsList = JSON.parse(commentSenders);
+  commentsList.push(essaiCommentaire);
+  console.log(commentsList);
+  commentsStorage = JSON.stringify(commentsList);
+  window.localStorage.setItem("comments", commentsStorage);
+  ////////////////////////////////////////////////////////
   user.message = newComment;
-  createArticle(user, lastComments[[...commentsLibrary][0]]);
   commentInput.value = "";
   commentsLibrary.clear();
+  commentContainerContent.innerHTML = "";
 });
 
-let postInput = document.querySelector(".post-txt")
-let postSubmitBtn = document.querySelector(".submit-post")
+let postInput = document.querySelector(".post-txt");
+let postSubmitBtn = document.querySelector(".submit-post");
 
+//Ajouter un nouveau post
 postSubmitBtn.addEventListener("click", (e) => {
   e.preventDefault();
+  let postsStorage = JSON.parse(localStorage.getItem("posts"));
   let userPost = user;
-  userPost.profilePic = "assets/img/user1.png";
+  userPost.profilePic = "assets/img/profile/damien-jean.jpeg";
   userPost.date = "A l'instant";
   userPost.text = postInput.value;
-  userPost.picture = "assets/img/post1.png";
-  posts.push(userPost)
-  articleArea.innerHTML = ""
-  for(let i = posts.length - 1; i >= 0; i--) {
-    createPost(posts[i], articleArea)
+  userPost.id = postsStorage.length;
+
+  postsStorage.push(userPost);
+  articleArea.innerHTML = "";
+  for (let i = postsStorage.length - 1; i >= 0; i--) {
+    createPost(postsStorage[i], articleArea, [i]);
   }
-  postInput.value = ""
-  newpostContainer.classList.remove("showComment")
-  removeShadowMode()
-})
+  let newPostStorage = JSON.stringify(postsStorage);
+  window.localStorage.setItem("posts", newPostStorage);
+
+  //remets à jour la liste des msg btns apres creation post
+  commentBtn = document.querySelectorAll(".comment-img");
+
+  //Réactive tous les boutons message apres creation d'un nouveau post
+  commentBtn.forEach((button) =>
+    button.addEventListener("click", (event) => {
+      const targetPost = event.target.parentNode.parentNode.parentNode;
+      console.log("l'Id du post: ", parseInt(targetPost.id));
+      commentsLibrary.add(parseInt(targetPost.id));
+      commentContainerContent.innerHTML = "";
+      commentsStorage = JSON.parse(localStorage.getItem("comments"));
+
+      let matchUser = commentsStorage.filter(
+        (comment) => comment.postId === parseInt(targetPost.id)
+      );
+      console.log("voici la liste: ", matchUser);
+      matchUser.forEach((match) =>
+        createComment(match, commentContainerContent)
+      );
+      addShadowMode();
+
+      commentContainer.classList.add("showComment");
+    })
+  );
+  //remets à jour la liste des boutons like après création d'un post
+  likeBtns = document.querySelectorAll(".like-img");
+
+  //Réactive tous les boutons like après création d'un post
+  const library = new Set();
+  likeBtns.forEach((likeBtn, key) => {
+    likeBtn.addEventListener("click", (event) => {
+      const likeZone = event.target.parentNode;
+      const likeCounter = likeZone.querySelector("span");
+      if (library.has(key)) {
+        likeCounter.innerHTML--;
+        library.delete(key);
+      } else {
+        event.target.strokeStyle = "red";
+        likeCounter.innerHTML++;
+        library.add(key);
+        console.log(key);
+      }
+    });
+  });
+
+  postInput.value = "";
+  newpostContainer.classList.remove("showComment");
+  removeShadowMode();
+});
 
 // Affiche la popup "New post" quand on clique sur le bouton "+"
 postBtn.addEventListener("click", () => {
   newpostContainer.classList.add("showComment");
+  messageBtn.inert = true;
+  profileBtn.inert = true;
   addShadowMode();
 });
 
-
-
-
-
-
-
-
 // Le bouton "home" remonte en haut de la liste de posts
-const homeBtn = document.querySelector(".homeBtn");
-
 homeBtn.addEventListener("click", () => {
   window.scrollTo({
-    top:0,
-    left:0,
-  behavior:"smooth"})
-})
+    top: 0,
+    left: 0,
+    behavior: "smooth",
+  });
+});
+
+if (window.innerWidth > 768) {
+  postBtn.innerHTML = "+ Nouveau post";
+  postBtn.style.width = "auto";
+}
+console.log(articleArea)
