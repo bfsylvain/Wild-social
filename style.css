@@ -47,6 +47,7 @@ body {
 .profile {
   display: flex;
   padding-left: 4vw;
+  
 }
 
 .user-name {
@@ -172,6 +173,7 @@ a,
   padding-left: 0;
 }
 .user-profile .profile {
+  align-items: center;
   padding-left: 0;
 }
 
@@ -210,6 +212,8 @@ a,
   align-items: center;
   height: 2rem;
   background-color: #fff;
+  border-radius: 5px;
+  color: var(--wildColor);
 }
 
 .profile-options {
@@ -220,6 +224,7 @@ a,
 
 .profile-link {
   margin: 2rem 0 1rem 0;
+  color: var(--wildColor);
 }
 
 .active-right {
@@ -321,10 +326,12 @@ a,
 }
 
 .submit {
+  border: none;
   background-color: var(--wildColor);
   color: white;
 }
 .submit-post {
+  border: none;
   background-color: var(--wildColor);
   color: #fff;
 }
@@ -353,6 +360,29 @@ a,
   left: 50%;
   top: 10px;
   transform: translate(-50%);
+}
+
+.commentsPopup {
+ display: none;
+}
+
+.commentsPopup-msgArea {
+  width: 75vw;
+  height: 84vh;
+  background-color: #fff;
+}
+
+.pop {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 69;
 }
 
 .comment-container-content .article .post-picture-area {
@@ -386,6 +416,11 @@ a,
     height: 100vh;
     border: none;
     background: #eeeeeed7;
+    display: block;
+  }
+  
+  .messages-footer {
+    margin-top: 15vh;
   }
 
   .post-button {

@@ -1,4 +1,5 @@
 * {
+  font-family: sans-serif;
   padding: 0;
   margin: 0;
 }
@@ -67,6 +68,23 @@ h1 {
 
 #email {
   margin: 10px;
+}
+
+.popupAlert {
+  display: none;
+}
+
+.show-popup {
+  top: 0;
+  height: 7vh;
+  width: 100vw;
+  text-align: center;
+  justify-content: center;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  
 }
 
 @media screen and (min-width: 768px) {
