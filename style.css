@@ -354,7 +354,8 @@ a,
   justify-content: center;
   align-items: center;
   border-radius: 5px;
-  font-size: 2rem;
+  font-size: 1.2rem;
+  padding: 10px 20px;
 }
 
 .newpost-container::before {
