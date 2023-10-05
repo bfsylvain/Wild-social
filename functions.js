@@ -98,7 +98,7 @@ export function createPost(object, parent, number, length) {
   </div>
 
   <div class="post-picture-area">
-    <img class="post-img" src= "${(object.picture ??= "")}" alt="post-img"/>
+    <img class="post-img" src= "${(object.picture ??= "")}"/>
   </div>
 
   <div class="article-interaction-area">
