@@ -384,9 +384,11 @@ a,
 }
 
 .commentsPopup-msgArea {
-  width: 60vw;
+  width: 80vw;
   height: 84vh;
   background-color: #fff;
+  border-radius: 10px;
+  padding: 1rem 2rem;
 }
 
 .pop {
@@ -478,5 +480,10 @@ a,
   }
   .user-name {
     padding: 1.5vw 2vw;
+  }
+  .commentsPopup-msgArea {
+    width: 50vw;
+    height: 84vh;
+    padding: 1rem 3rem;
   }
 }

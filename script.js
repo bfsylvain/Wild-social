@@ -76,7 +76,6 @@ postsStorage = JSON.parse(localStorage.getItem("posts"));
 for (let i = postsStorage.length - 1; i >= 0; i--) {
   let comments = JSON.parse(localStorage.getItem("comments"))
   let commentsAffiliated = comments.filter((comment) => comment.postId === i)
-  console.log(commentsAffiliated)
   createPost(postsStorage[i], articleArea, i, commentsAffiliated.length);
 }
 
@@ -334,7 +333,6 @@ submitBtn.addEventListener("click", (e) => {
   commentInput.value = "";
   commentsLibrary.clear();
   commentContainerContent.innerHTML = "";
-  console.log(commentInput.value? "cest true" : "cest false")
   }
 });
 
@@ -358,11 +356,9 @@ document.addEventListener("keydown", (e) => {
 
   postsStorage.push(userPost);
   articleArea.innerHTML = "";
-  console.log(postsStorage.length)
   for (let i = postsStorage.length - 1; i >= 0; i--) {
     let comments = JSON.parse(localStorage.getItem("comments"))
     let commentsAffiliated = comments.filter((comment) => comment.postId === i)
-    console.log(commentsAffiliated)
     createPost(postsStorage[i], articleArea, i, commentsAffiliated.length);
   }
 
@@ -433,11 +429,9 @@ postSubmitBtn.addEventListener("click", (e) => {
 
   postsStorage.push(userPost);
   articleArea.innerHTML = "";
-  console.log(postsStorage.length)
   for (let i = postsStorage.length - 1; i >= 0; i--) {
     let comments = JSON.parse(localStorage.getItem("comments"))
     let commentsAffiliated = comments.filter((comment) => comment.postId === i)
-    console.log(commentsAffiliated)
     createPost(postsStorage[i], articleArea, i, commentsAffiliated.length);
   }
 
