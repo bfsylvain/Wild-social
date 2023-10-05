@@ -204,7 +204,7 @@ export const messageSenders = [
     date: "1 oct 23:02",
     firstname: "Antoine",
     lastname: "",
-    message: "T'es es où sur le projet ??",
+    message: "T'en es où sur le projet ??",
   },
   {
     profilePic: "assets/img/profile/cedric.jpg",

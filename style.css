@@ -262,11 +262,17 @@ a,
 .footer {
   display: flex;
   justify-content: center;
+  align-items: center;
   position: sticky;
   bottom: 0;
   width: 100%;
   height: 8vh;
   background-color: lightgrey;
+}
+
+.homeBtn {
+  height: 30px;
+  width:30px;
 }
 
 .website-img {
