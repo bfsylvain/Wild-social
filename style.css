@@ -364,6 +364,10 @@ a,
   font-size: 1.2rem;
 }
 
+.post-button:hover {
+  cursor: pointer;
+}
+
 .newpost-container::before {
   content: "";
   position: absolute;
