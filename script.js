@@ -381,6 +381,11 @@ homeBtn.addEventListener("click", () => {
   });
 });
 
+if (window.innerWidth > 768) {
+  postBtn.innerHTML = "+ Nouveau post";
+  postBtn.style.width = "auto";
+}
+
 // Affichage Dates
 function getCurrentDate() {
   let date = new Date();
