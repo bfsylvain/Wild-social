@@ -111,8 +111,9 @@ a,
 .article-interaction-area {
   display: flex;
   justify-content: space-around;
-  padding-bottom: 1vh;
+  padding-bottom: 2vh;
   border-bottom: 1.2px solid rgb(82, 82, 82);
+  margin-top: 0.5rem ;
 }
 
 .like-img {
@@ -165,7 +166,13 @@ a,
 .sidebar-title {
   padding: 0.75rem 0 0.25rem 0;
 }
-
+.like-area, .comment-area {
+  display: flex;
+  align-items: center;
+}
+.like-span, .comment-span {
+  margin-left: 5px;
+}
 .message-area {
   flex: 1 0;
   overflow: hidden;
@@ -355,7 +362,6 @@ a,
   align-items: center;
   border-radius: 5px;
   font-size: 1.2rem;
-  padding: 10px 20px;
 }
 
 .newpost-container::before {
@@ -401,11 +407,21 @@ a,
     position: fixed;
     border-radius: 0;
   }
-
   .article-area {
     margin: 0 20vw;
     margin-top: 8vh;
     padding: 0 5vw;
+  }
+  .like-img, .comment-img{
+    width: 2rem;
+  }
+  .like-span, .comment-span{
+    font-size: 1.3rem;
+    margin-left: 10px;
+  }
+  .like-area, .comment-area {
+    display: flex;
+    align-items: center;
   }
   .profile-text {
     margin: 4vh 0;
