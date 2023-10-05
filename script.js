@@ -93,10 +93,6 @@ for (let messageSender of messageSenders) {
   createMessage(messageSender, messageArea);
 }
 
-const commentsPopupMsgs = document.querySelector(".commentsPopup-msgs");
-
-
-
 // Création des messages (popup messages)
 const commentsPopupMsgs = document.querySelector(".commentsPopup-msgs")
 for (let messageSender of messageSenders) {
@@ -342,78 +338,10 @@ submitBtn.addEventListener("click", (e) => {
   }
 });
 
+
+
 let postInput = document.querySelector(".post-txt");
 let postSubmitBtn = document.querySelector(".submit-post");
-// Ajouter le Keypress "Enter"
-document.addEventListener("keydown", (e) => {
-  if (e.key === "Enter" && newpostContainer.classList.contains("showComment")) {
-    // if (e.key === "Enter" && newpostContainer.contains("ShowComment")) {
-    e.preventDefault();
-    let postsStorage = JSON.parse(localStorage.getItem("posts"));
-    let userPost = user;
-    userPost.profilePic = "assets/img/profile/damien-jean.jpeg";
-    userPost.date = getCurrentDate();
-    userPost.text = postInput.value;
-    userPost.id = postsStorage.length;
-
-    postsStorage.push(userPost);
-    articleArea.innerHTML = "";
-    for (let i = postsStorage.length - 1; i >= 0; i--) {
-      createPost(postsStorage[i], articleArea, [i]);
-    }
-    let newPostStorage = JSON.stringify(postsStorage);
-    window.localStorage.setItem("posts", newPostStorage);
-
-    //remets à jour la liste des msg btns apres creation post
-    commentBtn = document.querySelectorAll(".comment-img");
-
-    //Réactive tous les boutons message apres creation d'un nouveau post
-    commentBtn.forEach((button) =>
-      button.addEventListener("click", (event) => {
-        const targetPost = event.target.parentNode.parentNode.parentNode;
-        console.log("l'Id du post: ", parseInt(targetPost.id));
-        commentsLibrary.add(parseInt(targetPost.id));
-        commentContainerContent.innerHTML = "";
-        commentsStorage = JSON.parse(localStorage.getItem("comments"));
-
-        let matchUser = commentsStorage.filter(
-          (comment) => comment.postId === parseInt(targetPost.id)
-        );
-        console.log("voici la liste: ", matchUser);
-        matchUser.forEach((match) =>
-          createComment(match, commentContainerContent)
-        );
-        addShadowMode();
-
-        commentContainer.classList.add("showComment");
-      })
-    );
-    //remets à jour la liste des boutons like après création d'un post
-    likeBtns = document.querySelectorAll(".like-img");
-
-    //Réactive tous les boutons like après création d'un post
-    const library = new Set();
-    likeBtns.forEach((likeBtn, key) => {
-      likeBtn.addEventListener("click", (event) => {
-        const likeZone = event.target.parentNode;
-        const likeCounter = likeZone.querySelector("span");
-        if (library.has(key)) {
-          likeCounter.innerHTML--;
-          library.delete(key);
-        } else {
-          event.target.strokeStyle = "red";
-          likeCounter.innerHTML++;
-          library.add(key);
-          console.log(key);
-        }
-      });
-    });
-
-    postInput.value = "";
-    newpostContainer.classList.remove("showComment");
-    removeShadowMode();
-  }
-});
 
 // Envoyer un post en appuyant sue entrée
 document.addEventListener("keydown", (e) => {
