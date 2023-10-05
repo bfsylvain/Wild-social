@@ -11,6 +11,7 @@ function sliceOrNot(sentence) {
 }
 //fonction de création des messages dans la barre latérale droite
 export function createMessage(objet, parent) {
+
   const message = document.createElement("div");
   message.classList.add("message");
   const profile = document.createElement("div");
@@ -30,7 +31,7 @@ export function createMessage(objet, parent) {
   const text = document.createElement("p");
   text.classList.add("text");
   const messageToSlice = objet.message;
-  if (window.innerWidth > 768 ) {
+  if (window.innerWidth > 768 || parent.id === "pop") {
     text.innerText = messageToSlice;
   } else {
     text.innerText = sliceOrNot(messageToSlice);
@@ -79,12 +80,13 @@ export function createProfile(objet, parent) {
   msgTxt.appendChild(abonnes);
 }
 
-export function createPost(object, parent, number, picture) {
+export function createPost(object, parent, number, length) {
+
   parent.innerHTML += `
 <div class="article" id="${number}">
 
   <div class="profile">
-    <img class="profile-img" src="${object.profilePic}" alt=""/>
+    <img class="profile-img" src="${object.profilePic}" alt="Photo user"/>
     <div class="user-name">
       <h2>${object.firstname} ${object.lastname}</h2>
       <p>${object.date}</p>
@@ -96,17 +98,17 @@ export function createPost(object, parent, number, picture) {
   </div>
 
   <div class="post-picture-area">
-    <img class="post-img" src= ${object.picture} alt=""/>
+    <img class="post-img" src= "${(object.picture ??= "")}" alt=""/>
   </div>
 
   <div class="article-interaction-area">
     <div class="like-area">
-      <img class="like-img icon" src="assets/img/heart-img.png" alt=""/>
-      <span>${object.likesNumber === undefined ? 0 : object.likesNumber}</span>
+      <img class="like-img icon" src="assets/icons/icon-heart.svg" alt=""/>
+      <span class="like-span">${object.likesNumber ??= 0}</span>
     </div>
     <div class="comment-area">
-      <img class="comment-img icon" src="assets/img/Bubble-img.png" alt=""/>
-      <span class="comment-span">${(object.commentsNumber ??= 0)}</span>
+      <img class="comment-img icon" src="assets/icons/icon-message.svg" alt=""/>
+      <span class="comment-span">${length}</span>
     </div>
   </div>
 </div>
@@ -116,28 +118,22 @@ export function createPost(object, parent, number, picture) {
 export function createComment(object, parent) {
   parent.innerHTML += `
   <div class="article">
-  <div class="profile">
-    <img
-      class="profile-img"
-      src="${object.profilePic}"
-      alt=""
-    />
-    <div class="user-name">
-      <h2>${object.firstname} ${object.lastname}</h2>
-      <p>${object.date}</p>
+    <div class="profile">
+      <img
+        class="profile-img"
+        src="${object.profilePic}"
+        alt=""
+      />
+      <div class="user-name">
+        <h2>${object.firstname} ${object.lastname}</h2>
+        <p>${object.date}</p>
+      </div>
     </div>
-  </div>
-  <div class="post-text-area">
-    <p>
-      ${object.text}
-    </p>
-  </div>
-  <div class="post-picture-area">
-    <img
-      class="post-img"
-      src= ${object.picture}
-      alt=""
-    />
+    <div class="post-text-area">
+      <p>
+        ${object.text}
+      </p>
+    </div>
   </div>
 </div>
   `;

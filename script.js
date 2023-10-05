@@ -2,7 +2,6 @@
 
 // Import des fonctions depuis functions.js
 import {
-  //createArticle,
   createProfile,
   removeShadowMode1,
   removeShadowMode,
@@ -23,7 +22,7 @@ import {
 // Récupération des noeuds HTML dans des variables JS
 const header = document.querySelector(".header");
 const articleArea = document.querySelector(".article-area");
-const main = document.querySelector(".main");
+const body = document.querySelector("body")
 
 const messageBtn = document.querySelector(".message-img");
 const profileBtn = document.querySelector(".user-img");
@@ -52,7 +51,6 @@ const homeBtn = document.querySelector(".homeBtn");
 
 let messageStorage = JSON.stringify(messageSenders);
 window.localStorage.setItem("messages", messageStorage);
-
 // Utiliser le local storage pour les posts
 let postsStorage;
 if (localStorage.getItem("posts")) {
@@ -62,11 +60,7 @@ if (localStorage.getItem("posts")) {
   window.localStorage.setItem("posts", postsStorage);
 }
 
-// affichage des posts
-postsStorage = JSON.parse(localStorage.getItem("posts"));
-for (let i = postsStorage.length - 1; i >= 0; i--) {
-  createPost(postsStorage[i], articleArea, [i]);
-}
+
 
 let commentsStorage;
 // Utiliser le local storage pour les commentaires
@@ -77,24 +71,32 @@ if (localStorage.getItem("comments")) {
   window.localStorage.setItem("comments", commentsStorage);
 }
 
+// affichage des posts
+postsStorage = JSON.parse(localStorage.getItem("posts"));
+for (let i = postsStorage.length - 1; i >= 0; i--) {
+  let comments = JSON.parse(localStorage.getItem("comments"))
+  let commentsAffiliated = comments.filter((comment) => comment.postId === i)
+  createPost(postsStorage[i], articleArea, i, commentsAffiliated.length);
+}
+
+
+
 let likeBtns = document.querySelectorAll(".like-img");
 let commentBtn = document.querySelectorAll(".comment-img");
 
 // Affichage du profil utilisateur (barre latérale gauche)
 createProfile(user, profile);
 
-// Affichage des messages (barre latérale droite)
+// Création des messages (barre latérale droite)
 for (let messageSender of messageSenders) {
   createMessage(messageSender, messageArea);
 }
-const commentsPopupMsgs = document.querySelector(".commentsPopup-msgs")
 
+// Création des messages (popup messages)
+const commentsPopupMsgs = document.querySelector(".commentsPopup-msgs")
 for (let messageSender of messageSenders) {
-  
   createMessage(messageSender, commentsPopupMsgs);
 }
-
-
 
 // Afficher ou masquer le header en fonction du scroll
 let lastScroll = 0;
@@ -132,15 +134,20 @@ messageBtn.addEventListener("click", () => {
   }
 });
 
+
 const seeAllBtn = document.querySelector(".messages-footer")
 const commentsPopup = document.querySelector(".commentsPopup")
+const commentsPopupMsgArea = document.querySelector(".commentsPopup-msgArea")
 
+
+// Affiche la popup avec tous les messages complets
 seeAllBtn.addEventListener("click", (e) => {
+
   e.preventDefault()
+  sidebarRight.classList.remove("active-right")
   commentsPopup.classList.add("pop")
-
+  body.classList.add("scroll-freeze")
 })
-
 
 // Le bouton "profil" ouvre la barre latérale gauche
 profileBtn.addEventListener("click", () => {
@@ -161,11 +168,14 @@ document.addEventListener("click", (e) => {
     !newpostContainer.contains(e.target) &&
     e.target !== messageBtn &&
     e.target !== profileBtn &&
-    e.target !== postBtn
+    e.target !== postBtn &&
+    e.target !== commentsPopupMsgArea 
   ) {
     sidebarLeft.classList.remove("active-left");
     sidebarRight.classList.remove("active-right");
     newpostContainer.classList.remove("showComment");
+    commentsPopup.classList.remove("pop")
+    body.classList.remove("scroll-freeze")
     messageBtn.inert = false;
     profileBtn.inert = false;
     postBtn.inert = false;
@@ -188,7 +198,6 @@ likeBtns.forEach((likeBtn, key) => {
       event.target.src = "assets/icons/icon-heart-red-outline.svg";
       likeCounter.innerHTML++;
       library.add(key);
-      console.log(key);
     }
   });
 });
@@ -209,6 +218,9 @@ commentBtn.forEach((button) =>
     );
     matchUser.forEach((match) => createComment(match, commentContainerContent));
     commentContainer.classList.add("showComment");
+    body.classList.add("scroll-freeze")
+    header.inert = true
+
   })
 );
 
@@ -218,6 +230,7 @@ for (let cancelBtn of cancelBtns) {
     e.preventDefault();
     commentContainer.classList.remove("showComment");
     newpostContainer.classList.remove("showComment");
+    body.classList.remove("scroll-freeze")
     removeShadowMode();
 
     commentInput.value = "";
@@ -237,10 +250,18 @@ class Post {
   }
 }
 
+
+
+
+
+/*
 // Crée le commentaire quand on clique sur "Envoyer"
 let commentInput = document.querySelector(".comment-txt");
-submitBtn.addEventListener("click", (e) => {
+document.addEventListener("keydown", (e) => {
+  let newComment = commentInput.value;
   e.preventDefault();
+  if(e.key === "Enter" && newpostContainer.classList.contains("showComment")) {
+  if(newComment) {
   const allPosts = document.querySelectorAll(".article");
   const targetPost = Array.from(allPosts).filter(
     (post) => parseInt(post.id) === [...commentsLibrary][0]
@@ -249,15 +270,15 @@ submitBtn.addEventListener("click", (e) => {
   commentCounter.innerHTML++;
   commentContainer.classList.remove("showComment");
   removeShadowMode();
+  body.classList.remove("scroll-freeze")
 
-  let newComment = commentInput.value;
+  
   const essaiCommentaire = new Post([...commentsLibrary][0], newComment);
   comments.push(essaiCommentaire);
   //Envoi d'un nouveau commentaire dans le local storage
   let commentSenders = window.localStorage.getItem("comments");
   let commentsList = JSON.parse(commentSenders);
   commentsList.push(essaiCommentaire);
-  console.log(commentsList);
   commentsStorage = JSON.stringify(commentsList);
   window.localStorage.setItem("comments", commentsStorage);
   ////////////////////////////////////////////////////////
@@ -265,14 +286,67 @@ submitBtn.addEventListener("click", (e) => {
   commentInput.value = "";
   commentsLibrary.clear();
   commentContainerContent.innerHTML = "";
+  }
+}
 });
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Crée le commentaire quand on clique sur "Envoyer"
+let commentInput = document.querySelector(".comment-txt");
+submitBtn.addEventListener("click", (e) => {
+  let newComment = commentInput.value;
+  e.preventDefault();
+  if(newComment) {
+  const allPosts = document.querySelectorAll(".article");
+  const targetPost = Array.from(allPosts).filter(
+    (post) => parseInt(post.id) === [...commentsLibrary][0]
+  );
+  const commentCounter = targetPost[0].querySelector(".comment-span");
+  commentCounter.innerHTML++;
+  commentContainer.classList.remove("showComment");
+  removeShadowMode();
+  body.classList.remove("scroll-freeze")
+
+  
+  const essaiCommentaire = new Post([...commentsLibrary][0], newComment);
+  comments.push(essaiCommentaire);
+  //Envoi d'un nouveau commentaire dans le local storage
+  let commentSenders = window.localStorage.getItem("comments");
+  let commentsList = JSON.parse(commentSenders);
+  commentsList.push(essaiCommentaire);
+  commentsStorage = JSON.stringify(commentsList);
+  window.localStorage.setItem("comments", commentsStorage);
+  ////////////////////////////////////////////////////////
+  user.message = newComment;
+  commentInput.value = "";
+  commentsLibrary.clear();
+  commentContainerContent.innerHTML = "";
+  }
+});
+
+
 
 let postInput = document.querySelector(".post-txt");
 let postSubmitBtn = document.querySelector(".submit-post");
 
-//Ajouter un nouveau post
-postSubmitBtn.addEventListener("click", (e) => {
+// Envoyer un post en appuyant sue entrée
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Enter" && newpostContainer.classList.contains("showComment")) {
+  let newPost = postInput.value
   e.preventDefault();
+  if(newPost) {
   let postsStorage = JSON.parse(localStorage.getItem("posts"));
   let userPost = user;
   userPost.profilePic = "assets/img/profile/damien-jean.jpeg";
@@ -283,8 +357,11 @@ postSubmitBtn.addEventListener("click", (e) => {
   postsStorage.push(userPost);
   articleArea.innerHTML = "";
   for (let i = postsStorage.length - 1; i >= 0; i--) {
-    createPost(postsStorage[i], articleArea, [i]);
+    let comments = JSON.parse(localStorage.getItem("comments"))
+    let commentsAffiliated = comments.filter((comment) => comment.postId === i)
+    createPost(postsStorage[i], articleArea, i, commentsAffiliated.length);
   }
+
   let newPostStorage = JSON.stringify(postsStorage);
   window.localStorage.setItem("posts", newPostStorage);
 
@@ -295,7 +372,6 @@ postSubmitBtn.addEventListener("click", (e) => {
   commentBtn.forEach((button) =>
     button.addEventListener("click", (event) => {
       const targetPost = event.target.parentNode.parentNode.parentNode;
-      console.log("l'Id du post: ", parseInt(targetPost.id));
       commentsLibrary.add(parseInt(targetPost.id));
       commentContainerContent.innerHTML = "";
       commentsStorage = JSON.parse(localStorage.getItem("comments"));
@@ -303,7 +379,6 @@ postSubmitBtn.addEventListener("click", (e) => {
       let matchUser = commentsStorage.filter(
         (comment) => comment.postId === parseInt(targetPost.id)
       );
-      console.log("voici la liste: ", matchUser);
       matchUser.forEach((match) =>
         createComment(match, commentContainerContent)
       );
@@ -328,7 +403,6 @@ postSubmitBtn.addEventListener("click", (e) => {
         event.target.strokeStyle = "red";
         likeCounter.innerHTML++;
         library.add(key);
-        console.log(key);
       }
     });
   });
@@ -336,11 +410,87 @@ postSubmitBtn.addEventListener("click", (e) => {
   postInput.value = "";
   newpostContainer.classList.remove("showComment");
   removeShadowMode();
+  body.classList.remove("scroll-freeze")
+}
+}
+});
+
+//Ajouter un nouveau post en apputant sur le bouton entrée
+postSubmitBtn.addEventListener("click", (e) => {
+  let newPost = postInput.value
+  e.preventDefault();
+  if(newPost) {
+  let postsStorage = JSON.parse(localStorage.getItem("posts"));
+  let userPost = user;
+  userPost.profilePic = "assets/img/profile/damien-jean.jpeg";
+  userPost.date = getCurrentDate();
+  userPost.text = postInput.value;
+  userPost.id = postsStorage.length;
+
+  postsStorage.push(userPost);
+  articleArea.innerHTML = "";
+  for (let i = postsStorage.length - 1; i >= 0; i--) {
+    let comments = JSON.parse(localStorage.getItem("comments"))
+    let commentsAffiliated = comments.filter((comment) => comment.postId === i)
+    createPost(postsStorage[i], articleArea, i, commentsAffiliated.length);
+  }
+
+  let newPostStorage = JSON.stringify(postsStorage);
+  window.localStorage.setItem("posts", newPostStorage);
+
+  //remets à jour la liste des msg btns apres creation post
+  commentBtn = document.querySelectorAll(".comment-img");
+
+  //Réactive tous les boutons message apres creation d'un nouveau post
+  commentBtn.forEach((button) =>
+    button.addEventListener("click", (event) => {
+      const targetPost = event.target.parentNode.parentNode.parentNode;
+      commentsLibrary.add(parseInt(targetPost.id));
+      commentContainerContent.innerHTML = "";
+      commentsStorage = JSON.parse(localStorage.getItem("comments"));
+
+      let matchUser = commentsStorage.filter(
+        (comment) => comment.postId === parseInt(targetPost.id)
+      );
+      matchUser.forEach((match) =>
+        createComment(match, commentContainerContent)
+      );
+      addShadowMode();
+
+      commentContainer.classList.add("showComment");
+    })
+  );
+  //remets à jour la liste des boutons like après création d'un post
+  likeBtns = document.querySelectorAll(".like-img");
+
+  //Réactive tous les boutons like après création d'un post
+  const library = new Set();
+  likeBtns.forEach((likeBtn, key) => {
+    likeBtn.addEventListener("click", (event) => {
+      const likeZone = event.target.parentNode;
+      const likeCounter = likeZone.querySelector("span");
+      if (library.has(key)) {
+        likeCounter.innerHTML--;
+        library.delete(key);
+      } else {
+        event.target.strokeStyle = "red";
+        likeCounter.innerHTML++;
+        library.add(key);
+      }
+    });
+  });
+
+  postInput.value = "";
+  newpostContainer.classList.remove("showComment");
+  removeShadowMode();
+  body.classList.remove("scroll-freeze")
+}
 });
 
 // Affiche la popup "New post" quand on clique sur le bouton "+"
 postBtn.addEventListener("click", () => {
   newpostContainer.classList.add("showComment");
+  body.classList.add("scroll-freeze")
   messageBtn.inert = true;
   profileBtn.inert = true;
   addShadowMode();
@@ -360,6 +510,7 @@ if (window.innerWidth > 768) {
   postBtn.style.width = "auto";
 }
 
+// Affichage Dates
 function getCurrentDate() {
   let date = new Date();
 
