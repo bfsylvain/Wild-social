@@ -347,10 +347,11 @@ document.addEventListener("keydown", (e) => {
       const likeZone = event.target.parentNode;
       const likeCounter = likeZone.querySelector("span");
       if (library.has(key)) {
+        event.target.src = "assets/icons/icon-heart.svg";
         likeCounter.innerHTML--;
         library.delete(key);
       } else {
-        event.target.strokeStyle = "red";
+        event.target.src = "assets/icons/icon-heart-red-outline.svg";
         likeCounter.innerHTML++;
         library.add(key);
       }
@@ -422,10 +423,11 @@ postSubmitBtn.addEventListener("click", (e) => {
       const likeZone = event.target.parentNode;
       const likeCounter = likeZone.querySelector("span");
       if (library.has(key)) {
+        event.target.src = "assets/icons/icon-heart.svg"
         likeCounter.innerHTML--;
         library.delete(key);
       } else {
-        event.target.strokeStyle = "red";
+        event.target.src = "assets/icons/icon-heart-red-outline.svg";
         likeCounter.innerHTML++;
         library.add(key);
       }
