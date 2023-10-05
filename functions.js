@@ -98,16 +98,16 @@ export function createPost(object, parent, number, length) {
   </div>
 
   <div class="post-picture-area">
-    <img class="post-img" src= "${(object.picture ??= "")}" alt=""/>
+    <img class="post-img" src= "${(object.picture ??= "")}" alt="post-img"/>
   </div>
 
   <div class="article-interaction-area">
     <div class="like-area">
-      <img class="like-img icon" src="assets/icons/icon-heart.svg" alt=""/>
+      <img class="like-img icon" src="assets/icons/icon-heart.svg" alt="like-btn"/>
       <span class="like-span">${object.likesNumber ??= 0}</span>
     </div>
     <div class="comment-area">
-      <img class="comment-img icon" src="assets/icons/icon-message.svg" alt=""/>
+      <img class="comment-img icon" src="assets/icons/icon-message.svg" alt="message-btn"/>
       <span class="comment-span">${length}</span>
     </div>
   </div>
@@ -122,7 +122,7 @@ export function createComment(object, parent) {
       <img
         class="profile-img"
         src="${object.profilePic}"
-        alt=""
+        alt="user-img"
       />
       <div class="user-name">
         <h2>${object.firstname} ${object.lastname}</h2>
