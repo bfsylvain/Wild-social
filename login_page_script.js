@@ -1,7 +1,7 @@
 const popupAlert = document.querySelector(".popupAlert")
 
-const userId = "4f"
-const userPassword = "4f"
+const userId = "4f@wild.com"
+const userPassword = "wild"
 
 const loginBtn = document.querySelector('.login-btn')
 const alertMsg = document.querySelector(".alert-msg")
