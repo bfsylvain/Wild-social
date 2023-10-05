@@ -103,11 +103,11 @@ export function createPost(object, parent, number, length) {
 
   <div class="article-interaction-area">
     <div class="like-area">
-      <img class="like-img icon" src="assets/img/heart-img.png" alt=""/>
-      <span>${object.likesNumber ??= 0}</span>
+      <img class="like-img icon" src="assets/icons/icon-heart.svg" alt=""/>
+      <span class="like-span">${object.likesNumber ??= 0}</span>
     </div>
     <div class="comment-area">
-      <img class="comment-img icon" src="assets/img/Bubble-img.png" alt=""/>
+      <img class="comment-img icon" src="assets/icons/icon-message.svg" alt=""/>
       <span class="comment-span">${length}</span>
     </div>
   </div>
