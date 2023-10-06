@@ -359,7 +359,7 @@ a,
 .post-button {
   position: fixed;
   bottom: calc(8vh + 0.5rem);
-  right: 2rem;
+  right: 1.5rem;
   height: 3rem;
   width: 3rem;
   background-color: var(--wildColor);
