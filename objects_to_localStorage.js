@@ -194,7 +194,7 @@ export const messageSenders = [
   },
   {
     profilePic: "assets/img/profile/dimitri.jpeg",
-    date: "4 oct 15:02",
+    date: "3 oct 15:02",
     firstname: "Dimitri",
     lastname: "",
     message: "C'est toi mon chouchou",
@@ -205,13 +205,6 @@ export const messageSenders = [
     firstname: "Antoine",
     lastname: "",
     message: "T'en es où sur le projet ??",
-  },
-  {
-    profilePic: "assets/img/profile/cedric.jpg",
-    date: "29 sept 12:12",
-    firstname: "Cédric",
-    lastname: "",
-    message: "Apéro ?",
   },
   {
     profilePic: "assets/img/profile/adam.jpg",
