@@ -232,7 +232,7 @@ for (let cancelBtn of cancelBtns) {
     newpostContainer.classList.remove("showComment");
     body.classList.remove("scroll-freeze")
     removeShadowMode();
-
+    header.inert = false
     commentInput.value = "";
     commentsLibrary.clear();
   });
@@ -267,7 +267,7 @@ submitBtn.addEventListener("click", (e) => {
   commentContainer.classList.remove("showComment");
   removeShadowMode();
   body.classList.remove("scroll-freeze")
-
+  header.inert = false
 
   
   const essaiCommentaire = new Post([...commentsLibrary][0], newComment);
@@ -285,7 +285,7 @@ submitBtn.addEventListener("click", (e) => {
   commentContainerContent.innerHTML = "";
   }
 });
-
+  
 
 
 let postInput = document.querySelector(".post-txt");
@@ -359,7 +359,7 @@ document.addEventListener("keydown", (e) => {
   });
 
   
-
+  header.inert = false
   postInput.value = "";
   newpostContainer.classList.remove("showComment");
   removeShadowMode();
@@ -433,7 +433,7 @@ postSubmitBtn.addEventListener("click", (e) => {
       }
     });
   });
-
+  header.inert = false
   postInput.value = "";
   newpostContainer.classList.remove("showComment");
   removeShadowMode();
