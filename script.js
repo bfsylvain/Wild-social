@@ -232,7 +232,7 @@ for (let cancelBtn of cancelBtns) {
     newpostContainer.classList.remove("showComment");
     body.classList.remove("scroll-freeze")
     removeShadowMode();
-
+    header.inert = false
     commentInput.value = "";
     commentsLibrary.clear();
   });
